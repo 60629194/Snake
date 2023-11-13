@@ -1,6 +1,6 @@
--   [ ]Gameplay
--   [ ]Playground skin and snake 
--   [ ]User interface
--   [ ]Levels system
--   [ ]In-game currency system
--   [ ]Leader board
+- [ ] Gameplay
+- [ ] Playground skin and snake
+- [ ] User interface
+- [ ] Levels system
+- [ ] In-game currency system
+- [ ] Leader board

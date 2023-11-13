@@ -17,5 +17,7 @@
     3.In game currency system
     4.Customizable snake skin
 ## Developers
-    [B11230006](https://github.com/the-biKing)
-    [B11230031](https://github.com/60629194)
+
+| [B11230006](https://github.com/the-biKing)  |
+|---------------------------------------------|
+| [B11230031](https://github.com/60629194)    |
