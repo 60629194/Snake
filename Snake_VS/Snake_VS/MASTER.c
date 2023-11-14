@@ -50,9 +50,13 @@ int main() {
         switch (choice) {
         case 0:
             GamePlay();
+            choice = 0;
+            key = 10;
             break;
         case 1:
             Store();
+            choice = 0;
+            key = 10;
             break;
         case 2:
             LeaderBoard();
@@ -61,6 +65,8 @@ int main() {
             break;
         case 3:
             Settings();
+            choice = 0;
+            key = 10;
             break;
         case 4:
             printf("Exiting...\n");
