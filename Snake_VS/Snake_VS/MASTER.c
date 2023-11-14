@@ -1,17 +1,19 @@
-﻿#include <stdio.h>
+﻿
+#include <stdio.h>
 #include <Windows.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<conio.h>
-#include"GamePlay.h"
-#include"LeaderBoard.h"
-#include"Settings.h"
-#include"Store.h"
+#include <stdlib.h>
+#include <stdbool.h>
+#include <conio.h>
+#include "GamePlay.h"
+#include "LeaderBoard.h"
+#include "Settings.h"
+#include "Store.h"
 
 int main() {
     int choice = 0;
-    int key=10;
-    //while (1) {
+    int key = 10;
+
+    while (1) { // Loop to keep displaying the menu until the user chooses to exit
         do {
             system("cls"); // Clears the console screen (Windows-specific)
 
@@ -54,6 +56,8 @@ int main() {
             break;
         case 2:
             LeaderBoard();
+            choice = 0;
+            key = 10;
             break;
         case 3:
             Settings();
@@ -63,7 +67,7 @@ int main() {
             exit(0);
             break;
         }
-    //}
+    }
 
     return 0;
 }
