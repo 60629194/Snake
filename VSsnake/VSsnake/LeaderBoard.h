@@ -4,4 +4,4 @@
 // Function prototype for openStore function
 void LeaderBoard();
 
-#endif /* LEADERBOARD_H*/
+#endif /* LEADERBOARD_H */

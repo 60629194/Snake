@@ -7,6 +7,7 @@
 #include "LeaderBoard.h"
 
 
+
 void gotoxy(int x, int y) {
     COORD pos = { x, y };
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
@@ -24,7 +25,8 @@ int main() {
         printf("    ·Play %s\n", (choice == 1) ? "◀" : "");
         printf("    ·Store %s\n", (choice == 2) ? "◀" : "");
         printf("    ·Leader Board %s\n", (choice == 3) ? "◀" : "");
-        printf("    ·Exit %s\n", (choice == 4) ? "◀" : "");
+        printf("    ·Settings %s\n",(choice == 4)?"◀" : "");
+        printf("    ·Exit %s\n", (choice == 5) ? "◀" : "");
 
         // Check for arrow key press
         if (GetAsyncKeyState(VK_UP) & 0x8000) {
@@ -33,7 +35,7 @@ int main() {
             }
             Sleep(150); // Optional delay to control the speed of navigation
         } else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-            if (choice < 4) {
+            if (choice < 5) {
                 choice++;
             }
             Sleep(150); // Optional delay to control the speed of navigation
@@ -53,6 +55,9 @@ int main() {
                     LeaderBoard();
                     break;
                 case 4:
+                    // Settings option selected
+                    Settings();
+                case 5:
                     // Exit option selected
 					exit(0);
             }
