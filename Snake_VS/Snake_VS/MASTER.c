@@ -1,4 +1,5 @@
-﻿#include <stdio.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 #include <Windows.h>
 #include<mmsystem.h>
 #include <stdlib.h>
@@ -9,8 +10,10 @@
 #include "Settings.h"
 #include "Store.h"
 
-
+bool isFolderEmpty(const char* path);
 int main() {
+
+
     int choice = 0;
     int key = 10;
 
@@ -85,3 +88,4 @@ int main() {
 
     return 0;
 }
+
