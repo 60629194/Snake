@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{1f69bc28-6a8b-44ab-9ace-0312b547de75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MASTER.c">
@@ -44,5 +47,19 @@
     <ClInclude Include="LeaderBoard.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="exitSFX.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="navigateSFX.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="enterSFX.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="invertNavigateSFX.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

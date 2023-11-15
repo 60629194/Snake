@@ -108,6 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +139,12 @@
     <ClInclude Include="LeaderBoard.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Store.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="enterSFX.wav" />
+    <Media Include="exitSFX.wav" />
+    <Media Include="invertNavigateSFX.wav" />
+    <Media Include="navigateSFX.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

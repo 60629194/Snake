@@ -1,5 +1,10 @@
 #include"LeaderBoard.h"
-
+#include <stdio.h>
+#include <Windows.h>
+#include<mmsystem.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <conio.h>
 void LeaderBoard() {
     system("cls");
     int scores[] = { 1000, 850, 720, 650, 500 };
@@ -16,5 +21,6 @@ void LeaderBoard() {
     do {
         userInput = _getch();
     } while (userInput != 'q' && userInput != 'Q');
+    PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
     return;
 }
