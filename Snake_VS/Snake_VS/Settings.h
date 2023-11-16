@@ -2,6 +2,6 @@
 #ifndef SETTINGS_H_   
 #define SETTINGS_H_
 
-void Settings();
+int Settings();
 
 #endif 

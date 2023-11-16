@@ -10,7 +10,7 @@ void deleteAccount();
 void resetAccount();
 
 
-void Settings() {
+int Settings() {
     int key=10;
     int choice = 0;
     do {
@@ -49,6 +49,7 @@ void Settings() {
     case 0:
         PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
         switchAccount();
+        return 1;
         choice = 0;
         key = 10;
         break;
@@ -63,14 +64,16 @@ void Settings() {
         resetAccount();
         choice = 0;
         key = 10;
+        
         break;
     case 3:
         PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-        return;
+        return 0;
     }
 }
 
 void switchAccount() {
+    system("cls");
     printf("switching account");
     Sleep(1000);
     return;

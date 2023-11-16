@@ -18,12 +18,13 @@ long int findSize(char file_name[]) ;
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 
 int main() {
-    int choice =0;
-    int key=10;
-    char account[100];
+START: 
 
     system("checkAccount.bat");
 
+    int choice =0;
+    int key=10;
+    char account[100];
     long int accountSize=findSize("log\\accountDATA.txt");
     printf("%d",accountSize);
     if(accountSize<3){
@@ -163,7 +164,11 @@ int main() {
             break;
         case 3:
             PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-            Settings();
+            int temp;
+            temp = Settings();
+            if (temp == 1) {
+                goto START;
+            }
             choice = 0;
             key = 10;
             break;
