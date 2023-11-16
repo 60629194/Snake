@@ -10,12 +10,76 @@
 #include "Settings.h"
 #include "Store.h"
 
-bool isFolderEmpty(const char* path);
+#define MAX_MENU_ITEMS 100
+#define MAX_FILENAME_LENGTH 100
+
+long int findSize(char file_name[]) ;
+void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
+
 int main() {
+    int choice =0;
+    int key=10;
+
+
     system("checkAccount.bat");
 
-    int choice = 0;
-    int key = 10;
+    long int accountSize=findSize("log\\accountDATA.txt");
+    printf("%d",accountSize);
+    if(accountSize<3){
+        printf("create an account");
+    }
+    else{
+        printf("choose an account");
+
+        FILE *file = fopen("log\\accountDATA.txt", "r");
+        if (file == NULL) {
+            printf("Error opening file.\n");
+            return 1;
+        }
+
+        char menu[MAX_MENU_ITEMS][MAX_FILENAME_LENGTH];
+        int itemCount = 0;
+
+        // Read menu items from the file
+        while (itemCount < MAX_MENU_ITEMS && fscanf(file, "%s", menu[itemCount]) == 1) {
+            itemCount++;
+        }
+        fclose(file);
+
+        do {
+            displayMenu(menu, itemCount, choice);
+
+            if (_kbhit()) {
+                key = _getch();
+                if (key == 224) {
+                    key = _getch();
+                    switch (key) {
+                        case 72: // Up arrow key
+                            if (choice > 0) {
+                                PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                                choice--;
+                            }
+                            break;
+                        case 80: // Down arrow key
+                            if (choice < itemCount - 1) {
+                                PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                                choice++;
+                            }
+                            break;
+                    }
+                }
+            }
+            Sleep(100);
+        } while (key != 13);
+
+
+        printf("you chosen %s",menu[choice]);
+        return 0;
+
+    }
+
+
+
 
     while (1) { // Loop to keep displaying the menu until the user chooses to exit
         do {
@@ -89,3 +153,33 @@ int main() {
     return 0;
 }
 
+
+long int findSize(char file_name[]) 
+{ 
+    // opening the file in read mode 
+    FILE* fp = fopen(file_name, "r"); 
+  
+    // checking if the file exist or not 
+    if (fp == NULL) { 
+        printf("File Not Found!\n"); 
+        return -1; 
+    } 
+  
+    fseek(fp, 0L, SEEK_END); 
+  
+    // calculating the size of the file 
+    long int res = ftell(fp); 
+  
+    // closing the file 
+    fclose(fp); 
+  
+    return res; 
+}
+
+void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice) {
+    system("cls"); // Clears the console screen (Windows-specific)
+    printf("Welcome to Snake\n");
+    for (int i = 0; i < itemCount; ++i) {
+        printf("   %s%s\n", (choice == i) ? "<" : "  ", menuItems[i]);
+    }
+}
