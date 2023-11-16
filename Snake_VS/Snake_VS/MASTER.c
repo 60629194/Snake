@@ -9,6 +9,7 @@
 #include "LeaderBoard.h"
 #include "Settings.h"
 #include "Store.h"
+#include "createAccount.h"
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
@@ -61,7 +62,7 @@ int main() {
                             }
                             break;
                         case 80: // Down arrow key
-                            if (choice < itemCount - 1) {
+                            if (choice < itemCount+1) {
                                 PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
                                 choice++;
                             }
@@ -71,12 +72,35 @@ int main() {
             }
             Sleep(100);
         } while (key != 13);
-        account=menu[choice];
 
-        printf("you chosen %s",account);
-        return 0;
+        if (choice < itemCount) {
+            // Copy the selected account to 'account'
+            strcpy(account, menu[choice]);
+
+            // Remove the ".txt" extension from 'account'
+            char* dot = strchr(account, '.');
+            if (dot != NULL) {
+                *dot = '\0'; // Null-terminate the string at the position of the dot
+            }
+            system("cls");
+            printf("you chosen %s", account);
+            Sleep(3000);
+        }
+        else if (choice == itemCount) {
+            system("cls");
+            createAccount();
+            Sleep(3000);
+        }
+        else if(choice==itemCount+1){
+            system("cls");
+            printf("exit game");
+            PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME);
+            exit(0);
+        }
 
     }
+
+
     choice=0;
     key=10;
 
@@ -179,8 +203,19 @@ long int findSize(char file_name[])
 
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice) {
     system("cls"); // Clears the console screen (Windows-specific)
-    printf("Welcome to Snake\n");
-    for (int i = 0; i < itemCount; ++i) {
-        printf("   %s%s\n", (choice == i) ? "<" : "  ", menuItems[i]);
+    printf("Select or create account\n");
+    int i;
+    for (i = 0; i < itemCount; ++i) {
+        // Removing the file extension ".txt" from the displayed menu
+        char fileName[MAX_FILENAME_LENGTH];
+        strcpy(fileName, menuItems[i]);
+        char* dot = strchr(fileName, '.');
+        if (dot != NULL) {
+            *dot = '\0'; // Null-terminate the string at the position of the dot
+        }
+
+        printf("   %s%s\n", fileName, (choice == i) ? "<" : "  ");
     }
+    printf("   create account%s\n", (choice == i) ? "<" : "  ");
+    printf("   Exit%s\n", (choice == i + 1) ? "<" : "  ");
 }

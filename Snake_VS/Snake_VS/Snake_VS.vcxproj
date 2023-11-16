@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="createAccount.c" />
     <ClCompile Include="GamePlay.c" />
     <ClCompile Include="LeaderBoard.c" />
     <ClCompile Include="MASTER.c" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Store.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="createAccount.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="LeaderBoard.h" />
     <ClInclude Include="Settings.h" />

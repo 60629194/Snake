@@ -39,6 +39,9 @@
     <ClCompile Include="Settings.c">
       <Filter>資源檔</Filter>
     </ClCompile>
+    <ClCompile Include="createAccount.c">
+      <Filter>資源檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePlay.h">
@@ -51,6 +54,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="LeaderBoard.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="createAccount.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
