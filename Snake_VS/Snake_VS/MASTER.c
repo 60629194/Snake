@@ -19,7 +19,7 @@ void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choic
 int main() {
     int choice =0;
     int key=10;
-
+    char account[100];
 
     system("checkAccount.bat");
 
@@ -71,13 +71,14 @@ int main() {
             }
             Sleep(100);
         } while (key != 13);
+        account=menu[choice];
 
-
-        printf("you chosen %s",menu[choice]);
+        printf("you chosen %s",account);
         return 0;
 
     }
-
+    choice=0;
+    key=10;
 
 
 
