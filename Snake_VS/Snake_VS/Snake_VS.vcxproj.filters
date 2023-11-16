@@ -16,6 +16,12 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{1f69bc28-6a8b-44ab-9ace-0312b547de75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{c8086b56-cdbc-4d61-9b6d-cf2f80ddb418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{f1a7b2a2-f04e-4083-a511-36266dea50bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MASTER.c">
@@ -61,5 +67,15 @@
     <Media Include="invertNavigateSFX.wav">
       <Filter>Audio</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="checkAccount.bat">
+      <Filter>Script</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\accountDATA.txt">
+      <Filter>log</Filter>
+    </Text>
   </ItemGroup>
 </Project>

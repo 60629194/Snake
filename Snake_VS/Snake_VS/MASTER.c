@@ -12,7 +12,7 @@
 
 bool isFolderEmpty(const char* path);
 int main() {
-
+    system("checkAccount.bat");
 
     int choice = 0;
     int key = 10;

@@ -146,6 +146,12 @@
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="checkAccount.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\accountDATA.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
