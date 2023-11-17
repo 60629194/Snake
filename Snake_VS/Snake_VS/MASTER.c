@@ -17,8 +17,24 @@
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
+void colorPrint(const char* text, int red, int green, int blue);
 
 int main() {
+	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	int red, green, blue;
+	for (red = 0, green = 0, blue = 0;red < 256&& green < 256&& blue < 256;red++, green++, blue++) {
+		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n", red, green, blue);
+		Sleep(8);
+		system("cls");
+		if (red % 2 == 1) {
+			green++;
+		}
+	}
+
+
+
+
+
 START:
 
 	system("checkAccount.bat");
@@ -236,4 +252,12 @@ char* combineStrings(const char* str1, const char* str2) {
 	strcat(combined, str2); // Concatenate the non-constant string
 
 	return combined;
+}
+void colorPrint(const char* text, int red, int green, int blue) {
+	if (red <= 0 || red >= 255 || green <= 0 || green >= 255 || blue <= 0 || blue >= 255) {
+		//printf("Invalid color values. Please use values between 0 and 255.\n");
+		return;
+	}
+
+	printf("\x1b[38;2;%d;%d;%dm%s\x1b[0m\n", red, green, blue, text);
 }

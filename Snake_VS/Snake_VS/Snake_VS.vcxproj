@@ -147,6 +147,7 @@
     <Media Include="accessGranted.wav" />
     <Media Include="enterSFX.wav" />
     <Media Include="exitSFX.wav" />
+    <Media Include="gameStart.wav" />
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
   </ItemGroup>
