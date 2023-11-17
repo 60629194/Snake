@@ -73,6 +73,12 @@
     <Media Include="invertNavigateSFX.wav">
       <Filter>Audio</Filter>
     </Media>
+    <Media Include="accessDenied.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="accessGranted.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="checkAccount.bat">

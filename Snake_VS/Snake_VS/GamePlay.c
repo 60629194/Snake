@@ -46,7 +46,7 @@ void equalize_plate(int array1[8][10], int array2[8][10]) {
     }
 }
 
-void GamePlay() {
+void GamePlay(const char* filepath) {
     int T[8][10];
     int M[8][10];
 

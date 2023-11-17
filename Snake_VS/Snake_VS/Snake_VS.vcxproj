@@ -143,6 +143,8 @@
     <ClInclude Include="Store.h" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="accessDenied.wav" />
+    <Media Include="accessGranted.wav" />
     <Media Include="enterSFX.wav" />
     <Media Include="exitSFX.wav" />
     <Media Include="invertNavigateSFX.wav" />

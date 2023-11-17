@@ -2,6 +2,6 @@
 #ifndef GAMEPLAY_H_   
 #define GAMEPLAY_H_
 
-void GamePlay();  
+void GamePlay(const char* filepath);
 
 #endif 

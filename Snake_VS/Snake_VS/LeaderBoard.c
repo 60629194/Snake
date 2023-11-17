@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
-void LeaderBoard() {
+void LeaderBoard(const char* filepath) {
     system("cls");
     int scores[] = { 1000, 850, 720, 650, 500 };
     const int numScores = sizeof(scores) / sizeof(scores[0]);
