@@ -46,6 +46,103 @@ void equalize_plate(int array1[8][10], int array2[8][10]) {
     }
 }
 
+char keyboardhit(char input) {
+    if (_kbhit()) {
+        int key = _getch();
+        if (key == 0xE0) {
+            key = _getch();
+            switch (key) {  //keyboardhit reaction to change direction
+            case 0x48:
+                input = 'w';
+                break;
+            case 0x4B:
+                input = 'a';
+                break;
+            case 0x50:
+                input = 's';
+                break;
+            case 0x4D:
+                input = 'd';
+                break;
+            }
+        }
+    }
+    return input;
+}
+
+void level(int level) {
+    int M[8][10];
+    int coin = 0;
+    int a, b;
+    int snakePositionv = 3;
+    int snakePositionh = 1;
+    char direction = 'd';
+    while (level < 20) {
+        if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check3
+            break;
+        }
+        coin = 0;
+        while (1) {
+            if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check2
+                Sleep(3000);
+                break;
+            }
+            srand(time(0));
+            a = rand() % 7;
+            b = rand() % 9;
+
+            while (coin < 3) {
+
+                printf("level = %d\n", level + 1);
+                printf("coin = %d\n", coin);
+
+                direction = keyboardhit(direction);
+
+                initialize_plate(M);
+                M[a][b] = -1;   //coinPos
+                M[snakePositionv][snakePositionh] = 1;  //snakePos
+                print_plate(M);
+
+                switch (direction) {
+                case 'w':
+                    snakePositionv--;
+                    break;
+                case 'a':
+                    snakePositionh--;
+                    break;
+                case 's':
+                    snakePositionv++;
+                    break;
+                case 'd':
+                    snakePositionh++;
+                    break;
+                }
+
+
+                if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check1;
+                    printf("game over");
+                    Sleep(3000);
+                    break;
+                }
+
+                Sleep(1000 / (level + 1));
+                system("cls");
+
+                if (a == snakePositionv && b == snakePositionh) {   //snakePos=coinPos
+                    coin++;
+                    break;
+                }
+            }
+            if (coin == 3) {
+                level++;
+                printf("Victory, 3 seconds for next stage");
+                Sleep(3000);
+                break;
+            }
+        }
+    }
+}
+
 void GamePlay(const char* filepath) {
     int T[8][10];
     int M[8][10];
@@ -55,14 +152,16 @@ void GamePlay(const char* filepath) {
     M[3][1] = 1;    //start point
     int coin = 0;
     int a, b;
+    int stage = 0;
     int snakePositionv = 3;
     int snakePositionh = 1;
     char direction='d';  //set initial=+x way
 
     initialize_plate(M);
 
+    level(stage);
 
-    while (1) {
+   /* while (1) {
         if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < -1 || snakePositionh < -1) {//boundary check2
             Sleep(3000);
             break;
@@ -72,27 +171,13 @@ void GamePlay(const char* filepath) {
         b = rand() % 9;
 
         while (coin < 3) {
-            if (_kbhit()) {
-                char key = _getch();
-                switch (key) {  //keyboardhit reaction to change direction
-                case 'w':
-                    direction = 'w';
-                    break;
-                case 'a':
-                    direction = 'a';
-                    break;
-                case 's':
-                    direction = 's';
-                    break;
-                case 'd':
-                    direction = 'd';
-                    break;
-                }
-            }
+            direction=keyboardhit(direction);
+
             initialize_plate(M);
             M[a][b] = -1;   //coinPos
             M[snakePositionv][snakePositionh] = 1;  //snakePos
             print_plate(M);
+            printf("coin=%d\n", coin);
 
             switch (direction) {
             case 'w':
@@ -108,11 +193,14 @@ void GamePlay(const char* filepath) {
                 snakePositionh++;
                 break;
             }
+
+
             if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < -1 || snakePositionh < -1) {//boundary check1;
                 printf("game over");
                 Sleep(3000);
                 break;
             }
+
             Sleep(500);
             system("cls");
 
@@ -127,6 +215,7 @@ void GamePlay(const char* filepath) {
             break;
         }
     }
+    */
 
     return ;
 }
