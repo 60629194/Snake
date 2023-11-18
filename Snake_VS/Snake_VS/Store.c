@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
-void Store() {
+void Store(const char* filepath) {
     printf("this is Store");
     return 0;
 }

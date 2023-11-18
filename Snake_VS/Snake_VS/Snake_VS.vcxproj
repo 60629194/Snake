@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="createAccount.c" />
     <ClCompile Include="GamePlay.c" />
     <ClCompile Include="LeaderBoard.c" />
     <ClCompile Include="MASTER.c" />
@@ -135,16 +136,25 @@
     <ClCompile Include="Store.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="createAccount.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="LeaderBoard.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Store.h" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="accessDenied.wav" />
+    <Media Include="accessGranted.wav" />
     <Media Include="enterSFX.wav" />
     <Media Include="exitSFX.wav" />
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="checkAccount.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\accountDATA.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

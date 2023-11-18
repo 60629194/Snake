@@ -2,6 +2,6 @@
 #ifndef LEADERBOARD_H_   
 #define LEADERBOARD_H_
 
-void LeaderBoard();
+void LeaderBoard(const char* filepath);
 
 #endif 

@@ -16,6 +16,12 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{1f69bc28-6a8b-44ab-9ace-0312b547de75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{c8086b56-cdbc-4d61-9b6d-cf2f80ddb418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{f1a7b2a2-f04e-4083-a511-36266dea50bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MASTER.c">
@@ -33,6 +39,9 @@
     <ClCompile Include="Settings.c">
       <Filter>資源檔</Filter>
     </ClCompile>
+    <ClCompile Include="createAccount.c">
+      <Filter>資源檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePlay.h">
@@ -45,6 +54,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="LeaderBoard.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="createAccount.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,5 +73,21 @@
     <Media Include="invertNavigateSFX.wav">
       <Filter>Audio</Filter>
     </Media>
+    <Media Include="accessDenied.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="accessGranted.wav">
+      <Filter>Audio</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="checkAccount.bat">
+      <Filter>Script</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log\accountDATA.txt">
+      <Filter>log</Filter>
+    </Text>
   </ItemGroup>
 </Project>
