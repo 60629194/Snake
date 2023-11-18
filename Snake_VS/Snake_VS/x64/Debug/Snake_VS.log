@@ -1,5 +1,5 @@
 ﻿  GamePlay.c
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(90,19): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(154,9): warning C4101: 'a': 未參考的區域變數
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(154,12): warning C4101: 'b': 未參考的區域變數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(93,19): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(157,9): warning C4101: 'a': 未參考的區域變數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(157,12): warning C4101: 'b': 未參考的區域變數
   Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
