@@ -13,6 +13,15 @@
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
+#define SKIN_NUMBER 50 // currently 48 skins now
+
+struct player
+{
+	char name[100];
+	long int money;
+	bool skin[SKIN_NUMBER];
+	char skinNow;
+};
 
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
