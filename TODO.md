@@ -6,4 +6,4 @@
 - [ ] Leader board
 - [ ] Test
 - [ ] make a function navigateMenu() so i input the options and how many choice is there and it return the number of the choice i made
-- [ ] account system
+- [x] account system
