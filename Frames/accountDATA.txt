@@ -1,2 +1,4 @@
-1=unlock, 0=lock
-username,money,skin1,skin2,skin3
+username
+money
+1 0 1 1 0 0 1 0 1 1 0 0 0 1 1 1 0 1 0 0 1 0 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 0 0 0 0 1 1 1 0 1 0 1
+％

@@ -13,12 +13,35 @@
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
+#define SKIN_NUMBER 50 // currently 48 skins now
+
+struct player
+{
+	char name[100];
+	long int money;
+	bool skin[SKIN_NUMBER];
+	char skinNow;
+};
 
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
+void colorPrint(const char* text, int red, int green, int blue);
+void writeObject(const char* filepath, int lineNumber, const char* content);
+char* readObject(const char* filepath, int lineNumber);
+void TrimFilePath(char* filepath);
 
 int main() {
+	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	int red, green, blue;
+	for (red = 0, green = 0, blue = 0;red < 256&& green < 256&& blue < 256;red++, green++, blue++) {
+		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n", red, green, blue);
+		Sleep(8);
+		system("cls");
+		if (red % 2 == 1) {
+			green++;
+		}
+	}
 START:
 
 	system("checkAccount.bat");
@@ -82,8 +105,28 @@ START:
 			*dot = '\0'; // Null-terminate the string at the position of the dot
 		}
 		system("cls");
-		printf("you chosen %s", account);
-		Sleep(3000);
+		//printf("you chosen %s\n", account);
+		accountSize = findSize(accountPath);
+		//if account is new, initialize the account
+		if (accountSize <= 10) {
+			writeObject(accountPath, 1, account);
+			writeObject(accountPath, 2, "0");
+			char initialSkin[100]="1 0";
+			for (int i=0;i < 46;i++) {
+				strcat(initialSkin, " 0");
+			}
+			writeObject(accountPath, 3, initialSkin);
+			writeObject(accountPath, 4, "％");
+		}
+		char show[100];
+		strcpy(show, "you've chosen ");
+		strncat(show, account, sizeof(show) - strlen(show) - 1);
+		for (red = 255, green = 255, blue = 255;red > 0 && green > 0 && blue > 0;red--,green--,blue--) {
+			colorPrint(show,red,green,blue);
+			Sleep(5);
+			system("cls");
+		}
+
 	}
 	else if (choice == itemCount) {
 		system("cls");
@@ -106,7 +149,7 @@ START:
 		do {
 			system("cls"); // Clears the console screen (Windows-specific)
 
-			printf("Welcome to Snake\n");
+			printf("Welcome to Snake, %s\n",account);
 			printf("   Play %s\n", (choice == 0) ? "<" : "  ");
 			printf("   Store %s\n", (choice == 1) ? "<" : "  ");
 			printf("   Leader Board %s\n", (choice == 2) ? "<" : "  ");
@@ -236,4 +279,96 @@ char* combineStrings(const char* str1, const char* str2) {
 	strcat(combined, str2); // Concatenate the non-constant string
 
 	return combined;
+}
+void colorPrint(const char* text, int red, int green, int blue) {
+	if (red <= 0 || red >= 255 || green <= 0 || green >= 255 || blue <= 0 || blue >= 255) {
+		//printf("Invalid color values. Please use values between 0 and 255.\n");
+		return;
+	}
+
+	printf("\x1b[38;2;%d;%d;%dm%s\x1b[0m\n", red, green, blue, text);
+}
+char* readObject(const char* filepath, int lineNumber) {
+	FILE* file = fopen(filepath, "r");
+	if (file == NULL) {
+		return "File not found.";
+	}
+
+	char* line = NULL;
+	size_t len = 0;
+	int currentLine = 0;
+	int maxLineLength = 1000; // Adjust as needed
+
+	while (currentLine < lineNumber && !feof(file)) {
+		line = malloc(maxLineLength * sizeof(char));
+		if (fgets(line, maxLineLength, file) != NULL) {
+			currentLine++;
+		}
+		else {
+			free(line);
+			line = NULL;
+			break; // Break loop on EOF or error
+		}
+	}
+
+	fclose(file);
+
+	if (line == NULL) {
+		return "Line number exceeds file length.";
+	}
+
+	return line;
+}
+void writeObject(const char* filepath, int lineNumber, const char* content) {
+	FILE* file = fopen(filepath, "r");
+	if (file == NULL) {
+		printf("File '%s' not found!\n", filepath);
+		exit(1);
+		return;
+	}
+
+	// Create a temporary file
+	FILE* tempFile = fopen("accounts/temp.txt", "w");
+	if (tempFile == NULL) {
+		fclose(file);
+		printf("Unable to create a temporary file.\n");
+		exit(1);
+		return;
+	}
+
+	char buffer[1024];
+	int lineCount = 0;
+
+	while (fgets(buffer, sizeof(buffer), file)) {
+		lineCount++;
+
+		if (lineCount == lineNumber) {
+			fprintf(tempFile, "%s\n", content);
+		}
+		else {
+			fprintf(tempFile, "%s", buffer);
+		}
+	}
+
+	fclose(file);
+	fclose(tempFile);
+	chdir("accounts");
+	char tempfilepath[100];
+	strcpy(tempfilepath, filepath);
+	TrimFilePath(tempfilepath);
+	// Remove the original file
+	remove(tempfilepath);
+
+	// Rename the temporary file to the original file name
+	rename("temp.txt", tempfilepath);
+	chdir("..");
+}
+void TrimFilePath(char* filepath) {
+	// Find the last occurrence of "account/"
+	char* accountStr = strstr(filepath, "accounts/");
+	if (accountStr != NULL) {
+		// Move the pointer ahead to exclude "account/"
+		accountStr += strlen("accounts/");
+		memmove(filepath, accountStr, strlen(accountStr) + 1); // +1 for null terminator
+	}
 }

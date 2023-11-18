@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  createAccount.c
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\createAccount.c(22,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\createAccount.c(84,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
@@ -12,3 +13,8 @@ C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(10,13): warning 
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Settings.c(78): warning C4715: 'Settings': 不是所有控制路徑都傳回值
   LINK : 最後的累加連結找不到或未建置 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe，正在執行完整連結
   Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+=======
+﻿  MASTER.c
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(355,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+  Snake_VS.vcxproj -> C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+>>>>>>> 02e7a18275210a74e95b8579f2c8fca9f01e939d
