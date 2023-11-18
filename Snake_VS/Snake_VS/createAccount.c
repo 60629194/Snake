@@ -69,10 +69,25 @@ START:
     system("cls");
     FILE* file = fopen(accountPath, "w");
     if (file != NULL) {
+        fprintf(file, "0\n");
+        fprintf(file, "0\n");
+        fprintf(file, "0\n");
+        fprintf(file, "0");
         fclose(file);
-        printf("account created successfully.\n");
-        PlaySound(TEXT("accessGranted.wav"), NULL, SND_FILENAME);
-        Sleep(500);
+
+        // Reopen the file in read mode to get its size
+        FILE* reopenedFile = fopen(accountPath, "r");
+        if (reopenedFile != NULL) {
+            fseek(reopenedFile, 0, SEEK_END);
+            int fileSize = ftell(reopenedFile);
+            fclose(reopenedFile);
+            printf("Account created successfully.\n");
+            PlaySound(TEXT("accessGranted.wav"), NULL, SND_FILENAME);
+        }
+        else {
+            perror("Error opening the file to get size");
+            exit(1);
+        }
     }
     else {
         perror("Error creating account");
