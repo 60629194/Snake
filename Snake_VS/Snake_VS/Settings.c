@@ -8,9 +8,9 @@
 #include <conio.h>
 void switchAccount();
 int deleteAccount(const char* filepath);
-void resetAccount();
-void trimFilePath(char* filepath);
-
+int resetAccount(const char* filepath);
+static void trimFilePath(char* filepath);
+static void writeObject(const char* filepath, int lineNumber, const char* content);
 
 int Settings(const char* filepath) {
     int key=10;
@@ -66,7 +66,10 @@ int Settings(const char* filepath) {
         break;
     case 2:
         PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-        resetAccount();
+        temp=resetAccount(filepath);
+        if (temp == 1) {
+            return 1;
+        }
         choice = 0;
         key = 10;
         
@@ -110,10 +113,38 @@ int deleteAccount(const char* filepath) {
         return 0;
     }
 }
-void resetAccount() {
-    printf("resetting account");
-    Sleep(1000);
-    return;
+int resetAccount(const char* filepath) {
+    char key[100];
+    char userKey[100];
+    system("cls");
+    printf("WARNING\nare you sure to reset account, this action cannot be undone\ntype your account name to reset account.\n");
+    strcpy(key, filepath);
+    trimFilePath(key);
+    scanf("%s", userKey);
+
+    if (strcmp(key, userKey) == 0) {
+        system("cls");
+        printf("resetting account");
+        writeObject(filepath, 1, "0");
+        printf(".");
+        Sleep(100);
+        writeObject(filepath, 2, "0");
+        printf(".");
+        Sleep(100);
+        writeObject(filepath, 3, "0");
+        printf(".");
+        Sleep(100);
+        writeObject(filepath, 4, "0");
+        printf("account resetted, you are being redirected to account page");
+        Sleep(3000);
+        return 1;
+    }
+    else {
+        system("cls");
+        printf("user name does not match, you are being redirected to home page");
+        Sleep(3000);
+        return 0;
+    }
 }
 
 void trimFilePath(char* filepath) {
@@ -130,4 +161,48 @@ void trimFilePath(char* filepath) {
         accountStr += strlen("accounts/");
         memmove(filepath, accountStr, strlen(accountStr) + 1); // +1 for null terminator
     }
+}
+void writeObject(const char* filepath, int lineNumber, const char* content) {
+    FILE* file = fopen(filepath, "r");
+    if (file == NULL) {
+        printf("File '%s' not found!\n", filepath);
+        exit(1);
+        return;
+    }
+
+    // Create a temporary file
+    FILE* tempFile = fopen("accounts/temp.txt", "w");
+    if (tempFile == NULL) {
+        fclose(file);
+        printf("Unable to create a temporary file.\n");
+        exit(1);
+        return;
+    }
+
+    char buffer[1024];
+    int lineCount = 0;
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        lineCount++;
+
+        if (lineCount == lineNumber) {
+            fprintf(tempFile, "%s\n", content);
+        }
+        else {
+            fprintf(tempFile, "%s", buffer);
+        }
+    }
+
+    fclose(file);
+    fclose(tempFile);
+    chdir("accounts");
+    char tempfilepath[100];
+    strcpy(tempfilepath, filepath);
+    TrimFilePath(tempfilepath);
+    // Remove the original file
+    remove(tempfilepath);
+
+    // Rename the temporary file to the original file name
+    rename("temp.txt", tempfilepath);
+    chdir("..");
 }

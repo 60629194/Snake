@@ -19,7 +19,7 @@ struct player
 {
 	char name[100];
 	long int money;
-	bool skin[SKIN_NUMBER];
+	int skin[SKIN_NUMBER];
 	char skinNow;
 };
 
@@ -30,6 +30,9 @@ void colorPrint(const char* text, int red, int green, int blue);
 void writeObject(const char* filepath, int lineNumber, const char* content);
 char* readObject(const char* filepath, int lineNumber);
 void TrimFilePath(char* filepath);
+void cls() {
+	system("cls");
+}
 
 int main() {
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -37,7 +40,7 @@ int main() {
 	for (red = 0, green = 0, blue = 0;red < 256&& green < 256&& blue < 256;red++, green++, blue++) {
 		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n", red, green, blue);
 		Sleep(8);
-		system("cls");
+		cls();
 		if (red % 2 == 1) {
 			green++;
 		}
@@ -98,13 +101,11 @@ START:
 		// Copy the selected account to 'account'
 		strcpy(account, menu[choice]);
 		strcpy(accountPath, combineStrings("accounts/", account));
-
 		// Remove the ".txt" extension from 'account'
 		char* dot = strchr(account, '.');
 		if (dot != NULL) {
 			*dot = '\0'; // Null-terminate the string at the position of the dot
 		}
-		system("cls");
 		//printf("you chosen %s\n", account);
 		accountSize = findSize(accountPath);
 		//if account is new, initialize the account
@@ -119,24 +120,42 @@ START:
 			writeObject(accountPath, 4, "％");
 		}
 		char show[100];
-		strcpy(show, "you've chosen ");
+		cls();
+		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
-		for (red = 255, green = 255, blue = 255;red > 0 && green > 0 && blue > 0;red--,green--,blue--) {
+		colorPrint(show, 254, 254, 254);
+		Sleep(500);
+		cls();
+		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--,green--,blue--) {
 			colorPrint(show,red,green,blue);
-			Sleep(5);
-			system("cls");
+			Sleep(2);
+			cls();
 		}
 
 	}
 	else if (choice == itemCount) {
-		system("cls");
+		cls();
 		createAccount();
 		goto START;
 	}
 	else if (choice == itemCount + 1) {
-		system("cls");
-		printf("exit game");
-		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME);
+		cls();
+		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
+			colorPrint("Have a good day!", red, green, blue);
+			Sleep(4);
+			cls();
+			if (red < 150) {
+				red--;
+				green--;
+				blue--;
+			}
+			if (red < 100) {
+				red--;
+				green--;
+				blue--;
+			}
+		}
 		exit(0);
 	}
 
@@ -147,7 +166,7 @@ START:
 
 	while (1) { // Loop to keep displaying the menu until the user chooses to exit
 		do {
-			system("cls"); // Clears the console screen (Windows-specific)
+			cls(); // Clears the console screen (Windows-specific)
 
 			printf("Welcome to Snake, %s\n",account);
 			printf("   Play %s\n", (choice == 0) ? "<" : "  ");
@@ -183,6 +202,7 @@ START:
 		// Perform action based on the chosen option (choice)
 		switch (choice) {
 		case 0:
+			cls();
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GamePlay(accountPath);
 			choice = 0;
@@ -211,7 +231,7 @@ START:
 			key = 10;
 			break;
 		case 4:
-			system("cls");
+			cls();
 			printf("Exiting...\n");
 			PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME);
 			exit(0);
@@ -246,7 +266,7 @@ long int findSize(char file_name[])
 }
 
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice) {
-	system("cls"); // Clears the console screen (Windows-specific)
+	cls(); // Clears the console screen (Windows-specific)
 	printf("Select or create account\n");
 	int i;
 	for (i = 0; i < itemCount; ++i) {
