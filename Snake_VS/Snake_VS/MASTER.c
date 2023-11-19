@@ -13,16 +13,9 @@
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
-#define SKIN_NUMBER 50 // currently 48 skins now
+#define SKIN_NUMBER 48 // currently 48 skins now
 
-struct player
-{
-	char name[100];
-	long int money;
-	int skin[SKIN_NUMBER];
-	char skinNow;
-};
-
+void writeObjectTEST(const char* filepath, int lineNumber, const char* content);
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
@@ -30,6 +23,10 @@ void colorPrint(const char* text, int red, int green, int blue);
 void writeObject(const char* filepath, int lineNumber, const char* content);
 char* readObject(const char* filepath, int lineNumber);
 void TrimFilePath(char* filepath);
+char* createUnlockedSkins(char* characters, bool* skin, int charCount);
+char chooseSkin(char** skin);
+int calculateSkinCount(char** skin);
+bool* convertLineToBoolArray(const char* line);
 void cls() {
 	system("cls");
 }
@@ -45,6 +42,11 @@ int main() {
 			green++;
 		}
 	}
+	char characters[SKIN_NUMBER + 1] = {
+		'%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '©', '￡', '@',
+		'?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+		'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ':', '+', ';', '\0'
+	};
 START:
 
 	system("checkAccount.bat");
@@ -109,7 +111,7 @@ START:
 		//printf("you chosen %s\n", account);
 		accountSize = findSize(accountPath);
 		//if account is new, initialize the account
-		if (accountSize <= 10) {
+		if (accountSize <= 20) {
 			writeObject(accountPath, 1, account);
 			writeObject(accountPath, 2, "0");
 			char initialSkin[100]="1 0";
@@ -128,7 +130,17 @@ START:
 		cls();
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--,green--,blue--) {
 			colorPrint(show,red,green,blue);
-			Sleep(2);
+			Sleep(1);
+			if (red < 200) {
+				red--;
+				green--;
+				blue--;
+			}
+			if (red < 100) {
+				red--;
+				green--;
+				blue--;
+			}
 			cls();
 		}
 
@@ -145,7 +157,7 @@ START:
 			colorPrint("Have a good day!", red, green, blue);
 			Sleep(4);
 			cls();
-			if (red < 150) {
+			if (red < 200) {
 				red--;
 				green--;
 				blue--;
@@ -159,8 +171,10 @@ START:
 		exit(0);
 	}
 
-
-
+	char* line = readObject(accountPath, 3);
+	bool* skin = convertLineToBoolArray(line);
+	char* unlockedSkins = createUnlockedSkins(characters, skin, SKIN_NUMBER);
+	//free(unlockedSkins);
 	choice = 0;
 	key = 10;
 
@@ -170,10 +184,11 @@ START:
 
 			printf("Welcome to Snake, %s\n",account);
 			printf("   Play %s\n", (choice == 0) ? "<" : "  ");
-			printf("   Store %s\n", (choice == 1) ? "<" : "  ");
-			printf("   Leader Board %s\n", (choice == 2) ? "<" : "  ");
-			printf("   Settings %s\n", (choice == 3) ? "<" : "  ");
-			printf("   Exit %s\n", (choice == 4) ? "<" : "  ");
+			printf("   Skin %s\n", (choice == 1) ? "<" : "  ");
+			printf("   Store %s\n", (choice == 2) ? "<" : "  ");
+			printf("   Leader Board %s\n", (choice == 3) ? "<" : "  ");
+			printf("   Settings %s\n", (choice == 4) ? "<" : "  ");
+			printf("   Exit %s\n", (choice == 5) ? "<" : "  ");
 
 			// Non-blocking key detection for arrow keys
 			if (_kbhit()) {
@@ -188,7 +203,7 @@ START:
 						}
 						break;
 					case 80: // Down arrow key
-						if (choice < 4) {
+						if (choice < 5) {
 							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 							choice++;
 						}
@@ -209,18 +224,24 @@ START:
 			key = 10;
 			break;
 		case 1:
+			cls();
+			char skinNow;
+			skinNow = chooseSkin(unlockedSkins);
+			writeObjectTEST(accountPath, 4, skinNow);
+			
+		case 2:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			Store(accountPath);
 			choice = 0;
 			key = 10;
 			break;
-		case 2:
+		case 3:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			LeaderBoard(accountPath);
 			choice = 0;
 			key = 10;
 			break;
-		case 3:
+		case 4:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			int temp;
 			temp = Settings(accountPath);
@@ -230,12 +251,25 @@ START:
 			choice = 0;
 			key = 10;
 			break;
-		case 4:
+		case 5:
 			cls();
-			printf("Exiting...\n");
-			PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME);
+			PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
+				colorPrint("Have a good day!", red, green, blue);
+				Sleep(4);
+				cls();
+				if (red < 200) {
+					red--;
+					green--;
+					blue--;
+				}
+				if (red < 100) {
+					red--;
+					green--;
+					blue--;
+				}
+			}
 			exit(0);
-			break;
 		}
 	}
 
@@ -391,4 +425,136 @@ void TrimFilePath(char* filepath) {
 		accountStr += strlen("accounts/");
 		memmove(filepath, accountStr, strlen(accountStr) + 1); // +1 for null terminator
 	}
+}
+bool* convertLineToBoolArray(const char* line) {
+	// Allocate memory for the boolean array
+	bool* boolArray = malloc(SKIN_NUMBER * sizeof(bool));
+
+	if (boolArray == NULL) {
+		return NULL;
+	}
+
+	// Parse the line and populate the boolean array
+	char* token = strtok(line, " "); // Split by space
+	int index = 0;
+	while (token != NULL && index < SKIN_NUMBER) {
+		int value = atoi(token); // Convert string to integer
+		boolArray[index] = (value == 1) ? true : false;
+		token = strtok(NULL, " ");
+		index++;
+	}
+
+	return boolArray;
+}
+char* createUnlockedSkins(char* characters, bool* skin, int charCount) {
+	int unlockedCount = 0;
+
+	// Allocate memory for the unlockedSkins array dynamically
+	char* unlockedSkins = (char*)malloc((SKIN_NUMBER + 1) * sizeof(char));
+	if (unlockedSkins == NULL) {
+		printf("Memory allocation failed.\n");
+		return NULL;
+	}
+
+	for (int i = 0; i < SKIN_NUMBER; i++) {
+		if (skin[i]) {
+			unlockedSkins[unlockedCount++] = characters[i];
+		}
+	}
+
+	unlockedSkins[unlockedCount] = '\0'; // Null-terminate the string
+
+	return unlockedSkins;
+}
+char chooseSkin(char* unlockedSkin) {
+	int choice = 0;
+	char key=72;
+	int skinCount = calculateSkinCount(unlockedSkin);
+	/*printf("%s\n", unlockedSkin);
+	printf("%d", skinCount);
+	exit(0);*/
+
+	do {
+		system("cls"); // Clears the console screen (Windows-specific)
+
+		printf("Choose a skin:\n");
+		for (int i = 0; i < skinCount; i++) {
+			printf("%c %s\n", unlockedSkin[i],(i == choice) ? "<" : " " );
+		}
+
+		// Non-blocking key detection for arrow keys
+		if (_kbhit()) {
+			key = _getch();
+			if (key == 224) { // Arrow key detected
+				key = _getch(); // Get the extended key code
+				switch (key) {
+				case 72: // Up arrow key
+					if (choice > 0) {
+						choice--;
+					}
+					break;
+				case 80: // Down arrow key
+					if (choice < skinCount - 1) {
+						choice++;
+					}
+					break;
+				}
+			}
+
+		}
+		Sleep(100);
+	} while (key != 13); // Continue until Enter key is pressed (13 is Enter's ASCII code)
+
+	return unlockedSkin[choice];
+}
+int calculateSkinCount(char* skin) {
+	int count = 0;
+	while (skin[count] != NULL) {
+		count++;
+	}
+	return count;
+}
+void writeObjectTEST(const char* filepath, int lineNumber, const char content) {
+	FILE* file = fopen(filepath, "r");
+	if (file == NULL) {
+		printf("File '%s' not found!\n", filepath);
+		exit(1);
+		return;
+	}
+
+	// Create a temporary file
+	FILE* tempFile = fopen("accounts/temp.txt", "w");
+	if (tempFile == NULL) {
+		fclose(file);
+		printf("Unable to create a temporary file.\n");
+		exit(1);
+		return;
+	}
+
+	char buffer[1024];
+	int lineCount = 0;
+
+	while (fgets(buffer, sizeof(buffer), file)) {
+		lineCount++;
+
+		if (lineCount == lineNumber) {
+			fprintf(tempFile, "%c\n", content);
+		}
+		else {
+			fprintf(tempFile, "%s", buffer);
+		}
+	}
+
+	fclose(file);
+	fclose(tempFile);
+	chdir("accounts");
+	char tempfilepath[100];
+	strcpy(tempfilepath, filepath);
+	TrimFilePath(tempfilepath);
+	// Remove the original file
+	remove(tempfilepath);
+
+	// Rename the temporary file to the original file name
+	rename("temp.txt", tempfilepath);
+	chdir("..");
 }

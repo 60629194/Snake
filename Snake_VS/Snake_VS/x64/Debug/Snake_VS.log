@@ -1,3 +1,16 @@
 ﻿  MASTER.c
-C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(375,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(46,78): warning C4566: 由通用字元名稱 '\u00A9' 表示的字元，無法在目前的字碼頁中表示 (950)
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(229,25): warning C4047: '函式': 'char **' 與 'char *' 間接取值的層級不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(229,25): warning C4024: 'chooseSkin': 型式和實質參數 1 不同的類型
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(230,36): warning C4047: '函式': 'const char *' 與 'char' 間接取值的層級不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(230,36): warning C4024: 'writeObjectTEST': 型式和實質參數 3 不同的類型
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(46,84): warning C4305: '正在初始化': 從 'int' 轉換為 'char'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(409,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(438,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(469,23): warning C4028: 型式參數 1 與來自宣告的不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(472,37): warning C4047: '函式': 'char **' 與 'char *' 間接取值的層級不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(472,37): warning C4024: 'calculateSkinCount': 型式和實質參數 1 不同的類型
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(510,30): warning C4028: 型式參數 1 與來自宣告的不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(512,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(517,71): warning C4028: 型式參數 3 與來自宣告的不同
   Snake_VS.vcxproj -> C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
