@@ -10,7 +10,7 @@ C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Sn
 C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(469,23): warning C4028: 型式參數 1 與來自宣告的不同
 C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(472,37): warning C4047: '函式': 'char **' 與 'char *' 間接取值的層級不同
 C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(472,37): warning C4024: 'calculateSkinCount': 型式和實質參數 1 不同的類型
-C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(510,30): warning C4028: 型式參數 1 與來自宣告的不同
-C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(512,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
-C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(517,71): warning C4028: 型式參數 3 與來自宣告的不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(512,30): warning C4028: 型式參數 1 與來自宣告的不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(514,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(519,71): warning C4028: 型式參數 3 與來自宣告的不同
   Snake_VS.vcxproj -> C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe

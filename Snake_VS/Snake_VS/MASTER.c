@@ -34,7 +34,7 @@ void cls() {
 int main() {
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int red, green, blue;
-	for (red = 0, green = 0, blue = 0;red < 256&& green < 256&& blue < 256;red++, green++, blue++) {
+	for (red = 0, green = 0, blue = 0;red < 256 && green < 256 && blue < 256;red++, green++, blue++) {
 		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n", red, green, blue);
 		Sleep(8);
 		cls();
@@ -114,8 +114,8 @@ START:
 		if (accountSize <= 20) {
 			writeObject(accountPath, 1, account);
 			writeObject(accountPath, 2, "0");
-			char initialSkin[100]="1 0";
-			for (int i=0;i < 46;i++) {
+			char initialSkin[100] = "1 0";
+			for (int i = 0;i < 46;i++) {
 				strcat(initialSkin, " 0");
 			}
 			writeObject(accountPath, 3, initialSkin);
@@ -128,8 +128,8 @@ START:
 		colorPrint(show, 254, 254, 254);
 		Sleep(500);
 		cls();
-		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--,green--,blue--) {
-			colorPrint(show,red,green,blue);
+		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
+			colorPrint(show, red, green, blue);
 			Sleep(1);
 			if (red < 200) {
 				red--;
@@ -182,7 +182,7 @@ START:
 		do {
 			cls(); // Clears the console screen (Windows-specific)
 
-			printf("Welcome to Snake, %s\n",account);
+			printf("Welcome to Snake, %s\n", account);
 			printf("   Play %s\n", (choice == 0) ? "<" : "  ");
 			printf("   Skin %s\n", (choice == 1) ? "<" : "  ");
 			printf("   Store %s\n", (choice == 2) ? "<" : "  ");
@@ -228,7 +228,7 @@ START:
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
 			writeObjectTEST(accountPath, 4, skinNow);
-			
+
 		case 2:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			Store(accountPath);
@@ -468,7 +468,7 @@ char* createUnlockedSkins(char* characters, bool* skin, int charCount) {
 }
 char chooseSkin(char* unlockedSkin) {
 	int choice = 0;
-	char key=72;
+	char key = 72;
 	int skinCount = calculateSkinCount(unlockedSkin);
 	/*printf("%s\n", unlockedSkin);
 	printf("%d", skinCount);
@@ -479,27 +479,29 @@ char chooseSkin(char* unlockedSkin) {
 
 		printf("Choose a skin:\n");
 		for (int i = 0; i < skinCount; i++) {
-			printf("%c %s\n", unlockedSkin[i],(i == choice) ? "<" : " " );
+			printf("%c %s\n", unlockedSkin[i], (i == choice) ? "<" : " ");
 		}
 
 		// Non-blocking key detection for arrow keys
 		if (_kbhit()) {
 			key = _getch();
-			if (key == 224) { // Arrow key detected
-				key = _getch(); // Get the extended key code
-				switch (key) {
-				case 72: // Up arrow key
-					if (choice > 0) {
-						choice--;
-					}
-					break;
-				case 80: // Down arrow key
-					if (choice < skinCount - 1) {
-						choice++;
-					}
-					break;
+
+
+			switch (key) {
+			case 72: // Up arrow key
+				if (choice > 0) {
+					PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					choice--;
 				}
+				break;
+			case 80: // Down arrow key
+				if (choice < skinCount - 1) {
+					PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					choice++;
+				}
+				break;
 			}
+
 
 		}
 		Sleep(100);
