@@ -14,7 +14,9 @@
     eaten—often apples or eggs. The simplicity and low technical requirements of snake games have  
     resulted in hundreds of versions—some of which have the word snake or worm in the title—for many platforms.
 
-    1982's Tron arcade game, based on the film, includes snake gameplay for the single-player Light Cycle segment, and some later snake games borrow the theme. After a version simply called Snake was preloaded on Nokia mobile phones in 1998, there was a resurgence of interest in snake games as it found a larger audience.
+    1982's Tron arcade game, based on the film, includes snake gameplay for the single-player Light Cycle  
+    segment, and some later snake games borrow the theme. After a version simply called Snake was preloaded on  
+    Nokia mobile phones in 1998, there was a resurgence of interest in snake games as it found a larger audience.
 ## Why are we making our own Snake
     It's our final project, what can i say.
 ## Features
