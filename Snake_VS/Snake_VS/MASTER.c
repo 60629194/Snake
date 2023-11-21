@@ -23,6 +23,7 @@ struct player
 	char skinNow;
 };
 
+extern int scdata;
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);

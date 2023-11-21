@@ -7,6 +7,9 @@
 #include <conio.h>
 #include <time.h>
 
+int scdata;
+
+
 //print background 
 void print_plate(int array[8][10]) {
     for (int i = 0; i < 8; i++) {
@@ -37,14 +40,6 @@ void initialize_plate(int array[8][10]) {
     }
 }
 
-//equalize array1=array2 
-void equalize_plate(int array1[8][10], int array2[8][10]) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 10; j++) {
-            array1[i][j] = array2[i][j];
-        }
-    }
-}
 
 char keyboardhit(char input) {
     if (_kbhit()) {
@@ -146,15 +141,14 @@ void level(int level) {
     }
 }
 
-void GamePlay(const char* filepath) {
-    int T[8][10];
-    int M[8][10];
 
-    initialize_plate(T);
+void GamePlay(const char* filepath) {
+    int M[8][10];
 
     M[3][1] = 1;    //start point
     int coin = 0;
     int a, b;
+    int sum;
     int stage = 0;
     int snakePositionv = 3;
     int snakePositionh = 1;
@@ -164,6 +158,9 @@ void GamePlay(const char* filepath) {
 
     level(stage);
 
+    sum= stage * 50 + coin * 16;
+    scdata = sum;
 
     return ;
 }
+
