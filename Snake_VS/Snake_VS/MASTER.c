@@ -126,10 +126,12 @@ START:
 		PlaySound(TEXT("logInSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
+		colorPrint(show, 254, 254, 254);
+		Sleep(500);
 		cls();
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint(show, red, green, blue);
-			Sleep(1);
+			Sleep(4);
 			if (red < 200) {
 				red--;
 				green--;
