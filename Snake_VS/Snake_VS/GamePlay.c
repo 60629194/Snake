@@ -127,7 +127,7 @@ void level(int level) {
                 system("cls");
 
                 if (a == snakePositionv && b == snakePositionh) {   //snakePos=coinPos
-                    PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                    PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
                     apple++;
                     break;
                 }
@@ -159,7 +159,7 @@ void GamePlay(const char* filepath) {
 
     level(stage);
 
-    sum= stage * 50 + coin * 16;
+    sum= stage * 50 + apple * 16;
     scdata = sum;
 
     return ;

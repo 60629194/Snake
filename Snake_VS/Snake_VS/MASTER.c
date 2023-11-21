@@ -15,11 +15,9 @@
 #define MAX_FILENAME_LENGTH 100
 #define SKIN_NUMBER 48 // currently 48 skins now
 
-<<<<<<< HEAD
-extern int scdata;
-=======
-void writeObjectTEST(const char* filepath, int lineNumber, const char* content);
->>>>>>> 4d01ebe102b4cb51721aeeef29d06535539d1edd
+
+
+void writeObjectTEST(const char* filepath, int lineNumber, const char content);
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
@@ -28,8 +26,8 @@ void writeObject(const char* filepath, int lineNumber, const char* content);
 char* readObject(const char* filepath, int lineNumber);
 void TrimFilePath(char* filepath);
 char* createUnlockedSkins(char* characters, bool* skin, int charCount);
-char chooseSkin(char** skin);
-int calculateSkinCount(char** skin);
+char chooseSkin(char* skin);
+int calculateSkinCount(char* skin);
 bool* convertLineToBoolArray(const char* line);
 void cls() {
 	system("cls");
