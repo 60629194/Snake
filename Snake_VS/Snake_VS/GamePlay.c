@@ -83,6 +83,8 @@ void level(int level) {
     int snakePositionv = 3;
     int snakePositionh = 1;
     char direction = 'i';
+    char deinput = '\0';
+
     while (level < 20) {
         if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check3
             break;
@@ -92,6 +94,7 @@ void level(int level) {
         snakePositionv = 3;
         snakePositionh = 1;
         direction = 'i';
+
 
         while (1) {
             if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check2
@@ -119,9 +122,11 @@ void level(int level) {
                 M[a][b] = -1;   //applePos
                 M[c][d] = -2;   //coinPos
                 M[snakePositionv][snakePositionh] = 1;  //snakePos
-                
+
+                /*
                 char noninput = nonBlockingInput();
                 if (noninput != '\0') {
+                    deinput = '\0';
                     direction = noninput;
                     switch (direction) {
                     case 'w':
@@ -138,8 +143,32 @@ void level(int level) {
                         break;
                     }
                     print_plate(M);
+                    system("cls");
+                    print_plate(M);
                 }
                 else {
+                    if (deinput != '\0') {
+                        direction = deinput;
+                        deinput = '\0';
+
+                        switch (direction) {
+                        case 'w':
+                            snakePositionv--;
+                            break;
+                        case 'a':
+                            snakePositionh--;
+                            break;
+                        case 's':
+                            snakePositionv++;
+                            break;
+                        case 'd':
+                            snakePositionh++;
+                            break;
+                        }
+                        print_plate(M);
+                        system("cls");
+                        print_plate(M);
+                    }
                     switch (direction) {
                     case 'w':
                         snakePositionv--;
@@ -154,12 +183,13 @@ void level(int level) {
                         snakePositionh++;
                         break;
                     }
-                    //print_plate(M);
+                    print_plate(M);
                     system("cls");
                     print_plate(M);
                     Sleep(1000 / (level + 1));
-                }
-                /*switch (direction) {
+                }*/
+                direction = keyboardhit(direction);
+                switch (direction) {
                     case 'w':
                         snakePositionv--;
                         break;
@@ -175,8 +205,8 @@ void level(int level) {
                     }
                 print_plate(M);
                 Sleep(1000/(level+1));
-                system("cls");*/
-                
+                system("cls");
+
 
                 if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check1;
                     printf("game over");
@@ -184,18 +214,10 @@ void level(int level) {
                     break;
                 }
 
-<<<<<<< Updated upstream
-                Sleep(1000 / (level + 1));
-                system("cls");
-
-                if (a == snakePositionv && b == snakePositionh) {   //snakePos=coinPos
-                    PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-=======
                 if (a == snakePositionv && b == snakePositionh) {   //snakePos=applePos
-                    PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
->>>>>>> Stashed changes
-                    apple++;
-                    break;
+                        PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                        apple++;
+                        break;
                 }
                 if (c == snakePositionv && d == snakePositionh) {    //snakePos=coinPos
                     coin++;
@@ -234,11 +256,6 @@ void GamePlay(const char* filepath) {
 
     level(stage);
 
-<<<<<<< Updated upstream
-    sum= stage * 50 + apple * 16;
-    scdata = sum;
-=======
->>>>>>> Stashed changes
 
     return ;
 }

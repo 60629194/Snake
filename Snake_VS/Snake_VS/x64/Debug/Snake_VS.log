@@ -1,10 +1,9 @@
-<<<<<<< Updated upstream
-﻿  Snake_VS.vcxproj -> C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
-=======
-﻿  GamePlay.c
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(102,19): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(218,9): warning C4101: 'a': 未參考的區域變數
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(219,9): warning C4101: 'sum': 未參考的區域變數
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(218,12): warning C4101: 'b': 未參考的區域變數
+﻿  MASTER.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(23,80): warning C4028: 型式參數 3 與來自宣告的不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(237,36): warning C4047: '函式': 'const char *' 與 'char' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(237,36): warning C4024: 'writeObjectTEST': 型式和實質參數 3 不同的類型
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(416,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(445,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(521,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(526,71): warning C4028: 型式參數 3 與來自宣告的不同
   Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
->>>>>>> Stashed changes
