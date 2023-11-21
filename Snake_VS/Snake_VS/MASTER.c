@@ -15,9 +15,16 @@
 #define MAX_FILENAME_LENGTH 100
 #define SKIN_NUMBER 48 // currently 48 skins now
 
+<<<<<<< Updated upstream
 
 
 void writeObjectTEST(const char* filepath, int lineNumber, const char content);
+=======
+//<<<<<<< HEAD
+//=======
+void writeObjectTEST(const char* filepath, int lineNumber, const char* content);
+//>>>>>>> 4d01ebe102b4cb51721aeeef29d06535539d1edd
+>>>>>>> Stashed changes
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
