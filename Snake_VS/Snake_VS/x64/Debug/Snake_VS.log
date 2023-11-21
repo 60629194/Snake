@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  GamePlay.c
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(88,19): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(150,9): warning C4101: 'a': 未參考的區域變數
@@ -6,3 +7,12 @@ C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(150,12): warn
 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(356,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
   正在產生程式碼...
   Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+=======
+﻿  Store.c
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(25,49): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(24,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(78,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(112,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(180,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
+  Snake_VS.vcxproj -> C:\Users\Josh\OneDrive\桌面\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+>>>>>>> 4d01ebe102b4cb51721aeeef29d06535539d1edd
