@@ -15,7 +15,7 @@ void print_plate(int array[8][10]) {
                 printf("s ");//snake 
             }
             else if (array[i][j] == -1) {
-                printf("c ");//coin 
+                printf("c ");//apple 
             }
             else if (array[i][j] == 0) {
                 printf("_ ");//empty 
@@ -72,7 +72,7 @@ char keyboardhit(char input) {
 
 void level(int level) {
     int M[8][10];
-    int coin = 0;
+    int apple = 0;
     int a, b;
     int snakePositionv = 3;
     int snakePositionh = 1;
@@ -81,7 +81,7 @@ void level(int level) {
         if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check3
             break;
         }
-        coin = 0;
+        apple = 0;
         snakePositionv = 3;
         snakePositionh = 1;
         direction = 'd';
@@ -94,10 +94,10 @@ void level(int level) {
             a = rand() % 7;
             b = rand() % 9;
 
-            while (coin < 3) {
+            while (apple < 3) {
 
                 printf("level = %d\n", level + 1);
-                printf("coin = %d\n", coin);
+                printf("apple = %d\n", apple);
 
                 direction = keyboardhit(direction);
 
@@ -132,11 +132,12 @@ void level(int level) {
                 system("cls");
 
                 if (a == snakePositionv && b == snakePositionh) {   //snakePos=coinPos
-                    coin++;
+                    PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                    apple++;
                     break;
                 }
             }
-            if (coin == 3) {
+            if (apple == 3) {
                 level++;
                 printf("Victory, 3 seconds for next stage");
                 Sleep(3000);
@@ -153,7 +154,7 @@ void GamePlay(const char* filepath) {
     initialize_plate(T);
 
     M[3][1] = 1;    //start point
-    int coin = 0;
+    int apple = 0;
     int a, b;
     int stage = 0;
     int snakePositionv = 3;

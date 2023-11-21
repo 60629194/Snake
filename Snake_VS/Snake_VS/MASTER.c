@@ -123,6 +123,7 @@ START:
 		}
 		char show[100];
 		cls();
+		PlaySound(TEXT("logInSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
 		colorPrint(show, 254, 254, 254);
