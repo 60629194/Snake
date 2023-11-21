@@ -43,7 +43,7 @@ int main() {
 		}
 	}
 	char characters[SKIN_NUMBER + 1] = {
-		'%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '©', '￡', '@',
+		'%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '~', '@',
 		'?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
 		'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ':', '+', ';', '\0'
 	};
@@ -126,8 +126,6 @@ START:
 		PlaySound(TEXT("logInSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
-		colorPrint(show, 254, 254, 254);
-		Sleep(500);
 		cls();
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint(show, red, green, blue);
@@ -229,7 +227,7 @@ START:
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
 			writeObjectTEST(accountPath, 4, skinNow);
-
+			break;
 		case 2:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			Store(accountPath);
