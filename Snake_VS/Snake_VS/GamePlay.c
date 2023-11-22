@@ -75,18 +75,23 @@ char keyboardhit(char input) {
     return input;
 }
 
-/*void snakeLonger(int M, int i, int j, char direction) {
-    if (M[i][j] == -1) {
-        switch (direction) {
-        case 'w':
-            M[i + 1][j] = 1;
-            break;
-        case 'a':
-            M[i][j + 1] = 1;
-        case ''
-        }
+void bodyFlollower(int M, int snakePv, int snakePh, int* newV, int* newH, char direction) {
+    switch (direction) {
+    case 'd':
+        newV = snakePv;
+        newH = snakePh - 1;
+    case 'w':
+        newV = snakePv + 1;
+        newH = snakePh;
+    case 'a':
+        newV = snakePv;
+        newH = snakePh + 1;
+    case 's':
+        newV = snakePv - 1;
+        newH = snakePh;
     }
-}*/
+    M[newV][newH] = 1;
+}
 
 void level(int level) {
     int M[8][10];
@@ -97,6 +102,9 @@ void level(int level) {
     int snakePositionh = 1;
     char direction = 'i';
     char deinput = '\0';
+
+    int newV[5] = { 0,0,0,0,0 };
+    int newH[5] = { 0,0,0,0,0 };
 
     while (level < 20) {
         if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check3
@@ -264,6 +272,7 @@ void level(int level) {
                 if (a == snakePositionv && b == snakePositionh) {   //snakePos=applePos
                         PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         apple++;
+                        //bodyFlollower(M, snakePositionv, snakePositionh, newV[apple-1],newH[apple-1],direction);
                         break;
                 }
                 if (c == snakePositionv && d == snakePositionh) {    //snakePos=coinPos
