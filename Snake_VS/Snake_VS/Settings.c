@@ -78,6 +78,7 @@ int Settings(const char* filepath) {
         PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
         return 0;
     }
+    return 0;
 }
 
 void switchAccount() {

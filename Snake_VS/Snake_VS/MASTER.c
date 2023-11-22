@@ -180,13 +180,14 @@ START:
 
 	char* line = readObject(accountPath, 3);
 	bool* skin = convertLineToBoolArray(line);
-	char* unlockedSkins = createUnlockedSkins(characters, skin, SKIN_NUMBER);
+	
 	//free(unlockedSkins);
 	choice = 0;
 	key = 10;
 
 	while (1) { // Loop to keep displaying the menu until the user chooses to exit
 		do {
+			
 			cls(); // Clears the console screen (Windows-specific)
 
 			printf("Welcome to Snake, %s\n", account);
@@ -232,9 +233,12 @@ START:
 			break;
 		case 1:
 			cls();
+			char* unlockedSkins = createUnlockedSkins(characters, skin, SKIN_NUMBER);
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
 			writeObjectTEST(accountPath, 4, skinNow);
+			choice = 0;
+			key = 10;
 			break;
 		case 2:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -492,23 +496,23 @@ char chooseSkin(char* unlockedSkin) {
 		// Non-blocking key detection for arrow keys
 		if (_kbhit()) {
 			key = _getch();
+			
 
-
-			switch (key) {
-			case 72: // Up arrow key
-				if (choice > 0) {
-					PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-					choice--;
+				switch (key) {
+				case 72: // Up arrow key
+					if (choice > 0) {
+						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						choice--;
+					}
+					break;
+				case 80: // Down arrow key
+					if (choice < skinCount - 1) {
+						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						choice++;
+					}
+					break;
 				}
-				break;
-			case 80: // Down arrow key
-				if (choice < skinCount - 1) {
-					PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-					choice++;
-				}
-				break;
-			}
-
+			
 
 		}
 		Sleep(100);
