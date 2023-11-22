@@ -10,18 +10,14 @@
 #include "Settings.h"
 #include "Store.h"
 #include "createAccount.h"
+#include"sha256.h"
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
 #define SKIN_NUMBER 48 // currently 48 skins now
 
-
-
-
-void writeObjectTEST(const char* filepath, int lineNumber, const char content);
-
-void writeObjectTEST(const char* filepath, int lineNumber, const char* content);
-
+void writeObjectForChar(const char* filepath, int lineNumber, const char content);
+char* sha256(const char* input);
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
@@ -236,7 +232,7 @@ START:
 			char* unlockedSkins = createUnlockedSkins(characters, skin, SKIN_NUMBER);
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
-			writeObjectTEST(accountPath, 4, skinNow);
+			writeObjectForChar(accountPath, 4, skinNow);
 			choice = 0;
 			key = 10;
 			break;
@@ -527,7 +523,7 @@ int calculateSkinCount(char* skin) {
 	}
 	return count;
 }
-void writeObjectTEST(const char* filepath, int lineNumber, const char content) {
+void writeObjectForChar(const char* filepath, int lineNumber, const char content) {
 	FILE* file = fopen(filepath, "r");
 	if (file == NULL) {
 		printf("File '%s' not found!\n", filepath);
@@ -570,4 +566,26 @@ void writeObjectTEST(const char* filepath, int lineNumber, const char content) {
 	// Rename the temporary file to the original file name
 	rename("temp.txt", tempfilepath);
 	chdir("..");
+}
+char* sha256(const char* input) {
+	BYTE hash[SHA256_BLOCK_SIZE]; // To store the hash output
+
+	SHA256_CTX ctx;
+	sha256_init(&ctx); // Initialize the SHA256 context
+	sha256_update(&ctx, (BYTE*)input, strlen(input)); // Update with input data
+	sha256_final(&ctx, hash); // Finalize and get the hash
+
+	// Convert the hash bytes to a string representation
+	char* hash_string = (char*)malloc((SHA256_BLOCK_SIZE * 2 + 1) * sizeof(char)); // Each byte represented by 2 characters in hexadecimal + '\0'
+	if (hash_string == NULL) {
+		// Handle memory allocation error
+		return NULL;
+	}
+
+	for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+		sprintf(&hash_string[i * 2], "%02x", hash[i]); // Convert byte to two hexadecimal characters
+	}
+	hash_string[SHA256_BLOCK_SIZE * 2] = '\0'; // Null-terminate the string
+
+	return hash_string;
 }

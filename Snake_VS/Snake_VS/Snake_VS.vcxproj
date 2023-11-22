@@ -133,6 +133,7 @@
     <ClCompile Include="LeaderBoard.c" />
     <ClCompile Include="MASTER.c" />
     <ClCompile Include="Settings.c" />
+    <ClCompile Include="sha256.c" />
     <ClCompile Include="Store.c" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="LeaderBoard.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="sha256.h" />
     <ClInclude Include="Store.h" />
   </ItemGroup>
   <ItemGroup>
