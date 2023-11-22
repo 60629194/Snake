@@ -75,6 +75,19 @@ char keyboardhit(char input) {
     return input;
 }
 
+/*void snakeLonger(int M, int i, int j, char direction) {
+    if (M[i][j] == -1) {
+        switch (direction) {
+        case 'w':
+            M[i + 1][j] = 1;
+            break;
+        case 'a':
+            M[i][j + 1] = 1;
+        case ''
+        }
+    }
+}*/
+
 void level(int level) {
     int M[8][10];
     int apple = 0;
@@ -188,24 +201,58 @@ void level(int level) {
                     print_plate(M);
                     Sleep(1000 / (level + 1));
                 }*/
-                direction = keyboardhit(direction);
-                switch (direction) {
-                    case 'w':
-                        snakePositionv--;
-                        break;
-                    case 'a':
-                        snakePositionh--;
-                        break;
-                    case 's':
-                        snakePositionv++;
-                        break;
-                    case 'd':
-                        snakePositionh++;
+
+                /*char temp;
+                for (int i = 0; i < 5; i++) {
+                    temp = direction;
+                    direction = keyboardhit(direction);
+                    Sleep(200 / (level + 1));
+                    
+                    if (temp!=direction) {
+                        switch (direction) {
+                            case 'w':
+                                snakePositionv--;
+                                break;
+                            case 'a':
+                                snakePositionh--;
+                                break;
+                            case 's':
+                                snakePositionv++;
+                                break;
+                            case 'd':
+                                snakePositionh++;
+                                break;
+                            }
+                    }
+                    else {
                         break;
                     }
+                    
+                }
+                
+                if (temp == direction) {
+                    Sleep(1000 / (level + 1));
+                }*/
+
+                direction = keyboardhit(direction);
+                switch (direction) {
+                case 'w':
+                    snakePositionv--;
+                    break;
+                case 'a':
+                    snakePositionh--;
+                    break;
+                case 's':
+                    snakePositionv++;
+                    break;
+                case 'd':
+                    snakePositionh++;
+                    break;
+                }
                 print_plate(M);
-                Sleep(1000/(level+1));
+                Sleep(1000 / (level + 1));
                 system("cls");
+                
 
 
                 if (snakePositionv > 8 || snakePositionh > 10 || snakePositionv < 0 || snakePositionh < 0) {//boundary check1;
