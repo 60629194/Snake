@@ -1,5 +1,45 @@
-﻿  MASTER.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(416,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(445,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(521,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
-  Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  createAccount.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\createAccount.c(22,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\createAccount.c(99,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+  GamePlay.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(81,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(82,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(84,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(85,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(87,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(88,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(90,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(91,14): warning C4047: '=': 'int *' 與 'int' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(126,19): warning C4244: '函式': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(304,9): warning C4101: 'a': 未參考的區域變數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(305,9): warning C4101: 'sum': 未參考的區域變數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(304,12): warning C4101: 'b': 未參考的區域變數
+  LeaderBoard.c
+  MASTER.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(416,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(445,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(521,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+  Settings.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Settings.c(199,5): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Settings.c(202,5): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
+  sha256.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(91,21): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(92,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(93,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(94,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(95,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(96,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\sha256.c(97,30): warning C4244: '=': 將 'unsigned __int64' 轉換為 'BYTE'，由於類型不同，可能導致資料遺失
+  Store.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(29,49): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(28,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(108,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(142,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(210,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(245,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(248,2): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(283,22): warning C4477: 'fprintf' : 格式字串 '%d' 需要 'int' 類型的引數，但 variadic 引數 1 的類型為 'char *'
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\Store.c(283,22): warning C4313: 'fprintf': 格式字串中的 '%d' 與型別 'char *' 的引數 1 衝突
+  正在產生程式碼...
+  LINK : 最後的累加連結找不到或未建置 C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe，正在執行完整連結
+  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe

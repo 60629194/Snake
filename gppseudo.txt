@@ -1,0 +1,74 @@
+1. coin, apple
+    出現方式：矩陣內隨機    #randomSpawn
+    coin：
+    1.level為多少，coin最多生成多少     #level
+    2.coin要消失    #coindisappear
+    apple：
+    1.apple=level*2     #level
+
+2. snake
+    1.拿帳號第四行做皮膚    #skin
+    2.snake=apple時，加長自己   #longer
+    3.撞到自己會死掉    #gameover
+    4.起始長度=關卡數   #initialite
+    5.碰到牆壁會死掉    #gameover
+    6.隨關卡移動#move變快，smooth    #level
+
+3. plate
+    1.要有漂亮的棋盤    #plate
+    2.隨關卡變大[8+level][10+level]     #plate
+
+4. score
+    分數=coin*level     #score
+    依序記錄到leaderboard.txt   #score
+    最多五筆;       #score
+
+void skin(){
+    
+}
+
+void plate(int i,int j,int M[i][j]){
+    印出矩陣
+}
+
+void initialite(){
+
+}
+
+void randomSpawn(int i,int j,int M[i][j]){
+    決定randomH,randomV;
+    M[randomV][randomH]=東西的代號;
+}
+
+void move(){
+    
+}
+
+void gameover(){
+    
+}
+
+void coindisappear(){
+
+}
+
+void level(){
+
+
+}
+
+void score(){
+
+}
+
+void gameplay(){
+
+}
+
+
+
+
+
+
+
+
