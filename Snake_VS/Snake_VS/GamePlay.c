@@ -11,7 +11,7 @@ int scdata;
 
 int WIDTH = 20;
 int HEIGHT = 10;
-char direction = 'd';
+char direction = 'n';
 
 typedef struct {
 	int x, y;
@@ -23,6 +23,7 @@ typedef struct {
 
 void placeItem(appleStruct* apple,snakeStruct* snake,int snakeLength) {
 	int overlap=0;
+	srand(time(0));
 	do {
 		apple->x = rand() % WIDTH;
 		apple->y = rand() % HEIGHT;
@@ -35,8 +36,6 @@ void placeItem(appleStruct* apple,snakeStruct* snake,int snakeLength) {
 			}
 		}
 	} while (overlap);
-	/*apple->x = rand() % WIDTH;
-	apple->y = rand() % HEIGHT;*/
 }
 
 void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, appleStruct* apple) {
@@ -97,7 +96,7 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	snake[1].y = prevY;
 
 	// 如果蛇的长度大于1，且按键，且吃到了苹果，则增加蛇的长度
-	if (*snakeLength > 0 && key && checkEat(&snake[0], apple)) {
+	if (*snakeLength > 0 && checkEat(&snake[0], apple)) {
 		printf("Key is pressed, snake ate the apple!\n");
 
 		// 增加蛇的长度
@@ -114,21 +113,21 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	printf("After eat - Snake length: %d\n", *snakeLength);
 }
 
-void setDisplay(snakeStruct* snake, appleStruct* apple, int snakeLength) {
+void setDisplay(snakeStruct* snake, appleStruct* apple,appleStruct* coin, int snakeLength) {
 	system("cls"); 
 	for (int i = 0; i < snakeLength; i++) {
 		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
 	}
 
 	// 上
-	for (int i = 0; i < WIDTH/2+2; i++) {
-		printf("■");
+	for (int i = 0; i < WIDTH+2; i++) {
+		printf("▪");
 	}
 	printf("\n");
 
 	
 	for (int y = 0; y < HEIGHT; y++) {
-		printf("■"); // 左
+		printf("▪"); // 左
 		for (int x = 0; x < WIDTH; x++) {
 			int isSnakeBody = 0;
 
@@ -145,17 +144,20 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, int snakeLength) {
 			else if (x == apple->x && y == apple->y) {
 				printf("A"); // apple
 			}
+			else if (x == coin->x && y == coin->y) {
+				printf("C");
+			}
 			else {
 				printf(" ");
 			}
 		}
-		printf("■"); // 右
+		printf("▪"); // 右
 		printf("\n");
 	}
 
 	// 下
-	for (int i = 0; i < WIDTH/2+2; i++) {
-		printf("■");
+	for (int i = 0; i < WIDTH+2; i++) {
+		printf("▪");
 	}
 	printf("\n");
 }
@@ -173,6 +175,7 @@ int checkBoundary(snakeStruct* snake) {
 void GamePlay(const char* filepath) {
 	snakeStruct snake[100];
 	appleStruct apple;
+	appleStruct coin;
 	for (int i = 0; i < 100; i++) {
 		snake[i].x = -1; 
 		snake[i].y = -1;
@@ -184,22 +187,27 @@ void GamePlay(const char* filepath) {
 	int snakeLength = 1;
 	int ateApple = 0;
 	placeItem(&apple, snake, snakeLength);
+	placeItem(&coin, snake, snakeLength);
 	printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 
 	while (1) {
-		setDisplay(snake, &apple, snakeLength);
 		move(snake, &direction, &snakeLength, &ateApple, &apple);
+		setDisplay(snake, &apple, &coin, snakeLength);
+
 
 		if (checkEat(snake,&apple)) {
 			placeItem(&apple, snake, snakeLength);
 			printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 			ateApple = 0;
 		}
+		if (checkEat(snake, &coin)) {
+			placeItem(&coin, snake, snakeLength);
+		}
 		if (checkBoundary(snake)) {
 			printf("Gameover");
 			break;
 		}
-		Sleep(500);
+		Sleep(1000);
 	}
 }
 
