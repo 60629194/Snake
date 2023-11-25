@@ -27,7 +27,7 @@ void placeItem(appleStruct* apple,snakeStruct* snake,int snakeLength) {
 		apple->x = rand() % WIDTH;
 		apple->y = rand() % HEIGHT;
 		// 檢查新生成的蘋果位置是否和蛇的位置重疊
-		int overlap = 0;
+		overlap = 0;
 		for (int i = 0; i < snakeLength; i++) {
 			if (snake[i].x == apple->x && snake[i].y == apple->y) {
 				overlap = 1;
@@ -46,15 +46,26 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	int prevX = snake[0].x;
 	int prevY = snake[0].y;
 
-	// 根据方向移动蛇头
+	printf("Before move - Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
+	printf("Before eat - Snake length: %d\n", *snakeLength);
+
 	if (_kbhit()) {
 		int newDirection = _getch();
-		if ((newDirection == 'w' && *direction != 's') ||
-			(newDirection == 's' && *direction != 'w') ||
-			(newDirection == 'a' && *direction != 'd') ||
-			(newDirection == 'd' && *direction != 'a')) {
+		if ((newDirection == 72) && *direction != 's') {
 			key = 1;
-			*direction = newDirection;
+			*direction = 'w';
+		}
+		else if ((newDirection == 80) && *direction != 'w') {
+			key = 1;
+			*direction = 's';
+		}
+		else if ((newDirection == 75) && *direction != 'd') {
+			key = 1;
+			*direction = 'a';
+		}
+		else if ((newDirection == 77) && *direction != 'a') {
+			key = 1;
+			*direction = 'd';
 		}
 	}
 
@@ -88,16 +99,26 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	// 如果蛇的长度大于1，且按键，且吃到了苹果，则增加蛇的长度
 	if (*snakeLength > 0 && key && checkEat(&snake[0], apple)) {
 		printf("Key is pressed, snake ate the apple!\n");
-		snake[*snakeLength].x = -1;
-		snake[*snakeLength].y = -1;
 
 		// 增加蛇的长度
 		(*snakeLength)++;
+
+		// 设置新蛇段的位置为前一蛇段的位置
+		snake[*snakeLength - 1].x = snake[*snakeLength - 2].x;
+		snake[*snakeLength - 1].y = snake[*snakeLength - 2].y;
+
+		placeItem(apple, snake, *snakeLength);
 	}
+
+	printf("After move - Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
+	printf("After eat - Snake length: %d\n", *snakeLength);
 }
 
 void setDisplay(snakeStruct* snake, appleStruct* apple, int snakeLength) {
-	system("cls"); // 清空控制台屏幕
+	system("cls"); 
+	for (int i = 0; i < snakeLength; i++) {
+		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
+	}
 
 	// 上
 	for (int i = 0; i < WIDTH/2+2; i++) {
@@ -140,6 +161,8 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, int snakeLength) {
 }
 
 int checkEat(snakeStruct* snake, appleStruct* apple) {
+	printf("Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
+	printf("Apple position: (%d, %d)\n", apple->x, apple->y);
 	return(snake[0].x == apple->x && snake[0].y == apple->y);
 }
 
@@ -151,7 +174,7 @@ void GamePlay(const char* filepath) {
 	snakeStruct snake[100];
 	appleStruct apple;
 	for (int i = 0; i < 100; i++) {
-		snake[i].x = -1;  // 使用一個特殊的值，表示這個位置不包含蛇的一部分
+		snake[i].x = -1; 
 		snake[i].y = -1;
 	}
 
@@ -161,6 +184,7 @@ void GamePlay(const char* filepath) {
 	int snakeLength = 1;
 	int ateApple = 0;
 	placeItem(&apple, snake, snakeLength);
+	printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 
 	while (1) {
 		setDisplay(snake, &apple, snakeLength);
@@ -168,13 +192,14 @@ void GamePlay(const char* filepath) {
 
 		if (checkEat(snake,&apple)) {
 			placeItem(&apple, snake, snakeLength);
+			printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 			ateApple = 0;
 		}
 		if (checkBoundary(snake)) {
 			printf("Gameover");
-			exit(0);
+			break;
 		}
-		Sleep(1000);
+		Sleep(500);
 	}
 }
 
