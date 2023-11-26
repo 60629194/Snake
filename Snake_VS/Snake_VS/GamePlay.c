@@ -40,6 +40,7 @@ static int checkEatCoin(snakeStruct* snake, coinStruct* coin);
 static int checkBoundary(snakeStruct* snake);
 
 void GamePlay(const char* filepath) {
+	srand(time(0));
 	snakeStruct snake[100];
 	appleStruct apple;
 	coinStruct coin;
@@ -84,7 +85,6 @@ void colorPrint(const char* text, int red, int green, int blue) {
 }
 void placeApple(appleStruct* apple, snakeStruct* snake, int snakeLength) {
 	bool overlap;
-	srand(time(0));
 	do {
 		apple->x = rand() % WIDTH;
 		apple->y = rand() % HEIGHT;
@@ -100,7 +100,6 @@ void placeApple(appleStruct* apple, snakeStruct* snake, int snakeLength) {
 }
 void placeCoin(coinStruct* coin, snakeStruct* snake, int snakeLength) {
 	bool overlap;
-	srand(time(0));
 	do {
 		coin->x = rand() % WIDTH;
 		coin->y = rand() % HEIGHT;
