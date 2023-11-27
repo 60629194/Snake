@@ -58,12 +58,15 @@ void GamePlay(const char* filepath) {
 	placeCoin(&coin, snake, snakeLength);
 	printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 
+	//DWORD startTime = GetTickCount;
+
 	while (1) {
+		//DWORD currentTime = GetTickCount;
+		//DWORD elapsedTime = currentTime - startTime;
 		move(snake, &direction, &snakeLength, &ateApple, &apple);
 		setDisplay(snake, &apple, &coin, snakeLength);
 
-
-		if (checkEatApple(snake,&apple)) {
+		if (checkEatApple(snake, &apple)) {
 			placeApple(&apple, snake, snakeLength);
 			printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 			ateApple = 0;
