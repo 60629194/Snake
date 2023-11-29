@@ -43,7 +43,7 @@ static int level(int stage);
 static int checkBody(snakeStruct* snake);
 
 void GamePlay(const char* filepath) {
-	srand(time(0));
+	srand((int)time(0));
 	snakeStruct snake[100];
 	appleStruct apple;
 	coinStruct coin;
@@ -89,6 +89,7 @@ void GamePlay(const char* filepath) {
 				setDisplay(snake, &apple, &coin, snakeLength);
 
 				if (checkEatApple(snake, &apple)) {
+					PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					placeApple(&apple, snake, snakeLength);
 					printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 					ateApple = 0;
@@ -100,6 +101,7 @@ void GamePlay(const char* filepath) {
 				}
 
 				if (checkEatCoin(snake, &coin)) {
+					PlaySound(TEXT("coinSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					setMaxCoin--;
 					coin.x = -1;
 					coin.y = -1;
