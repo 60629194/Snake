@@ -246,14 +246,14 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int sn
 	}
 
 	// 上
-	for (int i = 0; i < WIDTH + 2; i++) {
-		printf("臣");
+	for (int i = 0; i < WIDTH/2 + 2; i++) {
+		colorPrint("臣",77,57,1);
 	}
 	printf("\n");
 
 
 	for (int y = 0; y < HEIGHT; y++) {
-		printf("臣"); // 左
+		colorPrint("臣",77,57,1); // 左
 		for (int x = 0; x < WIDTH; x++) {
 			int isSnakeBody = 0;
 
@@ -277,13 +277,13 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int sn
 				printf(" ");
 			}
 		}
-		printf("臣"); // 右
+		colorPrint("臣",77,57,1); // 右
 		printf("\n");
 	}
 
 	// 下
-	for (int i = 0; i < WIDTH + 2; i++) {
-		printf("臣");
+	for (int i = 0; i < WIDTH/2 + 2; i++) {
+		colorPrint("臣",77,57,1);
 	}
 	printf("\n");
 }
