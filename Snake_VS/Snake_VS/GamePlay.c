@@ -61,6 +61,7 @@ void GamePlay(const char* filepath) {
 	int countApple = 0;
 	int countCoin = 0;
 	int stage = 1;
+	int setMaxCoin = 0;
 
 	placeApple(&apple, snake, snakeLength);
 	placeCoin(&coin, snake, snakeLength);
@@ -74,6 +75,7 @@ void GamePlay(const char* filepath) {
 			countApple = 0;
 			moveWhichReallyMove = 0;
 			snakeLength = stage;
+			setMaxCoin = stage;
 
 			snake->x = WIDTH / 2;
 			snake->y = HEIGHT / 2;
@@ -98,7 +100,12 @@ void GamePlay(const char* filepath) {
 				}
 
 				if (checkEatCoin(snake, &coin)) {
-					placeCoin(&coin, snake, snakeLength);
+					setMaxCoin--;
+					coin.x = -1;
+					coin.y = -1;
+					if (setMaxCoin > 0) {
+						placeCoin(&coin, snake, snakeLength);
+					}
 					printf("Coin position: (%d, %d)\n", coin.x, coin.y);
 					countCoin++;
 				}
@@ -258,10 +265,10 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int sn
 				colorPrint("O", 1, 255, 1); // 蛇
 			}
 			else if (x == apple->x && y == apple->y) {
-				printf("A"); // apple
+				colorPrint("A", 255, 1, 1); // apple
 			}
 			else if (x == coin->x && y == coin->y) {
-				printf("C");// coin
+				colorPrint("C", 255, 255, 1);// coin
 			}
 			else {
 				printf(" ");
