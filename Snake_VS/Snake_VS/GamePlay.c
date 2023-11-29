@@ -38,6 +38,8 @@ static void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin,
 static int checkEatApple(snakeStruct* snake, appleStruct* apple);
 static int checkEatCoin(snakeStruct* snake, coinStruct* coin);
 static int checkBoundary(snakeStruct* snake);
+static int level(int stage);
+static int checkBody(snakeStruct* snake);
 
 void GamePlay(const char* filepath) {
 	srand(time(0));
@@ -54,6 +56,11 @@ void GamePlay(const char* filepath) {
 
 	int snakeLength = 1;
 	int ateApple = 0;
+
+	int countApple = 0;
+	int countCoin = 0;
+	int stage = 1;
+
 	placeApple(&apple, snake, snakeLength);
 	placeCoin(&coin, snake, snakeLength);
 	printf("Apple position: (%d, %d)\n", apple.x, apple.y);
@@ -61,25 +68,49 @@ void GamePlay(const char* filepath) {
 	//DWORD startTime = GetTickCount;
 
 	while (1) {
-		//DWORD currentTime = GetTickCount;
-		//DWORD elapsedTime = currentTime - startTime;
-		move(snake, &direction, &snakeLength, &ateApple, &apple);
-		setDisplay(snake, &apple, &coin, snakeLength);
+		while (stage < 10) {
 
-		if (checkEatApple(snake, &apple)) {
-			placeApple(&apple, snake, snakeLength);
-			printf("Apple position: (%d, %d)\n", apple.x, apple.y);
-			ateApple = 0;
+			countApple = 0;
+
+			snake->x = WIDTH / 2;
+			snake->y = HEIGHT / 2;
+			direction = 'n';
+
+			while (countApple<stage*2) {
+				//DWORD currentTime = GetTickCount;
+				//DWORD elapsedTime = currentTime - startTime;
+
+
+				move(snake, &direction, &snakeLength, &ateApple, &apple);
+				setDisplay(snake, &apple, &coin, snakeLength);
+
+				if (checkEatApple(snake, &apple)) {
+					placeApple(&apple, snake, snakeLength);
+					printf("Apple position: (%d, %d)\n", apple.x, apple.y);
+					ateApple = 0;
+					countApple++;
+				}
+				if (checkEatCoin(snake, &coin)) {
+					placeCoin(&coin, snake, snakeLength);
+					printf("Coin position: (%d, %d)\n", coin.x, coin.y);
+					countCoin++;
+				}
+				if (checkBoundary(snake)) {
+					printf("Gameover");
+					break;
+				}
+				if (checkBody(snake)) {
+					printf("you lose");
+					exit(0);
+				}
+				Sleep(level(stage));
+			}
+			//printf("%d", countApple);
+			system("cls");
+			printf("Next stage comes in 3 second");
+			Sleep(3000);
+			stage++;
 		}
-		if (checkEatCoin(snake, &coin)) {
-			placeCoin(&coin, snake, snakeLength);
-			printf("Coin position: (%d, %d)\n", coin.x, coin.y);
-		}
-		if (checkBoundary(snake)) {
-			printf("Gameover");
-			break;
-		}
-		Sleep(1000);
 	}
 }
 
@@ -173,7 +204,7 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	snake[1].x = prevX;
 	snake[1].y = prevY;
 
-	// 如果蛇的长度大于1，且按键，且吃到了苹果，则增加蛇的长度
+	// 如果蛇的长度大于1，且吃到了苹果，则增加蛇的长度
 	if (*snakeLength > 0 && checkEatApple(&snake[0], apple)) {
 		printf("Key is pressed, snake ate the apple!\n");
 
@@ -184,7 +215,7 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 		snake[*snakeLength - 1].x = snake[*snakeLength - 2].x;
 		snake[*snakeLength - 1].y = snake[*snakeLength - 2].y;
 
-		placeApple(apple, snake, *snakeLength);
+		//placeApple(apple, snake, *snakeLength);
 	}
 
 	printf("After move - Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
@@ -198,13 +229,13 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int sn
 
 	// 上
 	for (int i = 0; i < WIDTH + 2; i++) {
-		printf("▪");
+		printf("臣");
 	}
 	printf("\n");
 
 
 	for (int y = 0; y < HEIGHT; y++) {
-		printf("▪"); // 左
+		printf("臣"); // 左
 		for (int x = 0; x < WIDTH; x++) {
 			int isSnakeBody = 0;
 
@@ -228,13 +259,13 @@ void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int sn
 				printf(" ");
 			}
 		}
-		printf("▪"); // 右
+		printf("臣"); // 右
 		printf("\n");
 	}
 
 	// 下
 	for (int i = 0; i < WIDTH + 2; i++) {
-		printf("▪");
+		printf("臣");
 	}
 	printf("\n");
 }
@@ -250,4 +281,13 @@ int checkEatCoin(snakeStruct* snake, coinStruct* coin) {
 }
 int checkBoundary(snakeStruct* snake) {
 	return(snake->x < 0 || snake->x >= WIDTH || snake->y < 0 || snake->y >= HEIGHT);
+}
+int checkBody(snakeStruct* snake) {
+	for (int i = 2; i < 100; i++) {
+		return(snake[0].x == snake[i].x && snake[0].y == snake[i].y);
+	}
+}
+
+int level(int stage) {
+	return 1000/stage;
 }
