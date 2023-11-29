@@ -17,6 +17,7 @@ int scdata;
 short int WIDTH = 20;
 short int HEIGHT = 10;
 char direction = 'n';
+int moveWhichReallyMove = 0;
 
 typedef struct {
 	int x, y;
@@ -71,6 +72,8 @@ void GamePlay(const char* filepath) {
 		while (stage < 10) {
 
 			countApple = 0;
+			moveWhichReallyMove = 0;
+			snakeLength = stage;
 
 			snake->x = WIDTH / 2;
 			snake->y = HEIGHT / 2;
@@ -79,7 +82,6 @@ void GamePlay(const char* filepath) {
 			while (countApple<stage*2) {
 				//DWORD currentTime = GetTickCount;
 				//DWORD elapsedTime = currentTime - startTime;
-
 
 				move(snake, &direction, &snakeLength, &ateApple, &apple);
 				setDisplay(snake, &apple, &coin, snakeLength);
@@ -90,6 +92,11 @@ void GamePlay(const char* filepath) {
 					ateApple = 0;
 					countApple++;
 				}
+				if (checkBody(snake) && moveWhichReallyMove > snakeLength) {
+					printf("you lose");
+					exit(0);
+				}
+
 				if (checkEatCoin(snake, &coin)) {
 					placeCoin(&coin, snake, snakeLength);
 					printf("Coin position: (%d, %d)\n", coin.x, coin.y);
@@ -97,12 +104,9 @@ void GamePlay(const char* filepath) {
 				}
 				if (checkBoundary(snake)) {
 					printf("Gameover");
-					break;
-				}
-				if (checkBody(snake)) {
-					printf("you lose");
 					exit(0);
 				}
+				
 				Sleep(level(stage));
 			}
 			//printf("%d", countApple);
@@ -180,15 +184,19 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 	switch (*direction) {
 	case 'w':
 		snake[0].y--;
+		moveWhichReallyMove++;
 		break;
 	case 's':
 		snake[0].y++;
+		moveWhichReallyMove++;
 		break;
 	case 'a':
 		snake[0].x--;
+		moveWhichReallyMove++;
 		break;
 	case 'd':
 		snake[0].x++;
+		moveWhichReallyMove++;
 		break;
 	}
 
@@ -284,8 +292,11 @@ int checkBoundary(snakeStruct* snake) {
 }
 int checkBody(snakeStruct* snake) {
 	for (int i = 2; i < 100; i++) {
-		return(snake[0].x == snake[i].x && snake[0].y == snake[i].y);
+		if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+			return 1;
+		}
 	}
+	return 0;
 }
 
 int level(int stage) {
