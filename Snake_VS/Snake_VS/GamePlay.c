@@ -73,7 +73,7 @@ void GamePlay(const char* filepath) {
 
 			while (countApple < stage * 2) {
 
-				move(snake, &direction, &snakeLength, &ateApple, &apple,300);
+				move(snake, &direction, &snakeLength, &ateApple, &apple,300);//level(stage)
 				setDisplay(snake, &apple, &coin, snakeLength);
 
 				if (checkEatApple(snake, &apple)) {
@@ -269,7 +269,9 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 					colorPrint(">", 1, 255, 1);
 				}
 				if (direction == 'n') {
-					colorPrint("O", 1, 255, 1);
+					if (snakeLength <= 1) {
+						colorPrint("O", 1, 255, 1);
+					}
 				}
 			}
 			int isSnakeBody = 0;
@@ -288,7 +290,7 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 				colorPrint("A", 255, 1, 1); // apple
 			}
 			else if (x == coin->x && y == coin->y) {
-				colorPrint("C", 255, 255, 1);// coin
+				colorPrint("◎", 255, 255, 1);// coin
 			}
 			else {
 				if (snake[0].x != x || snake[0].y != y) {
