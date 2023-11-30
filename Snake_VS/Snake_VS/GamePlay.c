@@ -124,6 +124,7 @@ void GamePlay(const char* filepath) {
 			Sleep(3000);
 			stage++;
 		}
+		printf("you win");
 	}
 }
 
@@ -203,11 +204,11 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 		moveWhichReallyMove++;
 		break;
 	case 'a':
-		snake[0].x--;
+		snake[0].x-=1;
 		moveWhichReallyMove++;
 		break;
 	case 'd':
-		snake[0].x++;
+		snake[0].x+=1;
 		moveWhichReallyMove++;
 		break;
 	}
@@ -244,7 +245,7 @@ void move(snakeStruct* snake, char* direction, int* snakeLength, int* ateApple, 
 void setDisplay(snakeStruct* snake, appleStruct* apple, coinStruct* coin, int snakeLength) {
 	system("cls");
 	for (int i = 0; i < snakeLength; i++) {
-		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
+		//printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
 	}
 
 	// 上
@@ -305,6 +306,7 @@ int checkBoundary(snakeStruct* snake) {
 int checkBody(snakeStruct* snake) {
 	for (int i = 2; i < 100; i++) {
 		if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+			printf("hit the snake[%d]", i);
 			return 1;
 		}
 	}
