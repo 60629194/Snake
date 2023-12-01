@@ -28,7 +28,7 @@ typedef struct{
 static void colorPrint(const char* text, int red, int green, int blue);
 static void placeApple(position* apple, position* snake, int snakeLength);
 static void placeCoin(position* coin, position* snake, int snakeLength, position* apple);
-static void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed);
+static void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed,bool clearMode);
 static void setDisplay(position* snake, position* apple, position* coin, int snakeLength);
 static int checkEatApple(position* snake, position* apple);
 static int checkEatCoin(position* snake, position* coin);
@@ -60,8 +60,8 @@ void GamePlay(const char* filepath) {
 
 	placeApple(&apple, snake, snakeLength);
 	placeCoin(&coin, snake, snakeLength,&apple);
-	printf("Apple position: (%d, %d)\n", apple.x, apple.y);
-
+	//printf("Apple position: (%d, %d)\n", apple.x, apple.y);
+	printf("Game Loading...");
 	while (1) {
 		while (stage < 10) {
 			appleCount = 0;
@@ -75,7 +75,7 @@ void GamePlay(const char* filepath) {
 
 			while (appleCount < stage * 2) {
 
-				move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage));//level(stage)
+				move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage),false);//level(stage)
 				
 				if (checkEatApple(snake, &apple)) {
 					PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -121,13 +121,11 @@ void GamePlay(const char* filepath) {
 				system("cls");
 				printf("Next stage comes in %d second",i);
 				Sleep(1000);
-				move(snake, &direction, &snakeLength, &ateApple, &apple, 1);
+				move(snake, &direction, &snakeLength, &ateApple, &apple, 1,true);
 			}
-			
-			direction = 'n';
 
 			for (int i = 0; i < WIDTH; i++) {
-				move(snake, &direction, &snakeLength, &ateApple, &apple, 0);
+				move(snake, &direction, &snakeLength, &ateApple, &apple, 0,true);
 			}
 
 			
@@ -179,7 +177,7 @@ void placeCoin(position* coin, position* snake, int snakeLength,position* apple)
 		}
 	} while (overlap);
 }
-void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed) {
+void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed,bool clearMode) {
 
 	// 保存蛇头的原始位置
 	int prevX = snake[0].x;
@@ -206,6 +204,9 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 				*direction = 'd';
 			}
 		}
+	}
+	if (clearMode) {
+		*direction = 'n';
 	}
 	switch (*direction) {
 	case 'w':
