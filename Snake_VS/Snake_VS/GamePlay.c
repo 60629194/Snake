@@ -66,7 +66,7 @@ void GamePlay(const char* filepath) {
 		while (stage < 10) {
 			appleCount = 0;
 			moveWhichReallyMove = 0;
-			snakeLength = stage+1;
+			snakeLength = stage + 1;
 			setMaxCoin = stage;
 			coinTimer = 0;
 			snake->x = WIDTH / 2;
@@ -121,11 +121,15 @@ void GamePlay(const char* filepath) {
 				system("cls");
 				printf("Next stage comes in %d second",i);
 				Sleep(1000);
+				move(snake, &direction, &snakeLength, &ateApple, &apple, 1);
 			}
+			
+			direction = 'n';
+
 			for (int i = 0; i < WIDTH; i++) {
 				move(snake, &direction, &snakeLength, &ateApple, &apple, 0);
 			}
-			direction = 'n';
+
 			
 			stage++;
 		}
@@ -189,20 +193,16 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 		timeNow = GetTickCount();
 		if (_kbhit()) {
 			int newDirection = _getch();
-			if ((newDirection == UPKEY) && *direction != 's') {
-				//key = 1;
+			if ((newDirection == UPKEY) && *direction != 's'&& snake[0].y!=snake[1].y+1) {
 				*direction = 'w';
 			}
-			else if ((newDirection == DOWNKEY) && *direction != 'w') {
-				//key = 1;
+			else if ((newDirection == DOWNKEY) && *direction != 'w'&&snake[0].y!=snake[1].y-1) {
 				*direction = 's';
 			}
-			else if ((newDirection == LEFTKEY) && *direction != 'd') {
-				//key = 1;
+			else if ((newDirection == LEFTKEY) && *direction != 'd'&&snake[0].x!=snake[1].x+2) {
 				*direction = 'a';
 			}
-			else if ((newDirection == RIGHTKEY) && *direction != 'a') {
-				//key = 1;
+			else if ((newDirection == RIGHTKEY) && *direction != 'a'&&snake[0].x!=snake[1].x-2) {
 				*direction = 'd';
 			}
 		}
@@ -223,6 +223,10 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 	case 'd':
 		snake[0].x += 2;
 		moveWhichReallyMove++;
+		break;
+	default:
+		snake[0].x = WIDTH/2;
+		snake[0].y = HEIGHT/2;
 		break;
 	}
 
@@ -258,15 +262,15 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 	system("cls");
 	/*for (int i = 0; i < snakeLength; i++) {
 		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
-	}*/
-
+	}
+	printf("%d\n", snakeLength);*/
 	// 上
 	for (int i = 0; i < WIDTH/2 + 2; i++) {
 		colorPrint("臣",77,57,1);
 	}
+	
 	printf("\n");
-
-
+	
 	for (int y = 0; y < HEIGHT; y++) {
 		colorPrint("臣",77,57,1); // 左
 		for (int x = 0; x < WIDTH; x++) {
