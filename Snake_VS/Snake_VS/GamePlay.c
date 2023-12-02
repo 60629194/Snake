@@ -1,4 +1,5 @@
-﻿#include "GamePlay.h"
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include "GamePlay.h"
 #include <stdio.h>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -29,13 +30,15 @@ static void colorPrint(const char* text, int red, int green, int blue);
 static void placeApple(position* apple, position* snake, int snakeLength);
 static void placeCoin(position* coin, position* snake, int snakeLength, position* apple);
 static void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed,bool clearMode);
-static void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage);
+static void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage,char *skin);
 static int checkEatApple(position* snake, position* apple);
 static int checkEatCoin(position* snake, position* coin);
 static int checkBoundary(position* snake);
 static int level(int stage);
 static int checkBody(position* snake,int snakeLength);
 static int absolute(int value);
+static char* readObject(const char* filepath, int lineNumber);
+static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
 	srand((int)time(0));
@@ -58,8 +61,9 @@ void GamePlay(const char* filepath) {
 	int setMaxCoin = 0;
 	int coinSpawnTimer;
 	int snakeCoinDistance;
+	char *skinnow = readObject(filepath, 4);
+	char skinNow = skinnow[0];
 	bool coinExist=true;
-
 	placeApple(&apple, snake, snakeLength);
 	placeCoin(&coin, snake, snakeLength,&apple);
 	snakeCoinDistance = absolute(snake[0].x - coin.x) + absolute(snake[0].y - coin.y);
@@ -77,8 +81,15 @@ void GamePlay(const char* filepath) {
 			direction = 'n';
 
 			while (appleCount < stage * 2) {
-
-				move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage),false);
+				//run or not
+				if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
+					move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage)/2,false);
+				}
+				else
+				{
+					move(snake, &direction, &snakeLength, &ateApple, &apple, level(stage), false);
+				}
+				
 				//coin disappear if not eat in shortest distance
 				if (direction != 'n') {
 					snakeCoinDistance--;
@@ -126,7 +137,7 @@ void GamePlay(const char* filepath) {
 					coinExist = true;
 				}
 
-				setDisplay(snake, &apple, &coin, snakeLength,stage);
+				setDisplay(snake, &apple, &coin, snakeLength,stage,skinNow);
 				//if hit wall
 				if (checkBoundary(snake)) {
 					PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
@@ -155,6 +166,9 @@ void GamePlay(const char* filepath) {
 
 void colorPrint(const char* text, int red, int green, int blue) {
 	printf("\x1b[38;2;%d;%d;%dm%s\x1b[0m", red, green, blue, text);
+}
+void colorPrintForChar(char text, int red, int green, int blue) {
+	printf("\x1b[38;2;%d;%d;%dm%c\x1b[0m", red, green, blue, text);
 }
 void placeApple(position* apple, position* snake, int snakeLength) {
 	bool overlap;
@@ -277,7 +291,7 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 	//printf("After move - Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
 	//printf("After eat - Snake length: %d\n", *snakeLength);
 }
-void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage) {
+void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage,char *skin) {
 	system("cls");
 	/*for (int i = 0; i < snakeLength; i++) {
 		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
@@ -309,7 +323,7 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 				}
 				if (direction == 'n') {
 					if (snakeLength <= 1) {
-						colorPrint("O", 1, 255, 1);
+						colorPrintForChar(skin, 1, 255, 1);
 					}
 				}
 			}
@@ -323,10 +337,10 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 			}
 			
 			if (isSnakeBody) {
-				colorPrint("O", 1, 255, 1); // 蛇
+				colorPrintForChar(skin, 1, 255, 1); // 蛇
 			}
 			else if (x == apple->x && y == apple->y) {
-				colorPrint("A", 255, 1, 1); // apple
+				colorPrint("Φ", 255, 1, 1); // apple
 			}
 			else if (x == coin->x && y == coin->y) {
 				colorPrint("◎", 255, 255, 1);// coin
@@ -382,4 +396,36 @@ int absolute(int value) {
 	{
 		return value;
 	}
+}
+
+char* readObject(const char* filepath, int lineNumber) {
+	FILE* file = fopen(filepath, "r");
+	if (file == NULL) {
+		return "File not found.";
+	}
+
+	char* line = NULL;
+	size_t len = 0;
+	int currentLine = 0;
+	int maxLineLength = 1000; // Adjust as needed
+
+	while (currentLine < lineNumber && !feof(file)) {
+		line = malloc(maxLineLength * sizeof(char));
+		if (fgets(line, maxLineLength, file) != NULL) {
+			currentLine++;
+		}
+		else {
+			free(line);
+			line = NULL;
+			break; // Break loop on EOF or error
+		}
+	}
+
+	fclose(file);
+
+	if (line == NULL) {
+		return "Line number exceeds file length.";
+	}
+
+	return line;
 }
