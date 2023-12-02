@@ -59,6 +59,7 @@ void GamePlay(const char* filepath) {
 	int coinCount = 0;
 	int stage = 1;
 	int setMaxCoin = 0;
+	int appleSum = 0;
 	int coinSpawnTimer;
 	int snakeCoinDistance;
 	char *skinnow = readObject(filepath, 4);
@@ -107,13 +108,14 @@ void GamePlay(const char* filepath) {
 					apple.x = -1;
 					apple.y = -1;
 					placeApple(&apple, snake, snakeLength);
-					
+					appleSum++;
 					//printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 					ateApple = 0;
 					appleCount++;
 				}
 				//check if hit yourself
 				if (checkBody(snake,snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
+					PlaySound(TEXT("gameOver.wav"), NULL, SND_FILENAME);
 					printf("you hit yourself");
 					exit(0);
 				}
@@ -136,7 +138,7 @@ void GamePlay(const char* filepath) {
 					snakeCoinDistance = absolute(snake[0].x - coin.x) + absolute(snake[0].y - coin.y);
 					coinExist = true;
 				}
-
+				scdata = stage * coinCount+appleSum;
 				setDisplay(snake, &apple, &coin, snakeLength,stage,skinNow);
 				//if hit wall
 				if (checkBoundary(snake)) {
@@ -299,6 +301,7 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 	printf("%d\n", snakeLength);*/
 	// 上
 	printf("level %d\n", stage);
+	printf("score: %d\n", scdata);
 	for (int i = 0; i < WIDTH/2 + 2; i++) {
 		colorPrint("臣",77,57,1);
 	}
@@ -377,7 +380,7 @@ int checkBoundary(position* snake) {
 int checkBody(position* snake,int snakeLength) {
 	for (int i = 3; i < snakeLength; i++) {
 		if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
-			printf("hit the snake[%d]", i);
+			printf("hit the snake[%d]\n", i);
 			return 1;
 		}
 	}
