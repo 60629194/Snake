@@ -154,6 +154,7 @@
     <Media Include="gameStart.wav" />
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
+    <Media Include="wallBreak.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="checkAccount.bat" />

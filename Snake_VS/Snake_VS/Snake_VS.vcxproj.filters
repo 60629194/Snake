@@ -94,6 +94,9 @@
     <Media Include="coinSFX.wav">
       <Filter>Audio</Filter>
     </Media>
+    <Media Include="wallBreak.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="checkAccount.bat">

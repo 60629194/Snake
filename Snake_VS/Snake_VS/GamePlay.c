@@ -29,12 +29,13 @@ static void colorPrint(const char* text, int red, int green, int blue);
 static void placeApple(position* apple, position* snake, int snakeLength);
 static void placeCoin(position* coin, position* snake, int snakeLength, position* apple);
 static void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed,bool clearMode);
-static void setDisplay(position* snake, position* apple, position* coin, int snakeLength);
+static void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage);
 static int checkEatApple(position* snake, position* apple);
 static int checkEatCoin(position* snake, position* coin);
 static int checkBoundary(position* snake);
 static int level(int stage);
 static int checkBody(position* snake,int snakeLength);
+static int absolute(int value);
 
 void GamePlay(const char* filepath) {
 	srand((int)time(0));
@@ -55,11 +56,13 @@ void GamePlay(const char* filepath) {
 	int coinCount = 0;
 	int stage = 1;
 	int setMaxCoin = 0;
-	int coinTimer;
+	int coinSpawnTimer;
+	int snakeCoinDistance;
 	bool coinExist=true;
 
 	placeApple(&apple, snake, snakeLength);
 	placeCoin(&coin, snake, snakeLength,&apple);
+	snakeCoinDistance = absolute(snake[0].x - coin.x) + absolute(snake[0].y - coin.y);
 	//printf("Apple position: (%d, %d)\n", apple.x, apple.y);
 	printf("Game Loading...");
 	while (1) {
@@ -68,15 +71,26 @@ void GamePlay(const char* filepath) {
 			moveWhichReallyMove = 0;
 			snakeLength = stage + 1;
 			setMaxCoin = stage;
-			coinTimer = 0;
+			coinSpawnTimer = 0;
 			snake->x = WIDTH / 2;
 			snake->y = HEIGHT / 2;
 			direction = 'n';
 
 			while (appleCount < stage * 2) {
 
-				move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage),false);//level(stage)
-				
+				move(snake, &direction, &snakeLength, &ateApple, &apple,level(stage),false);
+				//coin disappear if not eat in shortest distance
+				if (direction != 'n') {
+					snakeCoinDistance--;
+				}
+				if (snakeCoinDistance < 0 && coinExist) {
+					setMaxCoin--;
+					coin.x = -1;
+					coin.y = -1;
+					coinExist = false;
+					coinSpawnTimer = stage + (rand() % (stage + 5));
+				}
+				//check if eat apple
 				if (checkEatApple(snake, &apple)) {
 					PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					apple.x = -1;
@@ -87,11 +101,12 @@ void GamePlay(const char* filepath) {
 					ateApple = 0;
 					appleCount++;
 				}
+				//check if hit yourself
 				if (checkBody(snake,snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
 					printf("you hit yourself");
 					exit(0);
 				}
-
+				//check if eat coin and spawn coin
 				if (checkEatCoin(snake, &coin)) {
 					PlaySound(TEXT("coinSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					setMaxCoin--;
@@ -100,18 +115,21 @@ void GamePlay(const char* filepath) {
 					coinExist = false;
 					//printf("Coin position: (%d, %d)\n", coin.x, coin.y);
 					coinCount++;
-					coinTimer = stage+(rand() % (stage+5));
+					coinSpawnTimer = stage+(rand() % (stage+5));
 				}
 				else{
-					coinTimer--;
+					coinSpawnTimer--;
 				}
-				if ((!coinExist) && setMaxCoin > 0 && coinTimer<=0) {
+				if ((!coinExist) && setMaxCoin > 0 && coinSpawnTimer<=0) {
 					placeCoin(&coin, snake, snakeLength,&apple);
+					snakeCoinDistance = absolute(snake[0].x - coin.x) + absolute(snake[0].y - coin.y);
 					coinExist = true;
 				}
-				setDisplay(snake, &apple, &coin, snakeLength);
 
+				setDisplay(snake, &apple, &coin, snakeLength,stage);
+				//if hit wall
 				if (checkBoundary(snake)) {
+					PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
 					printf("Gameover");
 					exit(0);
 				}
@@ -259,13 +277,14 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 	//printf("After move - Snake head position: (%d, %d)\n", snake[0].x, snake[0].y);
 	//printf("After eat - Snake length: %d\n", *snakeLength);
 }
-void setDisplay(position* snake, position* apple, position* coin, int snakeLength) {
+void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage) {
 	system("cls");
 	/*for (int i = 0; i < snakeLength; i++) {
 		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
 	}
 	printf("%d\n", snakeLength);*/
 	// 上
+	printf("level %d\n", stage);
 	for (int i = 0; i < WIDTH/2 + 2; i++) {
 		colorPrint("臣",77,57,1);
 	}
@@ -353,4 +372,14 @@ int checkBody(position* snake,int snakeLength) {
 
 int level(int stage) {
 	return 1000 / stage;
+}
+
+int absolute(int value) {
+	if (value < 0) {
+		return -value;
+	}
+	else
+	{
+		return value;
+	}
 }
