@@ -299,6 +299,7 @@ void move(position* snake, char* direction, int* snakeLength, int* ateApple, pos
 }
 void setDisplay(position* snake, position* apple, position* coin, int snakeLength,int stage,char *skin) {
 	system("cls");
+	//printf("\033[2J\033[1;1H");
 	/*for (int i = 0; i < snakeLength; i++) {
 		printf("Snake[%d] position: (%d, %d)\n", i, snake[i].x, snake[i].y);
 	}
