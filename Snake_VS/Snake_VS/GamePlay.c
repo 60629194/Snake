@@ -8,6 +8,7 @@
 #include <conio.h>
 #include <time.h>
 
+
 #define UPKEY 72
 #define DOWNKEY 80
 #define LEFTKEY 75
@@ -15,7 +16,7 @@
 
 int scdata;
 
-short int WIDTH = 20+1;
+short int WIDTH = 20;
 short int HEIGHT = 10;
 char direction = 'n';
 int moveWhichReallyMove = 0;
@@ -41,6 +42,7 @@ static char* readObject(const char* filepath, int lineNumber);
 static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
+	system("chcp 950");
 	srand((int)time(0));
 	position snake[100];
 	position apple;
@@ -161,6 +163,8 @@ void GamePlay(const char* filepath) {
 
 			
 			stage++;
+			WIDTH += 4;
+			HEIGHT += 2;
 		}
 		printf("you win");
 	}
