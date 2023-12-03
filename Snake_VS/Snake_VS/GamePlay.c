@@ -16,7 +16,7 @@
 
 int scdata;
 
-short int WIDTH = 20;
+short int WIDTH = 20+1;
 short int HEIGHT = 10;
 char direction = 'n';
 int moveWhichReallyMove = 0;
