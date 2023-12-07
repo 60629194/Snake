@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include"LeaderBoard.h"
 #include <stdio.h>
 #include <Windows.h>
@@ -9,26 +10,74 @@
 
 extern int scdata;
 
+int compare(const void* a, const void* b) {
+    return (*(int*)b - *(int*)a);
+}
+
 void LeaderBoard(const char* filepath) {
+
     system("cls");
-    int scores[] = { 0, 0, 0, 0, 0 };
-    const int numScores = sizeof(scores) / sizeof(scores[0]);
+    int data[5];
 
-    printf("%d", scdata);
-
-    scores[0] = scdata;
-
-    printf(" Leaderboard\n");
-    printf(" ------------\n");
-    for (int i = 0; i < numScores; ++i) {
-        printf(" %d. Score: %d\n", i + 1, scores[i]);
+    // 讀取舊的排行榜數據
+    FILE* file = fopen(filepath, "r");
+    if (file != NULL) {
+        for (int i = 0; i < 5; ++i) {
+            if (fscanf(file, "%d", &data[i]) != 1) {
+                // 讀取失敗，可以進行錯誤處理
+                printf("無法讀取排行榜數據。\n");
+                fclose(file);
+                return;
+            }
+        }
+        fclose(file);
     }
-    printf("\n Press 'q' to return to the Homepage...\n");
+    else {
+        // 如果文件不存在，初始化數據
+        for (int i = 0; i < 5; ++i) {
+            data[i] = 0;
+        }
+    }
 
-    char userInput;
-    do {
-        userInput = _getch();
-    } while (userInput != 'q' && userInput != 'Q');
-    PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    return;
+    // 將新數據插入數組
+    data[4] = scdata;
+
+    // 將數組按由大到小排序
+    qsort(data, 5, sizeof(int), compare);
+
+    // 開啟文本文件以寫入模式
+    FILE* writefile = fopen(filepath, "w");
+
+    // 檢查檔案是否成功開啟
+    if (writefile == NULL) {
+        printf("無法開啟檔案。\n");
+        return;
+    }
+
+    // 寫入排序後的數據到文本文件
+    for (int i = 0; i < 5; ++i) {
+        fprintf(writefile, "%d\n", data[i]);
+    }
+
+    // 關閉檔案
+    fclose(writefile);
+
+    // 開啟文本文件以讀取模式，用於顯示排行榜
+    file = fopen(filepath, "r");
+
+    // 檢查檔案是否成功開啟
+    if (file == NULL) {
+        printf("無法開啟檔案。\n");
+        return;
+    }
+
+    // 遍歷檔案的每一行並顯示在終端機上
+    char line[10];
+    while (fgets(line, sizeof(line), file) != NULL) {
+        printf("%s", line);
+    }
+
+    fclose(file);
+
+    Sleep(3000);
 }

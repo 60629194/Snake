@@ -1,8 +1,2 @@
-﻿  GamePlay.c
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(144,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(144,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(334,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(334,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(348,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(348,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-  Snake_VS.vcxproj -> C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  LeaderBoard.c
+  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe

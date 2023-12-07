@@ -1,5 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "GamePlay.h"
+#include "LeaderBoard.h"
 #include <stdio.h>
 #include <Windows.h>
 #include <mmsystem.h>
@@ -119,7 +120,7 @@ void GamePlay(const char* filepath) {
 				if (checkBody(snake,snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
 					PlaySound(TEXT("gameOver.wav"), NULL, SND_FILENAME);
 					printf("you hit yourself");
-					exit(0);
+					break;
 				}
 				//check if eat coin and spawn coin
 				if (checkEatCoin(snake, &coin)) {
@@ -146,8 +147,14 @@ void GamePlay(const char* filepath) {
 				if (checkBoundary(snake)) {
 					PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
 					printf("Gameover");
-					exit(0);
+					break;
 				}
+			}
+			if (checkBoundary(snake)) {
+				break;
+			}
+			if (checkBody(snake, snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
+				break;
 			}
 
 			for(int i=3;i>0;i--){
@@ -161,13 +168,20 @@ void GamePlay(const char* filepath) {
 				move(snake, &direction, &snakeLength, &ateApple, &apple, 0,true);
 			}
 
-			
 			stage++;
 			WIDTH += 4;
 			HEIGHT += 2;
 		}
+		if (checkBoundary(snake)) {
+			break;
+		}
+		if (checkBody(snake, snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
+			break;
+		}
 		printf("you win");
 	}
+	//LeaderBoard("Leaderboard.txt");
+	//Sleep(3000);
 }
 
 void colorPrint(const char* text, int red, int green, int blue) {

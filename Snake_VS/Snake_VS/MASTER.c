@@ -244,7 +244,7 @@ START:
 			break;
 		case 3:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-			LeaderBoard(accountPath);
+			LeaderBoard("Leaderboard.txt");
 			choice = 0;
 			key = 10;
 			break;
