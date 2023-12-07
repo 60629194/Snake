@@ -34,11 +34,6 @@ void cls() {
 }
 
 int main() {
-	//ONLY FOR TESTING
-	while (1) {
-	GamePlay("accounts/jim.txt");
-	}
-	//ONLY FOR TESTING
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int red, green, blue;
 	for (red = 0, green = 0, blue = 0;red < 256 && green < 256 && blue < 256;red++, green++, blue++) {
