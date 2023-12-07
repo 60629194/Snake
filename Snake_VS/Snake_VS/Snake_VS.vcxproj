@@ -147,12 +147,15 @@
   <ItemGroup>
     <Media Include="accessDenied.wav" />
     <Media Include="accessGranted.wav" />
+    <Media Include="coinSFX.wav" />
     <Media Include="eatSFX.wav" />
     <Media Include="enterSFX.wav" />
     <Media Include="exitSFX.wav" />
+    <Media Include="gameOver.wav" />
     <Media Include="gameStart.wav" />
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
+    <Media Include="wallBreak.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="checkAccount.bat" />
