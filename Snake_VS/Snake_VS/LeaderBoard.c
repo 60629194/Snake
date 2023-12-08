@@ -7,6 +7,9 @@
 #include <stdbool.h>
 #include <conio.h>
 #include"GamePlay.h"
+#include<string.h>
+
+
 
 extern int scdata;
 

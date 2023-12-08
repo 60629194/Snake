@@ -16,6 +16,7 @@
 #define RIGHTKEY 77
 
 int scdata;
+int coinCount = 0;
 
 short int WIDTH = 20+1;
 short int HEIGHT = 10;
@@ -59,9 +60,9 @@ void GamePlay(const char* filepath) {
 	int snakeLength = 1;
 	int ateApple = 0;
 	int appleCount = 0;
-	int coinCount = 0;
 	int stage = 1;
 	int setMaxCoin = 0;
+	coinCount = 0;
 	int appleSum = 0;
 	int coinSpawnTimer;
 	int snakeCoinDistance;
