@@ -1,2 +1,20 @@
-﻿  LeaderBoard.c
-  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  constant.c
+  MASTER.c
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(228,51): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(412,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(441,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(517,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+  Store.c
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(28,45): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(29,57): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(30,49): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(29,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(109,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(143,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(211,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(246,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(249,2): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(284,22): warning C4477: 'fprintf' : 格式字串 '%d' 需要 'int' 類型的引數，但 variadic 引數 1 的類型為 'char *'
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(284,22): warning C4313: 'fprintf': 格式字串中的 '%d' 與型別 'char *' 的引數 1 衝突
+  正在產生程式碼...
+  Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe

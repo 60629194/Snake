@@ -45,6 +45,9 @@
     <ClCompile Include="sha256.c">
       <Filter>資源檔</Filter>
     </ClCompile>
+    <ClCompile Include="constant.c">
+      <Filter>資源檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePlay.h">
@@ -63,6 +66,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="sha256.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="constant.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

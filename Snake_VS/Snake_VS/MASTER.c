@@ -11,10 +11,10 @@
 #include "Store.h"
 #include "createAccount.h"
 #include"sha256.h"
+#include "constant.h"
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
-#define SKIN_NUMBER 48 // currently 48 skins now
 
 void writeObjectForChar(const char* filepath, int lineNumber, const char content);
 char* sha256(const char* input);
@@ -44,11 +44,7 @@ int main() {
 			green++;
 		}
 	}
-	char characters[SKIN_NUMBER + 1] = {
-		'%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '~', '@',
-		'?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-		'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ':', '+', ';', '\0'
-	};
+
 START:
 
 	system("checkAccount.bat");
@@ -175,7 +171,7 @@ START:
 	}
 
 	char* line = readObject(accountPath, 3);
-	bool* skin = convertLineToBoolArray(line);
+	bool* Bskin = convertLineToBoolArray(line);
 	
 	//free(unlockedSkins);
 	choice = 0;
@@ -229,7 +225,7 @@ START:
 			break;
 		case 1:
 			cls();
-			char* unlockedSkins = createUnlockedSkins(characters, skin, SKIN_NUMBER);
+			char* unlockedSkins = createUnlockedSkins(skins, Bskin, SKINNUMBER);
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
 			writeObjectForChar(accountPath, 4, skinNow);
@@ -435,7 +431,7 @@ void TrimFilePath(char* filepath) {
 }
 bool* convertLineToBoolArray(const char* line) {
 	// Allocate memory for the boolean array
-	bool* boolArray = malloc(SKIN_NUMBER * sizeof(bool));
+	bool* boolArray = malloc(SKINNUMBER * sizeof(bool));
 
 	if (boolArray == NULL) {
 		return NULL;
@@ -444,7 +440,7 @@ bool* convertLineToBoolArray(const char* line) {
 	// Parse the line and populate the boolean array
 	char* token = strtok(line, " "); // Split by space
 	int index = 0;
-	while (token != NULL && index < SKIN_NUMBER) {
+	while (token != NULL && index < SKINNUMBER) {
 		int value = atoi(token); // Convert string to integer
 		boolArray[index] = (value == 1) ? true : false;
 		token = strtok(NULL, " ");
@@ -457,13 +453,13 @@ char* createUnlockedSkins(char* characters, bool* skin, int charCount) {
 	int unlockedCount = 0;
 
 	// Allocate memory for the unlockedSkins array dynamically
-	char* unlockedSkins = (char*)malloc((SKIN_NUMBER + 1) * sizeof(char));
+	char* unlockedSkins = (char*)malloc((SKINNUMBER + 1) * sizeof(char));
 	if (unlockedSkins == NULL) {
 		printf("Memory allocation failed.\n");
 		return NULL;
 	}
 
-	for (int i = 0; i < SKIN_NUMBER; i++) {
+	for (int i = 0; i < SKINNUMBER; i++) {
 		if (skin[i]) {
 			unlockedSkins[unlockedCount++] = characters[i];
 		}
