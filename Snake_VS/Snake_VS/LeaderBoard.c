@@ -73,14 +73,25 @@ void LeaderBoard(const char* filepath) {
         printf("無法開啟檔案。\n");
         return;
     }
-
+    printf("LeaderBoard\n");
     // 遍歷檔案的每一行並顯示在終端機上
-    char line[10];
+    char line[100];
+    int rank = 1;
     while (fgets(line, sizeof(line), file) != NULL) {
-        printf("%s", line);
+        printf("%d.  %s", rank++, line); // %-5d is used for left-aligned numbering
     }
 
     fclose(file);
-
-    Sleep(3000);
+    char input;
+    printf("Press 'q' to quit or any other key to continue: ");
+    while(1){
+        if (_kbhit()) {
+            input = _getch();
+            if (input == 'q' || input == 'Q') {
+                system("cls");
+                break;
+            }
+        }
+    }
+    return;
 }

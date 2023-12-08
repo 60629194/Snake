@@ -1,6 +1,6 @@
 ﻿  MASTER.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(233,51): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(419,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(448,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(524,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(232,51): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(416,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(445,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(521,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
   Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe

@@ -245,8 +245,6 @@ START:
 		case 3:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			LeaderBoard("Leaderboard.txt");
-			printf("%c", *account);
-			Sleep(3000);
 			choice = 0;
 			key = 10;
 			break;

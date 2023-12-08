@@ -399,3 +399,4 @@ FodyWeavers.xsd
 *.lastbuildstate
 Snake_VS/Snake_VS/x64/Debug/Snake_VS.tlog/Snake_VS.lastbuildstate
 *.tlog
+*.log
