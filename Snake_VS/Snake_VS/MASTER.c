@@ -1,4 +1,5 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_DEPRECATE
 #include <stdio.h>
 #include <Windows.h>
 #include<mmsystem.h>
@@ -31,45 +32,9 @@ char* createUnlockedSkins(char* characters, bool* skin, int charCount);
 char chooseSkin(char* skin);
 int calculateSkinCount(char* skin);
 bool* convertLineToBoolArray(const char* line);
+void updateAccountFile(const char* filepath, int coinCount);
 void cls() {
 	system("cls");
-}
-
-
-void updateAccountFile(const char* filepath, int coinCount) {
-	// 開啟檔案以讀取原始數據
-	FILE* file = fopen(filepath, "r+");
-	if (file == NULL) {
-		printf("無法開啟檔案。\n");
-		return;
-	}
-
-	// 跳過第一行
-	fscanf(file, "%*[^\n]\n");
-
-	// 記錄當前文件指標位置
-	long int originalPos = ftell(file);
-
-	// 讀取第二行的數值
-	int originalValue;
-	if (fscanf(file, "%*s %d", &originalValue) != 1) {
-		printf("無法讀取原始數值。\n");
-		Sleep(1000);
-		fclose(file);
-		return;
-	}
-
-	// 將文件指標移回到原始位置
-	fseek(file, originalPos, SEEK_SET);
-
-	// 與原始數值相加
-	int newValue = originalValue + coinCount;
-
-	// 寫入新的數值到第二行
-	fprintf(file, "%d\n", newValue);
-
-	// 關閉檔案
-	fclose(file);
 }
 
 int main() {
@@ -212,7 +177,6 @@ START:
 	char* line = readObject(accountPath, 3);
 	bool* Bskin = convertLineToBoolArray(line);
 	
-	//free(unlockedSkins);
 	choice = 0;
 	key = 10;
 
@@ -626,4 +590,12 @@ char* sha256(const char* input) {
 	hash_string[SHA256_BLOCK_SIZE * 2] = '\0'; // Null-terminate the string
 
 	return hash_string;
+}
+void updateAccountFile(const char* filepath, int coinCount) {
+	int originalMoney = atoi(readObject(filepath, 2));
+	int newMoney = originalMoney + coinCount;
+	char sMoney[100];
+	itoa(newMoney, sMoney, 10);
+	writeObject(filepath, 2, sMoney);
+	return;
 }
