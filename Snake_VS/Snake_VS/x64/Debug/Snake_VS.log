@@ -5,14 +5,4 @@ C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\S
 C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(364,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
 C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(378,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
 C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(378,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-  MASTER.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(236,4): warning C4013: 'LeaderboardWrite' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(242,51): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(438,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(467,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(543,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
-  Settings.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Settings.c(235,5): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Settings.c(238,5): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
-  正在產生程式碼...
   Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe

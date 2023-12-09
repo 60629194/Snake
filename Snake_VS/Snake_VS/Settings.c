@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
-void switchAccount();
-int deleteAccount(const char* filepath);
-int resetAccount(const char* filepath);
+static void switchAccount();
+static int deleteAccount(const char* filepath);
+static int resetAccount(const char* filepath);
 static void trimFilePath(char* filepath);
 static void writeObject(const char* filepath, int lineNumber, const char* content);
 

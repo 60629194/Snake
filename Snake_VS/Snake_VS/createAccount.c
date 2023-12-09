@@ -7,9 +7,9 @@
 #include <stdbool.h>
 #include <conio.h>
 
-int containsSpecialChars(const char* name);
-void addExtension(char* result, const char* name);
-void removeNewLine(char* str);
+static int containsSpecialChars(const char* name);
+static void addExtension(char* result, const char* name);
+static void removeNewLine(char* str);
 
 
 void createAccount() {
@@ -69,6 +69,7 @@ START:
     system("cls");
     FILE* file = fopen(accountPath, "w");
     if (file != NULL) {
+        fprintf(file, "0\n");
         fprintf(file, "0\n");
         fprintf(file, "0\n");
         fprintf(file, "0\n");

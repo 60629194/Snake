@@ -20,7 +20,6 @@
 
 extern int coinCount;
 void writeObjectForChar(const char* filepath, int lineNumber, const char content);
-char* sha256(const char* input);
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
@@ -33,6 +32,10 @@ char chooseSkin(char* skin);
 int calculateSkinCount(char* skin);
 bool* convertLineToBoolArray(const char* line);
 void updateAccountFile(const char* filepath, int coinCount);
+char* sha256(const char* input);
+void updateSha256(char* accountPath);//write stuff to 5th line
+void checksha(char* accountPath);//check the 5th line and the sha now
+void removeNewline(char* str);
 void cls() {
 	system("cls");
 }
@@ -122,6 +125,10 @@ START:
 			}
 			writeObject(accountPath, 3, initialSkin);
 			writeObject(accountPath, 4, "％");
+			updateSha256(accountPath);
+		}
+		else {
+			checksha(accountPath);
 		}
 		char show[100];
 		cls();
@@ -146,7 +153,8 @@ START:
 			}
 			cls();
 		}
-
+		checksha(accountPath);
+		updateSha256(accountPath);
 	}
 	else if (choice == itemCount) {
 		cls();
@@ -155,6 +163,8 @@ START:
 	}
 	else if (choice == itemCount + 1) {
 		cls();
+		checksha(accountPath);
+		updateSha256(accountPath);
 		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint("Have a good day!", red, green, blue);
@@ -232,7 +242,9 @@ START:
 				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			}
 			GamePlay(accountPath);
+			checksha(accountPath);
 			updateAccountFile(accountPath, coinCount);
+			updateSha256(accountPath);
 			LeaderboardWrite("Leaderboard.txt");
 			choice = 0;
 			key = 10;
@@ -242,7 +254,9 @@ START:
 			char* unlockedSkins = createUnlockedSkins(skins, Bskin, SKINNUMBER);
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
+			checksha(accountPath);
 			writeObjectForChar(accountPath, 4, skinNow);
+			updateSha256(accountPath);
 			choice = 0;
 			key = 10;
 			break;
@@ -251,7 +265,9 @@ START:
 			{
 				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			}
+			checksha(accountPath);
 			Store(accountPath);
+			updateSha256(accountPath);
 			choice = 0;
 			key = 10;
 			break;
@@ -284,6 +300,8 @@ START:
 				PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			}
 			for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
+				checksha(accountPath);
+				updateSha256(accountPath);
 				colorPrint("Have a good day!", red, green, blue);
 				Sleep(4);
 				cls();
@@ -519,13 +537,19 @@ char chooseSkin(char* unlockedSkin) {
 				switch (key) {
 				case 72: // Up arrow key
 					if (choice > 0) {
-						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						if(SFX)
+						{
+							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						}
 						choice--;
 					}
 					break;
 				case 80: // Down arrow key
 					if (choice < skinCount - 1) {
-						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						if (SFX)
+						{
+							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						}
 						choice++;
 					}
 					break;
@@ -589,6 +613,15 @@ void writeObjectForChar(const char* filepath, int lineNumber, const char content
 	rename("temp.txt", tempfilepath);
 	chdir("..");
 }
+void updateAccountFile(const char* filepath, int coinCount) {
+	int originalMoney = atoi(readObject(filepath, 2));
+	int newMoney = originalMoney + coinCount;
+	char sMoney[100];
+	itoa(newMoney, sMoney, 10);
+	writeObject(filepath, 2, sMoney);
+	return;
+}
+
 char* sha256(const char* input) {
 	BYTE hash[SHA256_BLOCK_SIZE]; // To store the hash output
 
@@ -611,11 +644,74 @@ char* sha256(const char* input) {
 
 	return hash_string;
 }
-void updateAccountFile(const char* filepath, int coinCount) {
-	int originalMoney = atoi(readObject(filepath, 2));
-	int newMoney = originalMoney + coinCount;
-	char sMoney[100];
-	itoa(newMoney, sMoney, 10);
-	writeObject(filepath, 2, sMoney);
+void updateSha256(char* accountPath) {
+
+	char* content = NULL;
+	char* temp;
+
+	for (int i = 1; i <= 4; ++i) {
+		temp = readObject(accountPath, i);
+		if (temp != NULL && strcmp(temp, "File not found.") != 0 && strcmp(temp, "Line number exceeds file length.") != 0) {
+			if (content == NULL) {
+				content = strdup(temp);
+			}
+			else {
+				content = realloc(content, strlen(content) + strlen(temp) + 1);
+				strcat(content, temp);
+			}
+			free(temp);
+		}
+		else {
+			cls();
+			printf("sth went wrong");
+			exit(1);
+		}
+	}
+	char* sha = sha256(content);
+	free(content);
+	writeObject(accountPath, 5, sha);
 	return;
+}
+void checksha(char* accountPath) {
+	char* shaInFile = readObject(accountPath, 5);
+	char* content = NULL;
+	char* temp;
+
+	for (int i = 1; i <= 4; ++i) {
+		temp = readObject(accountPath, i);
+		if (temp != NULL && strcmp(temp, "File not found.") != 0 && strcmp(temp, "Line number exceeds file length.") != 0) {
+			if (content == NULL) {
+				content = strdup(temp);
+			}
+			else {
+				content = realloc(content, strlen(content) + strlen(temp) + 1);
+				strcat(content, temp);
+			}
+			free(temp);
+		}
+		else {
+			cls();
+			printf("sth went wrong");
+			exit(1);
+		}
+	}
+	char* shaNow = sha256(content);
+	removeNewline(shaInFile);
+	free(content);
+	if (strcmp(shaInFile, shaNow) != 0) {
+		printf("you are cheating\n");
+		printf("%s\n",shaInFile);
+		printf("%s", shaNow);
+		exit(0);
+	}
+	else {
+		return;
+	}
+
+}
+void removeNewline(char* str) {
+	int len = strlen(str);
+	if (len > 0 && str[len - 1] == '\n') {
+		str[len - 1] = '\0';
+	}
 }

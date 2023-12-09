@@ -13,7 +13,7 @@
 
 extern int scdata;
 
-int compare(const void* a, const void* b) {
+static int compare(const void* a, const void* b) {
     return (*(int*)b - *(int*)a);
 }
 
