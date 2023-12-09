@@ -1,4 +1,5 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
+#include"constant.h"
 #include "GamePlay.h"
 #include "LeaderBoard.h"
 #include <stdio.h>
@@ -110,7 +111,10 @@ void GamePlay(const char* filepath) {
 				}
 				//check if eat apple
 				if (checkEatApple(snake, &apple)) {
-					PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					if(SFX)
+					{
+						PlaySound(TEXT("eatSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					}
 					apple.x = -1;
 					apple.y = -1;
 					placeApple(&apple, snake, snakeLength);
@@ -121,13 +125,19 @@ void GamePlay(const char* filepath) {
 				}
 				//check if hit yourself
 				if (checkBody(snake,snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
-					PlaySound(TEXT("gameOver.wav"), NULL, SND_FILENAME);
+					if(SFX)
+					{
+						PlaySound(TEXT("gameOver.wav"), NULL, SND_FILENAME);
+					}
 					printf("you hit yourself");
 					break;
 				}
 				//check if eat coin and spawn coin
 				if (checkEatCoin(snake, &coin)) {
-					PlaySound(TEXT("coinSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					if(SFX)
+					{
+						PlaySound(TEXT("coinSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					}
 					setMaxCoin--;
 					coin.x = -1;
 					coin.y = -1;
@@ -148,7 +158,10 @@ void GamePlay(const char* filepath) {
 				setDisplay(snake, &apple, &coin, snakeLength,stage,skinNow);
 				//if hit wall
 				if (checkBoundary(snake)) {
-					PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
+					if(SFX)
+					{
+						PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
+					}
 					printf("Gameover");
 					break;
 				}

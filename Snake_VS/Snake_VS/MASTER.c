@@ -57,7 +57,7 @@ START:
 	int key = 10;
 	char account[100];
 	char accountPath[100];
-	long int accountSize = findSize("log\\accountDATA.txt");
+	long int accountSize;
 
 
 	FILE* file = fopen("log\\accountDATA.txt", "r");
@@ -201,13 +201,19 @@ START:
 					switch (key) {
 					case 72: // Up arrow key
 						if (choice > 0) {
-							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+							if(SFX)
+							{
+								PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+							}
 							choice--;
 						}
 						break;
 					case 80: // Down arrow key
 						if (choice < 5) {
-							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+							if(SFX)
+							{
+								PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+							}
 							choice++;
 						}
 						break;
@@ -221,7 +227,10 @@ START:
 		switch (choice) {
 		case 0:
 			cls();
-			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if(SFX)
+			{
+				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			GamePlay(accountPath);
 			updateAccountFile(accountPath, coinCount);
 			LeaderboardWrite("Leaderboard.txt");
@@ -238,19 +247,28 @@ START:
 			key = 10;
 			break;
 		case 2:
-			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if(SFX)
+			{
+				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			Store(accountPath);
 			choice = 0;
 			key = 10;
 			break;
 		case 3:
-			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if(SFX)
+			{
+				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			LeaderBoard("Leaderboard.txt");
 			choice = 0;
 			key = 10;
 			break;
 		case 4:
-			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if(SFX)
+			{
+				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			int temp;
 			temp = Settings(accountPath);
 			if (temp == 1) {
@@ -261,7 +279,10 @@ START:
 			break;
 		case 5:
 			cls();
-			PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if(SFX)
+			{
+				PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 				colorPrint("Have a good day!", red, green, blue);
 				Sleep(4);

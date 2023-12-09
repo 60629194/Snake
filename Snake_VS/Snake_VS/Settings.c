@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"Settings.h"
+#include"constant.h"
 #include <stdio.h>
 #include <Windows.h>
 #include<mmsystem.h>
@@ -15,6 +16,7 @@ static void writeObject(const char* filepath, int lineNumber, const char* conten
 int Settings(const char* filepath) {
     int key=10;
     int choice = 0;
+    SETTING:
     do {
         system("cls"); // Clears the console screen (Windows-specific)
 
@@ -22,7 +24,8 @@ int Settings(const char* filepath) {
         printf("   Switch account %s\n", (choice == 0) ? "<" : "  ");
         printf("   Delete account %s\n", (choice == 1) ? "<" : "  ");
         printf("   Reset account %s\n", (choice == 2) ? "<" : "  ");
-        printf("   Return to home page %s\n", (choice == 3) ? "<" : "  ");
+        printf("   Sound %s %s\n", (SFX) ? "ON" : "OFF", (choice == 3) ? "<" : "  ");
+        printf("   Return to home page %s\n", (choice == 4) ? "<" : "  ");
 
         // Non-blocking key detection for arrow keys
         if (_kbhit()) {
@@ -32,13 +35,19 @@ int Settings(const char* filepath) {
                 switch (key) {
                 case 72: // Up arrow key
                     if (choice > 0) {
-                        PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                        if (SFX)
+                        {
+                            PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                        }
                         choice--;
                     }
                     break;
                 case 80: // Down arrow key
-                    if (choice < 3) {
-                        PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                    if (choice < 4) {
+                        if (SFX)
+                        {
+                            PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                        }
                         choice++;
                     }
                     break;
@@ -49,14 +58,20 @@ int Settings(const char* filepath) {
     } while (key != 13); // Continue until Enter key is pressed (13 is Enter's ASCII code)
     switch (choice) {
     case 0:
-        PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        if (SFX)
+        {
+            PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        }
         switchAccount();
         return 1;// return value of one will be directed to choose account page
         choice = 0;
         key = 10;
         break;
     case 1:
-        PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        if (SFX)
+        {
+            PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        }
         int temp= deleteAccount(filepath);
         if (temp == 1) {
             return 1;
@@ -65,7 +80,10 @@ int Settings(const char* filepath) {
         key = 10;
         break;
     case 2:
-        PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        if (SFX)
+        {
+            PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        }
         temp=resetAccount(filepath);
         if (temp == 1) {
             return 1;
@@ -75,7 +93,25 @@ int Settings(const char* filepath) {
         
         break;
     case 3:
-        PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        if (SFX == true) {
+            SFX = false;
+        }
+        else {
+            SFX = true;
+        }
+        if (SFX)
+        {
+            PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        }
+        choice = 0;
+        key = 10;
+        goto SETTING;
+        break;
+    case 4:
+        if (SFX)
+        {
+            PlaySound(TEXT("invertNavigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        }
         return 0;
     }
     return 0;

@@ -400,3 +400,5 @@ FodyWeavers.xsd
 Snake_VS/Snake_VS/x64/Debug/Snake_VS.tlog/Snake_VS.lastbuildstate
 *.tlog
 *.log
+Snake_VS/.vs/Snake_VS/v17/.suo
+Snake_VS/.vs/Snake_VS/v17/Browse.VC.db
