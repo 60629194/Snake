@@ -17,7 +17,7 @@ int compare(const void* a, const void* b) {
     return (*(int*)b - *(int*)a);
 }
 
-void LeaderBoard(const char* filepath) {
+void LeaderboardWrite(const char* filepath) {
 
     system("cls");
     int data[5];
@@ -64,9 +64,15 @@ void LeaderBoard(const char* filepath) {
 
     // 關閉檔案
     fclose(writefile);
+}
+
+void LeaderBoard(const char* filepath) {
+
+    system("cls");
+    int data[5];
 
     // 開啟文本文件以讀取模式，用於顯示排行榜
-    file = fopen(filepath, "r");
+    FILE* file = fopen(filepath, "r");
 
     // 檢查檔案是否成功開啟
     if (file == NULL) {

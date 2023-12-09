@@ -44,6 +44,8 @@ static char* readObject(const char* filepath, int lineNumber);
 static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
+	WIDTH = 20 + 1;
+	HEIGHT = 10;
 	system("chcp 950");
 	srand((int)time(0));
 	position snake[100];

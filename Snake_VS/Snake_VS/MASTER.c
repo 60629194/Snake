@@ -224,6 +224,7 @@ START:
 			PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GamePlay(accountPath);
 			updateAccountFile(accountPath, coinCount);
+			LeaderboardWrite("Leaderboard.txt");
 			choice = 0;
 			key = 10;
 			break;
