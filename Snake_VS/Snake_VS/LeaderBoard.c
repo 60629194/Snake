@@ -8,8 +8,9 @@
 #include <conio.h>
 #include"GamePlay.h"
 #include<string.h>
+#include<time.h>
 
-#define LEADERBOARD_SIZE 5
+
 #define FILENAME "leaderBoard.txt"
 
 extern int scdata;
@@ -39,7 +40,8 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
     time_t t = time(NULL);
     struct tm* tm_info = localtime(&t);
     char dateStr[20];
-    strftime(dateStr, sizeof(dateStr), "%Y-%m-%d %H:%M:%S", tm_info);
+    strftime(dateStr, sizeof(dateStr), "%Y-%m-%d=%H:%M:%S", tm_info);
+
 
     // 創建LeaderboardEntry結構
     struct LeaderboardEntry entry;
@@ -48,14 +50,17 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
     strcpy(entry.account, account);
 
     // 讀取舊的排行榜數據
-    struct LeaderboardEntry data[LEADERBOARD_SIZE];
+    struct LeaderboardEntry data[5];
     FILE* file = fopen(filepath, "r");
 
+
     if (file != NULL) {
-        for (int i = 0; i < LEADERBOARD_SIZE; ++i) {
-            if (fscanf(file, "%d %s %s", &data[i].score, data[i].date, data[i].account) != 3) {
+        for (int i = 0; i < 5; ++i) {
+            if (fscanf(file, "%d\t%s\t%s", &data[i].score, data[i].date, data[i].account) != 3) {
                 // 讀取失敗，可以進行錯誤處理
-                printf("無法讀取排行榜數據。\n");
+                printf("無法讀取排行榜數據。行號：%d\n", i + 1);
+                //printf("無法讀取排行榜數據。\n");
+                Sleep(3000);
                 fclose(file);
                 return;
             }
@@ -64,10 +69,11 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
     }
 
     // 將新數據插入數組
-    data[LEADERBOARD_SIZE - 1] = entry;
+    data[4] = entry;
 
     // 將數組按由大到小排序
-    qsort(data, LEADERBOARD_SIZE, sizeof(struct LeaderboardEntry), compare);
+    qsort(data, 5 , sizeof(struct LeaderboardEntry), compare);
+
 
     // 開啟文本文件以寫入模式
     FILE* writefile = fopen(filepath, "w");
@@ -75,17 +81,19 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
     // 檢查檔案是否成功開啟
     if (writefile == NULL) {
         printf("無法開啟檔案。\n");
+        Sleep(3000);
         return;
     }
 
     // 寫入排序後的數據到文本文件
-    for (int i = 0; i < LEADERBOARD_SIZE; ++i) {
-        fprintf(writefile, "%d %s %s\n", data[i].score, data[i].date, data[i].account);
+    for (int i = 0; i < 5 ; ++i) {
+        fprintf(writefile, "%d\t%s\t%s\n", data[i].score, data[i].date, data[i].account);
     }
 
     // 關閉檔案
     fclose(writefile);
 }
+
 
 /*extern int scdata;
 
@@ -157,16 +165,18 @@ void LeaderBoard(const char* filepath) {
         return;
     }
     printf("LeaderBoard\n");
+    printf("rank    score       playing time        player\n");
     // 遍歷檔案的每一行並顯示在終端機上
     char line[100];
     int rank = 1;
     while (fgets(line, sizeof(line), file) != NULL) {
-        printf("%d.  %s", rank++, line); // %-5d is used for left-aligned numbering
+        printf("------------------------------------------------\n");
+        printf("%d.     %s", rank++, line);// %-5d is used for left-aligned numbering
     }
-
+    printf("\n------------------------------------------------");
     fclose(file);
     char input;
-    printf("Press 'q' to quit or any other key to continue: ");
+    printf("\nPress 'q' to quit or any other key to continue: ");
     while(1){
         if (_kbhit()) {
             input = _getch();

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
+#include <time.h>
 #include "GamePlay.h"
 #include "LeaderBoard.h"
 #include "Settings.h"
@@ -18,7 +19,7 @@
 #define MAX_FILENAME_LENGTH 100
 
 
-const char* acc = 'HI';
+
 
 extern int coinCount;
 void writeObjectForChar(const char* filepath, int lineNumber, const char content);
@@ -245,7 +246,8 @@ START:
 			checksha(accountPath);
 			updateAccountFile(accountPath, coinCount);
 			updateSha256(accountPath);
-			LeaderboardWrite("leaderBoard.txt",scdata,accountPath);
+			const char* acc = readObject(accountPath, 1);
+			LeaderboardWrite("leaderBoard.txt",scdata,acc);
 			choice = 0;
 			key = 10;
 			break;
