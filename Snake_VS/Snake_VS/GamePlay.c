@@ -47,7 +47,7 @@ static void colorPrintForChar(char text, int red, int green, int blue);
 void GamePlay(const char* filepath) {
 	WIDTH = 20;
 	HEIGHT = 10;
-	//system("chcp 950");
+	system("chcp 950");
 	srand((int)time(0));
 	position snake[100];
 	position apple;
@@ -378,7 +378,7 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 				colorPrintForChar(skin, 1, 255, 1); // 蛇
 			}
 			else if (x == apple->x && y == apple->y) {
-				colorPrint("Φ", 255, 1, 1); // apple
+				colorPrint("Φ",255,1,1); // apple
 			}
 			else if (x == coin->x && y == coin->y) {
 				colorPrint("◎", 255, 255, 1);// coin
