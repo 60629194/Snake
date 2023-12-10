@@ -9,9 +9,85 @@
 #include"GamePlay.h"
 #include<string.h>
 
-
+#define LEADERBOARD_SIZE 5
+#define FILENAME "leaderBoard.txt"
 
 extern int scdata;
+
+// 修改數據結構，增加日期和帳號身分
+struct LeaderboardEntry {
+    int score;
+    char date[20];  // 日期字符串，這裡使用固定長度
+    char account[20];  // 帳號身分字符串，這裡使用固定長度
+};
+
+static int compare(const void* a, const void* b) {
+    // 修改比較函數，首先比較分數，然後比較日期
+    const struct LeaderboardEntry* entryA = (const struct LeaderboardEntry*)a;
+    const struct LeaderboardEntry* entryB = (const struct LeaderboardEntry*)b;
+
+    if (entryA->score != entryB->score) {
+        return entryB->score - entryA->score;
+    }
+
+    // 如果分數相同，比較日期
+    return strcmp(entryB->date, entryA->date);
+}
+
+void LeaderboardWrite(const char* filepath, int score, const char* account) {
+    // 獲取當前日期和時間
+    time_t t = time(NULL);
+    struct tm* tm_info = localtime(&t);
+    char dateStr[20];
+    strftime(dateStr, sizeof(dateStr), "%Y-%m-%d %H:%M:%S", tm_info);
+
+    // 創建LeaderboardEntry結構
+    struct LeaderboardEntry entry;
+    entry.score = score;
+    strcpy(entry.date, dateStr);
+    strcpy(entry.account, account);
+
+    // 讀取舊的排行榜數據
+    struct LeaderboardEntry data[LEADERBOARD_SIZE];
+    FILE* file = fopen(filepath, "r");
+
+    if (file != NULL) {
+        for (int i = 0; i < LEADERBOARD_SIZE; ++i) {
+            if (fscanf(file, "%d %s %s", &data[i].score, data[i].date, data[i].account) != 3) {
+                // 讀取失敗，可以進行錯誤處理
+                printf("無法讀取排行榜數據。\n");
+                fclose(file);
+                return;
+            }
+        }
+        fclose(file);
+    }
+
+    // 將新數據插入數組
+    data[LEADERBOARD_SIZE - 1] = entry;
+
+    // 將數組按由大到小排序
+    qsort(data, LEADERBOARD_SIZE, sizeof(struct LeaderboardEntry), compare);
+
+    // 開啟文本文件以寫入模式
+    FILE* writefile = fopen(filepath, "w");
+
+    // 檢查檔案是否成功開啟
+    if (writefile == NULL) {
+        printf("無法開啟檔案。\n");
+        return;
+    }
+
+    // 寫入排序後的數據到文本文件
+    for (int i = 0; i < LEADERBOARD_SIZE; ++i) {
+        fprintf(writefile, "%d %s %s\n", data[i].score, data[i].date, data[i].account);
+    }
+
+    // 關閉檔案
+    fclose(writefile);
+}
+
+/*extern int scdata;
 
 static int compare(const void* a, const void* b) {
     return (*(int*)b - *(int*)a);
@@ -65,6 +141,7 @@ void LeaderboardWrite(const char* filepath) {
     // 關閉檔案
     fclose(writefile);
 }
+*/
 
 void LeaderBoard(const char* filepath) {
 
@@ -101,3 +178,4 @@ void LeaderBoard(const char* filepath) {
     }
     return;
 }
+

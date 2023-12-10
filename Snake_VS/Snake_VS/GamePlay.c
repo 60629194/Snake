@@ -19,7 +19,7 @@
 int scdata;
 int coinCount = 0;
 
-short int WIDTH = 20+1;
+short int WIDTH = 20;
 short int HEIGHT = 10;
 char direction = 'n';
 int moveWhichReallyMove = 0;
@@ -45,7 +45,7 @@ static char* readObject(const char* filepath, int lineNumber);
 static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
-	WIDTH = 20 + 1;
+	WIDTH = 20;
 	HEIGHT = 10;
 	//system("chcp 950");
 	srand((int)time(0));
@@ -389,7 +389,7 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 				}
 			}
 		}
-		colorPrint("臣",77,57,1); // 右
+		colorPrint("臣", 77, 57, 1); // 右
 		printf("\n");
 	}
 

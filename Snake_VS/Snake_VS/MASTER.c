@@ -18,6 +18,8 @@
 #define MAX_FILENAME_LENGTH 100
 
 
+const char* acc = 'HI';
+
 extern int coinCount;
 void writeObjectForChar(const char* filepath, int lineNumber, const char content);
 long int findSize(char file_name[]);
@@ -245,7 +247,7 @@ START:
 			checksha(accountPath);
 			updateAccountFile(accountPath, coinCount);
 			updateSha256(accountPath);
-			LeaderboardWrite("Leaderboard.txt");
+			LeaderboardWrite("leaderBoard.txt",scdata,accountPath);
 			choice = 0;
 			key = 10;
 			break;
@@ -276,7 +278,7 @@ START:
 			{
 				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			}
-			LeaderBoard("Leaderboard.txt");
+			LeaderBoard("leaderBoard.txt");
 			choice = 0;
 			key = 10;
 			break;
