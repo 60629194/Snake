@@ -385,7 +385,16 @@ void setDisplay(position* snake, position* apple, position* coin, int snakeLengt
 			}
 			else {
 				if (snake[0].x != x || snake[0].y != y) {
-					printf(" ");
+					if (coin->x == x - 1 && coin->y == y) {
+						printf("");
+					}
+					else if (apple->x == x - 1 && apple->y == y) {
+						printf("");
+					}
+					else
+					{
+						printf(" ");
+					}
 				}
 			}
 		}

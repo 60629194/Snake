@@ -1,8 +1,9 @@
-﻿  GamePlay.c
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(158,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(158,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(364,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(364,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(378,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(378,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-  Snake_VS.vcxproj -> C:\Users\大和玉\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  MASTER.c
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(21,19): warning C4047: '正在初始化': 'const char *' 與 'int' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(248,4): warning C4013: 'LeaderboardWrite' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(254,51): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(456,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(485,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(567,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(713,12): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+  Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe

@@ -165,8 +165,6 @@ START:
 	}
 	else if (choice == itemCount + 1) {
 		cls();
-		checksha(accountPath);
-		updateSha256(accountPath);
 		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint("Have a good day!", red, green, blue);
