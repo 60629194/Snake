@@ -1,12 +1,11 @@
-﻿  Store.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(23,45): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(24,57): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(25,49): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(28,20): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(56,20): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(61,24): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(24,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(77,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(111,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(179,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
-  Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  GamePlay.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(157,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(157,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(357,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(357,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(371,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(371,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
+  LeaderBoard.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\LeaderBoard.c(100,9): warning C4101: 'data': 未參考的區域變數
+  正在產生程式碼...
+  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
