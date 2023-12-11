@@ -1,8 +1,1 @@
-﻿  MASTER.c
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(250,4): warning C4013: 'LeaderboardWrite' 未定義; 假設 extern 傳回整數
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(256,51): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(458,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(487,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(569,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\MASTER.c(715,12): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
-  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+﻿  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe

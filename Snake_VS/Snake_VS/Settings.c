@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"Settings.h"
-#include"constant.h"
+#include"global.h"
 #include <stdio.h>
 #include <Windows.h>
 #include<mmsystem.h>

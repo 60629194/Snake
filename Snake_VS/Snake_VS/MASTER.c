@@ -13,7 +13,7 @@
 #include "Store.h"
 #include "createAccount.h"
 #include"sha256.h"
-#include "constant.h"
+#include "global.h"
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100

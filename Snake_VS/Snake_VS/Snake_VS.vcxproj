@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="constant.c" />
+    <ClCompile Include="global.c" />
     <ClCompile Include="createAccount.c" />
     <ClCompile Include="GamePlay.c" />
     <ClCompile Include="LeaderBoard.c" />
@@ -138,7 +138,7 @@
     <ClCompile Include="Store.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constant.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="createAccount.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="LeaderBoard.h" />

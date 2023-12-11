@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
-#include"constant.h"
+#include"global.h"
 //#define SKIN_NUMBER 48
 
 static char* readObject(const char* filepath, int lineNumber);
