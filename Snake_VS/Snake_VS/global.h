@@ -11,4 +11,7 @@ char* readObject(const char* filepath, int lineNumber);
 void writeObject(const char* filepath, int lineNumber, const char* content);
 void removeNewLine(char* str);
 void colorPrint(const char* text, int red, int green, int blue);
+char* sha256(const char* input);
+void updateSha256(char* accountPath);
+void checksha(char* accountPath);
 #endif 

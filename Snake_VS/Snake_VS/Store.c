@@ -1,23 +1,21 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"Store.h"
+#include"global.h"
 #include <stdio.h>
 #include <Windows.h>
 #include<mmsystem.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
-#include"global.h"
+
 
 static bool* convertLineToBoolArray(const char* line);
 static char* createlockedSkins(char* characters, bool* skin, int charCount);
 static int chooseSkin(char* lockedSkin,char *filepath, int* skinValues);
 static char* createlockedSkinValue(int* values, bool* skin, int charCount);
-static void writeObjectForInt(const char* filepath, int lineNumber, int content);
 
 
 void Store(const char* filepath) {
-	//char skins[SKINNUMBER + 1] = {'%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '~', '@', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ':', '+', ';', '\0'};
-	//int skinValue[SKINNUMBER + 1] = {       5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5 , '\0'};
 START:
 	system("cls");
 	char* lineOfLockedSkin = readObject(filepath, 3);
@@ -27,6 +25,7 @@ START:
 	int skinToBuy = chooseSkin(lockedSkins,filepath,lockedSkinValues);
 	if (skinToBuy < 0) {
 		// player chose return home
+		checksha(filepath);
 		return;
 	}
 	int money = atoi(readObject(filepath, 2));
@@ -54,10 +53,12 @@ START:
 			}
 			i++;
 		}
+		checksha(filepath);
 		writeObject(filepath, 3, skinAfterBuy);
 		char Cmoney[2000];
 		_itoa(money, Cmoney, 10);
 		writeObject(filepath, 2, Cmoney);
+		updateSha256(filepath);
 		goto START;
 	}
     return;
@@ -176,49 +177,4 @@ char* createlockedSkinValue(int* values, bool* skin, int charCount) {
 	lockedSkins[lockedCount] = '\0'; // Null-terminate the string
 
 	return lockedSkins;
-}
-
-void writeObjectForInt(const char* filepath, int lineNumber, int content) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		printf("File '%s' not found!\n", filepath);
-		exit(1);
-		return;
-	}
-
-	// Create a temporary file
-	FILE* tempFile = fopen("accounts/temp.txt", "w");
-	if (tempFile == NULL) {
-		fclose(file);
-		printf("Unable to create a temporary file.\n");
-		exit(1);
-		return;
-	}
-
-	char buffer[1024];
-	int lineCount = 0;
-
-	while (fgets(buffer, sizeof(buffer), file)) {
-		lineCount++;
-
-		if (lineCount == lineNumber) {
-			fprintf(tempFile, "%d\n", content);
-		}
-		else {
-			fprintf(tempFile, "%d", buffer);
-		}
-	}
-
-	fclose(file);
-	fclose(tempFile);
-	chdir("accounts");
-	char tempfilepath[100];
-	strcpy(tempfilepath, filepath);
-	TrimFilePath(tempfilepath);
-	// Remove the original file
-	remove(tempfilepath);
-
-	// Rename the temporary file to the original file name
-	rename("temp.txt", tempfilepath);
-	chdir("..");
 }

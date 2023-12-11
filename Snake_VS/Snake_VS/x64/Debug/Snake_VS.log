@@ -1,44 +1,12 @@
-﻿  GamePlay.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(155,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(155,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(357,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(357,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(371,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(371,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-  LeaderBoard.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\LeaderBoard.c(160,9): warning C4101: 'data': 未參考的區域變數
-  MASTER.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(243,4): warning C4013: 'LeaderboardWrite' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(251,51): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(400,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(482,21): warning C4047: '!=': 'int' 與 'void *' 間接取值的層級不同
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\MASTER.c(520,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-  Settings.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Settings.c(235,5): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Settings.c(238,5): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
-  Store.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(25,45): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(26,57): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(27,49): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(26,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(76,27): warning C4090: '函式': 不同的 'const' 限定詞
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(110,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(178,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(208,22): warning C4477: 'fprintf' : 格式字串 '%d' 需要 'int' 類型的引數，但 variadic 引數 1 的類型為 'char *'
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(208,22): warning C4313: 'fprintf': 格式字串中的 '%d' 與型別 'char *' 的引數 1 衝突
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(214,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(217,2): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
-  createAccount.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\createAccount.c(22,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\createAccount.c(100,18): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
-  global.c
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(20,10): warning C4013: 'malloc' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(20,8): warning C4047: '=': 'char *' 與 'int' 間接取值的層級不同
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(25,4): warning C4013: 'free' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(43,3): warning C4013: 'exit' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(72,2): warning C4013: 'chdir' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(74,2): warning C4013: 'strcpy' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(75,2): warning C4013: 'TrimFilePath' 未定義; 假設 extern 傳回整數
-C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\global.c(84,18): warning C4013: 'strlen' 未定義; 假設 extern 傳回整數
-  正在產生程式碼...
+﻿  Store.c
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(23,45): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(24,57): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(25,49): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(28,20): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(56,20): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(61,24): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(24,7): warning C4133: '正在初始化': 不相容的類型 - 從 'char *' 至 'int *'
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(77,27): warning C4090: '函式': 不同的 'const' 限定詞
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(111,18): warning C4013: 'calculateSkinCount' 未定義; 假設 extern 傳回整數
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\Store.c(179,2): warning C4133: 'return': 不相容的類型 - 從 'int *' 至 'char *'
   Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
