@@ -50,7 +50,7 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
     strcpy(entry.account, account);
 
     // 讀取舊的排行榜數據
-    struct LeaderboardEntry data[5];
+    struct LeaderboardEntry data[6];
     FILE* file = fopen(filepath, "r");
 
 
@@ -67,12 +67,12 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
         }
         fclose(file);
     }
-
+    
     // 將新數據插入數組
-    data[4] = entry;
+    data[5] = entry;
 
     // 將數組按由大到小排序
-    qsort(data, 5 , sizeof(struct LeaderboardEntry), compare);
+    qsort(data, 6 , sizeof(struct LeaderboardEntry), compare);
 
 
     // 開啟文本文件以寫入模式
@@ -87,7 +87,10 @@ void LeaderboardWrite(const char* filepath, int score, const char* account) {
 
     // 寫入排序後的數據到文本文件
     for (int i = 0; i < 5 ; ++i) {
-        fprintf(writefile, "%d\t%s\t%s\n", data[i].score, data[i].date, data[i].account);
+        fprintf(writefile, "%d\t%s\t%s", data[i].score, data[i].date, data[i].account);
+        if (i < 4) {
+            fprintf(writefile, "\n");
+        }
     }
 
     // 關閉檔案
@@ -169,10 +172,21 @@ void LeaderBoard(const char* filepath) {
     // 遍歷檔案的每一行並顯示在終端機上
     char line[100];
     int rank = 1;
+
     while (fgets(line, sizeof(line), file) != NULL) {
+        // 如果是空白行，跳過
+        if (strlen(line) <= 1) {
+            continue;
+        }
+
         printf("------------------------------------------------\n");
-        printf("%d.     %s", rank++, line);// %-5d is used for left-aligned numbering
+        printf("%d.     %s", rank++, line); // %-5d is used for left-aligned numbering
     }
+
+    //while (fgets(line, sizeof(line), file) != NULL) {
+    //    printf("------------------------------------------------\n");
+    //    printf("%d.     %s", rank++, line);// %-5d is used for left-aligned numbering
+    //}
     printf("\n------------------------------------------------");
     fclose(file);
     char input;
