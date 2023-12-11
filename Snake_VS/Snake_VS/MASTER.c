@@ -26,9 +26,6 @@ void writeObjectForChar(const char* filepath, int lineNumber, const char content
 long int findSize(char file_name[]);
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice);
 char* combineStrings(const char* str1, const char* str2);
-void colorPrint(const char* text, int red, int green, int blue);
-void writeObject(const char* filepath, int lineNumber, const char* content);
-char* readObject(const char* filepath, int lineNumber);
 void TrimFilePath(char* filepath);
 char* createUnlockedSkins(char* characters, bool* skin, int charCount);
 char chooseSkin(char* skin);
@@ -38,7 +35,6 @@ void updateAccountFile(const char* filepath, int coinCount);
 char* sha256(const char* input);
 void updateSha256(char* accountPath);//write stuff to 5th line
 void checksha(char* accountPath);//check the 5th line and the sha now
-void removeNewline(char* str);
 void cls() {
 	system("cls");
 }
@@ -184,9 +180,6 @@ START:
 		}
 		exit(0);
 	}
-
-	char* line = readObject(accountPath, 3);
-	bool* Bskin = convertLineToBoolArray(line);
 	
 	choice = 0;
 	key = 10;
@@ -253,6 +246,8 @@ START:
 			break;
 		case 1:
 			cls();
+			char* line = readObject(accountPath, 3);
+			bool* Bskin = convertLineToBoolArray(line);
 			char* unlockedSkins = createUnlockedSkins(skins, Bskin, SKINNUMBER);
 			char skinNow;
 			skinNow = chooseSkin(unlockedSkins);
@@ -383,89 +378,7 @@ char* combineStrings(const char* str1, const char* str2) {
 
 	return combined;
 }
-void colorPrint(const char* text, int red, int green, int blue) {
-	if (red <= 0 || red >= 255 || green <= 0 || green >= 255 || blue <= 0 || blue >= 255) {
-		//printf("Invalid color values. Please use values between 0 and 255.\n");
-		return;
-	}
 
-	printf("\x1b[38;2;%d;%d;%dm%s\x1b[0m\n", red, green, blue, text);
-}
-char* readObject(const char* filepath, int lineNumber) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		return "File not found.";
-	}
-
-	char* line = NULL;
-	size_t len = 0;
-	int currentLine = 0;
-	int maxLineLength = 1000; // Adjust as needed
-
-	while (currentLine < lineNumber && !feof(file)) {
-		line = malloc(maxLineLength * sizeof(char));
-		if (fgets(line, maxLineLength, file) != NULL) {
-			currentLine++;
-		}
-		else {
-			free(line);
-			line = NULL;
-			break; // Break loop on EOF or error
-		}
-	}
-
-	fclose(file);
-
-	if (line == NULL) {
-		return "Line number exceeds file length.";
-	}
-
-	return line;
-}
-void writeObject(const char* filepath, int lineNumber, const char* content) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		printf("File '%s' not found!\n", filepath);
-		exit(1);
-		return;
-	}
-
-	// Create a temporary file
-	FILE* tempFile = fopen("accounts/temp.txt", "w");
-	if (tempFile == NULL) {
-		fclose(file);
-		printf("Unable to create a temporary file.\n");
-		exit(1);
-		return;
-	}
-
-	char buffer[1024];
-	int lineCount = 0;
-
-	while (fgets(buffer, sizeof(buffer), file)) {
-		lineCount++;
-
-		if (lineCount == lineNumber) {
-			fprintf(tempFile, "%s\n", content);
-		}
-		else {
-			fprintf(tempFile, "%s", buffer);
-		}
-	}
-
-	fclose(file);
-	fclose(tempFile);
-	chdir("accounts");
-	char tempfilepath[100];
-	strcpy(tempfilepath, filepath);
-	TrimFilePath(tempfilepath);
-	// Remove the original file
-	remove(tempfilepath);
-
-	// Rename the temporary file to the original file name
-	rename("temp.txt", tempfilepath);
-	chdir("..");
-}
 void TrimFilePath(char* filepath) {
 	// Find the last occurrence of "account/"
 	char* accountStr = strstr(filepath, "accounts/");
@@ -698,7 +611,7 @@ void checksha(char* accountPath) {
 		}
 	}
 	char* shaNow = sha256(content);
-	removeNewline(shaInFile);
+	removeNewLine(shaInFile);
 	free(content);
 	if (strcmp(shaInFile, shaNow) != 0) {
 		printf("you are cheating\n");
@@ -710,10 +623,4 @@ void checksha(char* accountPath) {
 		return;
 	}
 
-}
-void removeNewline(char* str) {
-	int len = strlen(str);
-	if (len > 0 && str[len - 1] == '\n') {
-		str[len - 1] = '\0';
-	}
 }

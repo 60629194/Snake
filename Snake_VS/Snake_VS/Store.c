@@ -7,14 +7,11 @@
 #include <stdbool.h>
 #include <conio.h>
 #include"global.h"
-//#define SKIN_NUMBER 48
 
-static char* readObject(const char* filepath, int lineNumber);
 static bool* convertLineToBoolArray(const char* line);
 static char* createlockedSkins(char* characters, bool* skin, int charCount);
 static int chooseSkin(char* lockedSkin,char *filepath, int* skinValues);
 static char* createlockedSkinValue(int* values, bool* skin, int charCount);
-static void writeObject(const char* filepath, int lineNumber, const char* content);
 static void writeObjectForInt(const char* filepath, int lineNumber, int content);
 
 
@@ -66,37 +63,7 @@ START:
     return;
 }
 
-char* readObject(const char* filepath, int lineNumber) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		return "File not found.";
-	}
 
-	char* line = NULL;
-	size_t len = 0;
-	int currentLine = 0;
-	int maxLineLength = 1000; // Adjust as needed
-
-	while (currentLine < lineNumber && !feof(file)) {
-		line = malloc(maxLineLength * sizeof(char));
-		if (fgets(line, maxLineLength, file) != NULL) {
-			currentLine++;
-		}
-		else {
-			free(line);
-			line = NULL;
-			break; // Break loop on EOF or error
-		}
-	}
-
-	fclose(file);
-
-	if (line == NULL) {
-		return "Line number exceeds file length.";
-	}
-
-	return line;
-}
 bool* convertLineToBoolArray(const char* line) {
 	// Allocate memory for the boolean array
 	bool* boolArray = malloc(SKINNUMBER * sizeof(bool));
@@ -210,50 +177,7 @@ char* createlockedSkinValue(int* values, bool* skin, int charCount) {
 
 	return lockedSkins;
 }
-void writeObject(const char* filepath, int lineNumber, const char* content) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		printf("File '%s' not found!\n", filepath);
-		exit(1);
-		return;
-	}
 
-	// Create a temporary file
-	FILE* tempFile = fopen("accounts/temp.txt", "w");
-	if (tempFile == NULL) {
-		fclose(file);
-		printf("Unable to create a temporary file.\n");
-		exit(1);
-		return;
-	}
-
-	char buffer[1024];
-	int lineCount = 0;
-
-	while (fgets(buffer, sizeof(buffer), file)) {
-		lineCount++;
-
-		if (lineCount == lineNumber) {
-			fprintf(tempFile, "%s\n", content);
-		}
-		else {
-			fprintf(tempFile, "%s", buffer);
-		}
-	}
-
-	fclose(file);
-	fclose(tempFile);
-	chdir("accounts");
-	char tempfilepath[100];
-	strcpy(tempfilepath, filepath);
-	TrimFilePath(tempfilepath);
-	// Remove the original file
-	remove(tempfilepath);
-
-	// Rename the temporary file to the original file name
-	rename("temp.txt", tempfilepath);
-	chdir("..");
-}
 void writeObjectForInt(const char* filepath, int lineNumber, int content) {
 	FILE* file = fopen(filepath, "r");
 	if (file == NULL) {

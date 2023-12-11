@@ -6,4 +6,9 @@
 extern const char skins[SKINNUMBER+1] ;
 extern const int  skinValue[SKINNUMBER+1];
 extern bool SFX;
+
+char* readObject(const char* filepath, int lineNumber);
+void writeObject(const char* filepath, int lineNumber, const char* content);
+void removeNewLine(char* str);
+void colorPrint(const char* text, int red, int green, int blue);
 #endif 

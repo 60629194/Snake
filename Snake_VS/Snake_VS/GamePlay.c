@@ -1,5 +1,5 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
-#include"constant.h"
+#include"global.h"
 #include "GamePlay.h"
 #include "LeaderBoard.h"
 #include <stdio.h>
@@ -29,8 +29,6 @@ typedef struct{
 	int y;
 }position;
 
-
-static void colorPrint(const char* text, int red, int green, int blue);
 static void placeApple(position* apple, position* snake, int snakeLength);
 static void placeCoin(position* coin, position* snake, int snakeLength, position* apple);
 static void move(position* snake, char* direction, int* snakeLength, int* ateApple, position* apple,int snakeSpeed,bool clearMode);
@@ -41,7 +39,6 @@ static int checkBoundary(position* snake);
 static int level(int stage);
 static int checkBody(position* snake,int snakeLength);
 static int absolute(int value);
-static char* readObject(const char* filepath, int lineNumber);
 static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
@@ -198,10 +195,6 @@ void GamePlay(const char* filepath) {
 	}
 	//LeaderBoard("Leaderboard.txt");
 	//Sleep(3000);
-}
-
-void colorPrint(const char* text, int red, int green, int blue) {
-	printf("\x1b[38;2;%d;%d;%dm%s\x1b[0m", red, green, blue, text);
 }
 void colorPrintForChar(char text, int red, int green, int blue) {
 	printf("\x1b[38;2;%d;%d;%dm%c\x1b[0m", red, green, blue, text);
@@ -445,34 +438,3 @@ int absolute(int value) {
 	}
 }
 
-char* readObject(const char* filepath, int lineNumber) {
-	FILE* file = fopen(filepath, "r");
-	if (file == NULL) {
-		return "File not found.";
-	}
-
-	char* line = NULL;
-	size_t len = 0;
-	int currentLine = 0;
-	int maxLineLength = 1000; // Adjust as needed
-
-	while (currentLine < lineNumber && !feof(file)) {
-		line = malloc(maxLineLength * sizeof(char));
-		if (fgets(line, maxLineLength, file) != NULL) {
-			currentLine++;
-		}
-		else {
-			free(line);
-			line = NULL;
-			break; // Break loop on EOF or error
-		}
-	}
-
-	fclose(file);
-
-	if (line == NULL) {
-		return "Line number exceeds file length.";
-	}
-
-	return line;
-}

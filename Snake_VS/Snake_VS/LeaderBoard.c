@@ -190,7 +190,7 @@ void LeaderBoard(const char* filepath) {
     printf("\n------------------------------------------------");
     fclose(file);
     char input;
-    printf("\nPress 'q' to quit or any other key to continue: ");
+    printf("\nPress 'q' to quit: ");
     while(1){
         if (_kbhit()) {
             input = _getch();

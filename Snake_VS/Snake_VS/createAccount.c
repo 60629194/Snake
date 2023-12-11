@@ -6,10 +6,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
+#include"global.h"
 
 static int containsSpecialChars(const char* name);
 static void addExtension(char* result, const char* name);
-static void removeNewLine(char* str);
 
 
 void createAccount() {
@@ -114,9 +114,4 @@ void addExtension(char* result, const char* name) {
     strcat(result, name);       // Concatenate the user name
     strcat(result, ".txt");     // Add ".txt" at the end
 }
-void removeNewLine(char* str) {
-    size_t length = strlen(str);
-    if (length > 0 && str[length - 1] == '\n') {
-        str[length - 1] = '\0'; // Replace newline with null terminator
-    }
-}
+
