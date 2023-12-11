@@ -127,7 +127,7 @@ START:
 				strcat(initialSkin, " 0");
 			}
 			writeObject(accountPath, 3, initialSkin);
-			writeObject(accountPath, 4, "％");
+			writeObject(accountPath, 4, "%");
 			updateSha256(accountPath);
 		}
 		else {
