@@ -149,6 +149,8 @@
   <ItemGroup>
     <Media Include="accessDenied.wav" />
     <Media Include="accessGranted.wav" />
+    <Media Include="bgm.mp3" />
+    <Media Include="bgm.wav" />
     <Media Include="coinSFX.wav" />
     <Media Include="eatSFX.wav" />
     <Media Include="enterSFX.wav" />
@@ -157,10 +159,13 @@
     <Media Include="gameStart.wav" />
     <Media Include="invertNavigateSFX.wav" />
     <Media Include="navigateSFX.wav" />
+    <Media Include="snake_song_.mp3" />
     <Media Include="wallBreak.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BGM.bat" />
     <None Include="checkAccount.bat" />
+    <None Include="stopBGM.bat" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log\accountDATA.txt" />

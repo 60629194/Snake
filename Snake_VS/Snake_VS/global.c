@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_NONSTDC_NO_DEPRECATE
 #include "global.h"
-#include"sha256.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include "sha256.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 const char skins[SKINNUMBER + 1] = { '%', '!', '#', '$', '&', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '~', '@', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ':', '+', ';', '\0' };
 const int  skinValue[SKINNUMBER + 1] = { 5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5,   5 , '\0' };
@@ -133,7 +133,7 @@ void updateSha256(char* accountPath) {
 			free(temp);
 		}
 		else {
-			cls();
+			system("cls");
 			printf("sth went wrong");
 			exit(1);
 		}
@@ -161,7 +161,7 @@ void checksha(char* accountPath) {
 			free(temp);
 		}
 		else {
-			cls();
+			system("cls");
 			printf("sth went wrong");
 			exit(1);
 		}

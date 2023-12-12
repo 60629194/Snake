@@ -14,7 +14,6 @@ static char* createlockedSkins(char* characters, bool* skin, int charCount);
 static int chooseSkin(char* lockedSkin,char *filepath, int* skinValues);
 static char* createlockedSkinValue(int* values, bool* skin, int charCount);
 
-
 void Store(const char* filepath) {
 START:
 	system("cls");

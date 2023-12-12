@@ -7,11 +7,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
+
+
 static void switchAccount();
 static int deleteAccount(const char* filepath);
 static int resetAccount(const char* filepath);
 static void trimFilePath(char* filepath);
-static void writeObject(const char* filepath, int lineNumber, const char* content);
 
 int Settings(const char* filepath) {
     int key=10;
@@ -198,48 +199,4 @@ void trimFilePath(char* filepath) {
         accountStr += strlen("accounts/");
         memmove(filepath, accountStr, strlen(accountStr) + 1); // +1 for null terminator
     }
-}
-void writeObject(const char* filepath, int lineNumber, const char* content) {
-    FILE* file = fopen(filepath, "r");
-    if (file == NULL) {
-        printf("File '%s' not found!\n", filepath);
-        exit(1);
-        return;
-    }
-
-    // Create a temporary file
-    FILE* tempFile = fopen("accounts/temp.txt", "w");
-    if (tempFile == NULL) {
-        fclose(file);
-        printf("Unable to create a temporary file.\n");
-        exit(1);
-        return;
-    }
-
-    char buffer[1024];
-    int lineCount = 0;
-
-    while (fgets(buffer, sizeof(buffer), file)) {
-        lineCount++;
-
-        if (lineCount == lineNumber) {
-            fprintf(tempFile, "%s\n", content);
-        }
-        else {
-            fprintf(tempFile, "%s", buffer);
-        }
-    }
-
-    fclose(file);
-    fclose(tempFile);
-    chdir("accounts");
-    char tempfilepath[100];
-    strcpy(tempfilepath, filepath);
-    TrimFilePath(tempfilepath);
-    // Remove the original file
-    remove(tempfilepath);
-
-    // Rename the temporary file to the original file name
-    rename("temp.txt", tempfilepath);
-    chdir("..");
 }

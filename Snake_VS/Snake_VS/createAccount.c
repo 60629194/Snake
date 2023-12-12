@@ -8,9 +8,9 @@
 #include <conio.h>
 #include"global.h"
 
+
 static int containsSpecialChars(const char* name);
 static void addExtension(char* result, const char* name);
-
 
 void createAccount() {
 START:
@@ -95,7 +95,6 @@ START:
         exit(1);
     }
 }
-
 int containsSpecialChars(const char* name) {
     int length = strlen(name);
     const char* specialChars = ". , / ! @ # $ % ^ & * ( ) { } [ ] \\ | / ; : - _ = + > < \" ' "; // List of special characters to check
@@ -108,10 +107,8 @@ int containsSpecialChars(const char* name) {
 
     return 0; // No special characters found
 }
-
 void addExtension(char* result, const char* name) {
     strcpy(result, "accounts/"); // Add "accounts/" at the beginning
     strcat(result, name);       // Concatenate the user name
     strcat(result, ".txt");     // Add ".txt" at the end
 }
-

@@ -106,9 +106,24 @@
     <Media Include="gameOver.wav">
       <Filter>Audio</Filter>
     </Media>
+    <Media Include="bgm.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="bgm.mp3">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="snake_song_.mp3">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="checkAccount.bat">
+      <Filter>Script</Filter>
+    </None>
+    <None Include="BGM.bat">
+      <Filter>Script</Filter>
+    </None>
+    <None Include="stopBGM.bat">
       <Filter>Script</Filter>
     </None>
   </ItemGroup>

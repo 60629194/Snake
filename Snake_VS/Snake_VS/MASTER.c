@@ -2,24 +2,23 @@
 #define _CRT_NONSTDC_NO_DEPRECATE
 #include <stdio.h>
 #include <Windows.h>
-#include<mmsystem.h>
+#include <mmsystem.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <conio.h>
 #include <time.h>
+#include <string.h>
 #include "GamePlay.h"
 #include "LeaderBoard.h"
 #include "Settings.h"
 #include "Store.h"
 #include "createAccount.h"
-#include"sha256.h"
+#include "sha256.h"
 #include "global.h"
+
 
 #define MAX_MENU_ITEMS 100
 #define MAX_FILENAME_LENGTH 100
-
-
-
 
 extern int coinCount;
 void writeObjectForChar(const char* filepath, int lineNumber, const char content);
@@ -32,21 +31,12 @@ char chooseSkin(char* skin);
 int calculateSkinCount(char* skin);
 bool* convertLineToBoolArray(const char* line);
 void updateAccountFile(const char* filepath, int coinCount);
-void cls() {
-	system("cls");
-}
+void displaySnake();
 
 int main() {
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int red, green, blue;
-	for (red = 0, green = 0, blue = 0;red < 256 && green < 256 && blue < 256;red++, green++, blue++) {
-		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n", red, green, blue);
-		Sleep(8);
-		cls();
-		if (red % 2 == 1) {
-			green++;
-		}
-	}
+	displaySnake();
 
 START:
 
@@ -127,13 +117,13 @@ START:
 			checksha(accountPath);
 		}
 		char show[100];
-		cls();
+		system("cls");
 		PlaySound(TEXT("logInSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
 		colorPrint(show, 254, 254, 254);
 		Sleep(500);
-		cls();
+		system("cls");
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint(show, red, green, blue);
 			Sleep(4);
@@ -147,23 +137,23 @@ START:
 				green--;
 				blue--;
 			}
-			cls();
+			system("cls");
 		}
 		checksha(accountPath);
 		updateSha256(accountPath);
 	}
 	else if (choice == itemCount) {
-		cls();
+		system("cls");
 		createAccount();
 		goto START;
 	}
 	else if (choice == itemCount + 1) {
-		cls();
+		system("cls");
 		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
 			colorPrint("Have a good day!", red, green, blue);
 			Sleep(4);
-			cls();
+			system("cls");
 			if (red < 200) {
 				red--;
 				green--;
@@ -184,7 +174,7 @@ START:
 	while (1) { // Loop to keep displaying the menu until the user chooses to exit
 		do {
 			
-			cls(); // Clears the console screen (Windows-specific)
+			system("cls"); // Clears the console screen (Windows-specific)
 
 			printf("Welcome to Snake, %s\n", account);
 			printf("   Play %s\n", (choice == 0) ? "<" : "  ");
@@ -227,7 +217,7 @@ START:
 		// Perform action based on the chosen option (choice)
 		switch (choice) {
 		case 0:
-			cls();
+			system("cls");
 			if(SFX)
 			{
 				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -242,7 +232,7 @@ START:
 			key = 10;
 			break;
 		case 1:
-			cls();
+			system("cls");
 			char* line = readObject(accountPath, 3);
 			bool* Bskin = convertLineToBoolArray(line);
 			char* unlockedSkins = createUnlockedSkins(skins, Bskin, SKINNUMBER);
@@ -288,7 +278,7 @@ START:
 			key = 10;
 			break;
 		case 5:
-			cls();
+			system("cls");
 			if(SFX)
 			{
 				PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -298,7 +288,7 @@ START:
 				updateSha256(accountPath);
 				colorPrint("Have a good day!", red, green, blue);
 				Sleep(4);
-				cls();
+				system("cls");
 				if (red < 200) {
 					red--;
 					green--;
@@ -341,7 +331,7 @@ long int findSize(char file_name[])
 }
 
 void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choice) {
-	cls(); // Clears the console screen (Windows-specific)
+	system("cls"); // Clears the console screen (Windows-specific)
 	printf("Select or create account\n");
 	int i;
 	for (i = 0; i < itemCount; ++i) {
@@ -531,5 +521,23 @@ void updateAccountFile(const char* filepath, int coinCount) {
 	char sMoney[100];
 	itoa(newMoney, sMoney, 10);
 	writeObject(filepath, 2, sMoney);
+	return;
+}
+void displaySnake(){
+	DWORD initial=GetTickCount();
+	DWORD r=1,g=1,b=1;
+	DWORD now=GetTickCount();
+	while(g<=256){
+		now=GetTickCount();
+		r=(now-initial)/16;
+		g=(now-initial)/8;
+		b=(now-initial)/16;
+		colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n",r,g,b);
+		Sleep(25);
+		system("cls");
+	}
+	colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n",128,256,128);
+	Sleep(1000);
+	system("cls");
 	return;
 }
