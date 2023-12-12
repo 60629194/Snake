@@ -1,3 +1,0 @@
-ckai.txt
-jim.txt
-test.txt
