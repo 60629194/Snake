@@ -21,8 +21,8 @@
 int scdata;
 int coinCount = 0;
 
-short int WIDTH = 20;
-short int HEIGHT = 10;
+int WIDTH = 20;
+int HEIGHT = 10;
 char direction = 'n';
 int moveWhichReallyMove = 0;
 
@@ -52,7 +52,6 @@ static int checkBody(position* snake,int snakeLength);
 static void colorPrintForChar(char text, int red, int green, int blue);
 
 void GamePlay(const char* filepath) {
-
 
 	WIDTH = 20;
 	HEIGHT = 10;
@@ -84,7 +83,9 @@ void GamePlay(const char* filepath) {
 	snakeCoinDistance = abs(snake[0].x - coin.x) + abs(snake[0].y - coin.y);
 
 	printf("Game Loading...");
-	system("BGM.bat");
+	if (SFX) {
+		system("BGM.bat");
+	}
 
 	while (1) {
 		
@@ -135,6 +136,7 @@ void GamePlay(const char* filepath) {
 				if (checkBody(snake,snakeLength) == 1 && moveWhichReallyMove > snakeLength) {
 					if(SFX)
 					{
+						system("stopBGM.bat");
 						PlaySound(TEXT("gameOver.wav"), NULL, SND_FILENAME);
 					}
 					printf("you hit yourself");
@@ -168,6 +170,7 @@ void GamePlay(const char* filepath) {
 				if (checkBoundary(snake)) {
 					if(SFX)
 					{
+						system("stopBGM.bat");
 						PlaySound(TEXT("wallBreak.wav"), NULL, SND_FILENAME);
 					}
 					printf("Gameover");
@@ -205,7 +208,6 @@ void GamePlay(const char* filepath) {
 		}
 		printf("you win");
 	}
-	system("stopBGM.bat");
 }
 void colorPrintForChar(char text, int red, int green, int blue) {
 	printf("\x1b[38;2;%d;%d;%dm%c\x1b[0m", red, green, blue, text);
