@@ -32,6 +32,7 @@ int calculateSkinCount(char* skin);
 bool* convertLineToBoolArray(const char* line);
 void updateAccountFile(const char* filepath, int coinCount);
 void displaySnake();
+void login(char* string);
 
 int main() {
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -121,24 +122,7 @@ START:
 		PlaySound(TEXT("logInSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		strcpy(show, "you've logged in as ");
 		strncat(show, account, sizeof(show) - strlen(show) - 1);
-		colorPrint(show, 254, 254, 254);
-		Sleep(500);
-		system("cls");
-		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
-			colorPrint(show, red, green, blue);
-			Sleep(4);
-			if (red < 200) {
-				red--;
-				green--;
-				blue--;
-			}
-			if (red < 100) {
-				red--;
-				green--;
-				blue--;
-			}
-			system("cls");
-		}
+		login(show);
 		checksha(accountPath);
 		updateSha256(accountPath);
 	}
@@ -527,7 +511,7 @@ void displaySnake(){
 	DWORD initial=GetTickCount();
 	DWORD r=1,g=1,b=1;
 	DWORD now=GetTickCount();
-	while(g<=256){
+	while(g<256){
 		now=GetTickCount();
 		r=(now-initial)/16;
 		g=(now-initial)/8;
@@ -536,8 +520,18 @@ void displaySnake(){
 		Sleep(25);
 		system("cls");
 	}
-	colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n",128,256,128);
+	colorPrint(" $$$$$                      $$              \n$$   $$            $$$$$    $$  $$    $$$$  \n $$$      $$$$$        $$   $$ $$    $$  $$ \n   $$$    $$  $$    $$$$$   $$$$     $$$$$$ \n$$   $$   $$  $$   $$  $$   $$ $$    $$     \n $$$$$    $$  $$    $$$$$   $$  $$    $$$$$ \n",128,255,128);
 	Sleep(1000);
 	system("cls");
 	return;
+}
+void login(char* string) {
+	int len = strlen(string);
+	Sleep(500);
+	for (int i = 0; i < len; i++) {
+		printf("%c", string[i]);
+		fflush(stdout);
+		Sleep(100); 
+	}
+	Sleep(500);
 }

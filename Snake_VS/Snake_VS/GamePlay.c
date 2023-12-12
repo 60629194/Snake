@@ -84,6 +84,7 @@ void GamePlay(const char* filepath) {
 	snakeCoinDistance = abs(snake[0].x - coin.x) + abs(snake[0].y - coin.y);
 
 	printf("Game Loading...");
+	system("BGM.bat");
 
 	while (1) {
 		
@@ -203,10 +204,8 @@ void GamePlay(const char* filepath) {
 			break;
 		}
 		printf("you win");
-		
-		
 	}
-	
+	system("stopBGM.bat");
 }
 void colorPrintForChar(char text, int red, int green, int blue) {
 	printf("\x1b[38;2;%d;%d;%dm%c\x1b[0m", red, green, blue, text);

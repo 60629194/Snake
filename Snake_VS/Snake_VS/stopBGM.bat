@@ -1,2 +1,2 @@
 @echo off
-taskkill /f /im RuntimeBroker.exe >nul
+taskkill  /F /FI "WINDOWTITLE eq BGM" /T >nul

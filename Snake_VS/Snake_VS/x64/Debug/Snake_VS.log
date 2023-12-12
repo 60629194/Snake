@@ -1,11 +1,8 @@
 ﻿  GamePlay.c
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(165,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(165,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(359,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(359,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(373,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\GamePlay.c(373,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
-  LeaderBoard.c
-C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\LeaderBoard.c(100,9): warning C4101: 'data': 未參考的區域變數
-  正在產生程式碼...
-  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Debug\Snake_VS.exe
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(166,56): warning C4047: '函式': 'char *' 與 'char' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(166,56): warning C4024: 'setDisplay': 型式和實質參數 6 不同的類型
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(358,25): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(358,25): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(372,23): warning C4047: '函式': 'char' 與 'char *' 間接取值的層級不同
+C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\Snake_VS\GamePlay.c(372,23): warning C4024: 'colorPrintForChar': 型式和實質參數 1 不同的類型
+  Snake_VS.vcxproj -> C:\Users\Josh\Desktop\josh\計算機程式應用與實習專案\Snake\Snake_VS\x64\Debug\Snake_VS.exe
