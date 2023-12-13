@@ -118,6 +118,13 @@ void LeaderBoard(const char* filepath) {
         if (strlen(line) <= 1) {
             continue;
         }
+        int score;
+        sscanf(line, "%d", &score);
+
+        // ¦pªG¤À??0¡A?¸õ?
+        if (score == 0) {
+            continue;
+        }
 
         printf("------------------------------------------------\n");
         printf("%d.     %s", rank++, line); 
