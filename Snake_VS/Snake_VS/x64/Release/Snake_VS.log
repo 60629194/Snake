@@ -1,0 +1,8 @@
+﻿  LeaderBoard.c
+C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\Snake_VS\LeaderBoard.c(100,9): warning C4101: 'data': 未參考的區域變數
+  正在產生程式碼
+  2 of 68 functions ( 2.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  已完成程式碼產生
+  Snake_VS.vcxproj -> C:\Users\jesse\Documents\GitHub\Snake\Snake_VS\x64\Release\Snake_VS.exe
