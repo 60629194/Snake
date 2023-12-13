@@ -33,6 +33,7 @@ bool* convertLineToBoolArray(const char* line);
 void updateAccountFile(const char* filepath, int coinCount);
 void displaySnake();
 void login(char* string);
+void exitGame(char* string);
 
 int main() {
 	PlaySound(TEXT("gameStart.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -128,27 +129,14 @@ START:
 	}
 	else if (choice == itemCount) {
 		system("cls");
+		PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		createAccount();
 		goto START;
 	}
 	else if (choice == itemCount + 1) {
 		system("cls");
 		PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-		for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
-			colorPrint("Have a good day!", red, green, blue);
-			Sleep(4);
-			system("cls");
-			if (red < 200) {
-				red--;
-				green--;
-				blue--;
-			}
-			if (red < 100) {
-				red--;
-				green--;
-				blue--;
-			}
-		}
+		exitGame("Have a good day!");
 		exit(0);
 	}
 	
@@ -217,6 +205,10 @@ START:
 			break;
 		case 1:
 			system("cls");
+			if (SFX)
+			{
+				PlaySound(TEXT("enterSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			}
 			char* line = readObject(accountPath, 3);
 			bool* Bskin = convertLineToBoolArray(line);
 			char* unlockedSkins = createUnlockedSkins(skins, Bskin, SKINNUMBER);
@@ -267,23 +259,7 @@ START:
 			{
 				PlaySound(TEXT("exitSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			}
-			for (red = 254, green = 254, blue = 254;red > 0 && green > 0 && blue > 0;red--, green--, blue--) {
-				checksha(accountPath);
-				updateSha256(accountPath);
-				colorPrint("Have a good day!", red, green, blue);
-				Sleep(4);
-				system("cls");
-				if (red < 200) {
-					red--;
-					green--;
-					blue--;
-				}
-				if (red < 100) {
-					red--;
-					green--;
-					blue--;
-				}
-			}
+			exitGame("Have a good day!");
 			exit(0);
 		}
 	}
@@ -335,18 +311,14 @@ void displayMenu(char menuItems[][MAX_FILENAME_LENGTH], int itemCount, int choic
 char* combineStrings(const char* str1, const char* str2) {
 	size_t len1 = strlen(str1);
 	size_t len2 = strlen(str2);
-
 	// Allocate memory for the combined string (+1 for the null terminator)
 	char* combined = (char*)malloc((len1 + len2 + 1) * sizeof(char));
-
 	if (combined == NULL) {
 		printf("Memory allocation failed.\n");
 		exit(EXIT_FAILURE);
 	}
-
 	strcpy(combined, str1); // Copy the constant string
 	strcat(combined, str2); // Concatenate the non-constant string
-
 	return combined;
 }
 
@@ -403,9 +375,6 @@ char chooseSkin(char* unlockedSkin) {
 	int choice = 0;
 	char key = 72;
 	int skinCount = calculateSkinCount(unlockedSkin);
-	/*printf("%s\n", unlockedSkin);
-	printf("%d", skinCount);
-	exit(0);*/
 
 	do {
 		system("cls"); // Clears the console screen (Windows-specific)
@@ -415,33 +384,28 @@ char chooseSkin(char* unlockedSkin) {
 			printf("%c %s\n", unlockedSkin[i], (i == choice) ? "<" : " ");
 		}
 
-		// Non-blocking key detection for arrow keys
 		if (_kbhit()) {
 			key = _getch();
-			
-
-				switch (key) {
-				case 72: // Up arrow key
-					if (choice > 0) {
-						if(SFX)
-						{
-							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-						}
-						choice--;
+			switch (key) {
+			case 72: // Up arrow key
+				if (choice > 0) {
+					if(SFX)
+					{
+						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
 					}
-					break;
-				case 80: // Down arrow key
-					if (choice < skinCount - 1) {
-						if (SFX)
-						{
-							PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
-						}
-						choice++;
-					}
-					break;
+					choice--;
 				}
-			
-
+				break;
+			case 80: // Down arrow key
+				if (choice < skinCount - 1) {
+					if (SFX)
+					{
+						PlaySound(TEXT("navigateSFX.wav"), NULL, SND_FILENAME | SND_ASYNC);
+					}
+					choice++;
+				}
+				break;
+			}
 		}
 		Sleep(100);
 	} while (key != 13); // Continue until Enter key is pressed (13 is Enter's ASCII code)
@@ -532,6 +496,15 @@ void login(char* string) {
 		printf("%c", string[i]);
 		fflush(stdout);
 		Sleep(100); 
+	}
+	Sleep(500);
+}
+void exitGame(char* string) {
+	int len = strlen(string);
+	for (int i = 0; i < len; i++) {
+		printf("%c", string[i]);
+		fflush(stdout);
+		Sleep(100);
 	}
 	Sleep(500);
 }
