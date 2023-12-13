@@ -121,7 +121,7 @@ void LeaderBoard(const char* filepath) {
         int score;
         sscanf(line, "%d", &score);
 
-        // ¦pªG¤À??0¡A?¸õ?
+        //score=0,skipped
         if (score == 0) {
             continue;
         }
