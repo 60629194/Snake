@@ -1,4 +1,1 @@
-ckai.txt
-jim.txt
-josh.txt
-test.txt
+default.txt
