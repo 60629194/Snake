@@ -89,7 +89,7 @@ void GamePlay(const char* filepath) {
 
 	while (1) {
 		
-		while (stage < 10) {
+		while (stage <= 10) {
 			appleCount = 0;
 			moveWhichReallyMove = 0;
 			snakeLength = stage + 1;
@@ -99,7 +99,7 @@ void GamePlay(const char* filepath) {
 			snake->y = HEIGHT / 2;
 			direction = 'n';
 
-			while (appleCount < stage * 2) {
+			while (appleCount < stage * 2||stage==10) {
 				//run or not
 				if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
 					move(snake, &direction, &snakeLength, &apple,level(stage)/2,false);
